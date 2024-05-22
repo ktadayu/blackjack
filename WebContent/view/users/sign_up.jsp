@@ -12,7 +12,7 @@
        <section class="section">
               <h1 class="section-headline">登録</h1>
 
-              <form action="<%= request.getContextPath() %>/SignupServlet" method="post" class="form">
+              <form action="<%= request.getContextPath() %>/HelloServlet" method="post" class="form">
                 <table class="form-table" >
                 <tr>
                 <th class="form-table-headline"><label for="id">ユーザー名</label></th>
