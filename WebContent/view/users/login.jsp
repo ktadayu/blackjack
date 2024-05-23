@@ -10,6 +10,13 @@
        <section class="section">
               <h1 class="section-headline">ログイン</h1>
 
+        <div class="header-notice">
+        <% String msg = (String) request.getAttribute("message");%>
+        <% if(msg!=null){ %>
+        	<p><%= msg %></p>
+        <%}else{} %>
+        </div>
+
               <form action="<%= request.getContextPath() %>/LoginServlet" method="post" class="form">
                 <table class="form-table" >
                 <tr>
@@ -36,7 +43,7 @@
         <section class="section">
                 <div class="form-button">
                 <h4>-----または-----</h4><!-- 線をcssで作る -->
-                <button type="submit" class="button button-signin" onclick="location.href='./sign_up.jsp'" >登録 </button>
+                <button type="submit" class="button button-signin" onclick="location.href='<%= request.getContextPath()%>/view/users/sign_up.jsp'" >登録 </button>
                 </div>
         </section>
 </body>

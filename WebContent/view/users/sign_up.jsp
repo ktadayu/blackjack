@@ -7,13 +7,17 @@
 <title>登録画面</title>
 </head>
 <body>
+<section class="section">
+	<h1 class="section-headline">登録</h1>
 
-
-       <section class="section">
-              <h1 class="section-headline">登録</h1>
-
-              <form action="<%= request.getContextPath() %>/HelloServlet" method="post" class="form">
-                <table class="form-table" >
+	<div class="header-notice">
+        <% String msg = (String) request.getAttribute("message");%>
+        <% if(msg!=null){ %>
+        	<p><%= msg %></p>
+        <%}else{} %>
+    </div>
+	<form action="<%= request.getContextPath() %>/SignupServlet" method="post" class="form">
+		<table class="form-table" >
                 <tr>
                 <th class="form-table-headline"><label for="id">ユーザー名</label></th>
                 <td class="form-table-data">
@@ -23,24 +27,27 @@
                 <tr>
                     <th class="form-table-headline"> <label for="pass"> パスワード </label></th>
                     <td class="form-table-data">
-                      <input type="text" class="input" name="user_password1" id="pass"/>
+                      <input type="text" class="input" name="user_password1" id="pass1"/>
                     </td>
         		<% //サーブレット側でパスワードの一致を確認する %>
                 </tr>
                 <tr>
                     <th class="form-table-headline"> <label for="pass"> パスワード(確認用) </label></th>
                     <td class="form-table-data">
-                      <input type="text" class="input" name="user_password2" id="pass"/>
+                      <input type="text" class="input" name="user_password2" id="pass2"/>
                     </td>
                 </tr>
-                </table>
-                <div class="form-button">
-                  <button class="button button-submission" type="submit">
-                   	登録
-                  </button>
-                </div>
-              </form>
-         </section>
-
+                <tr>
+                    <th class="form-table-headline"> <label for="nickname"> ニックネーム(表示名)</label></th>
+                    <td class="form-table-data">
+                      <input type="text" class="input" name="user_nickname" id="nickname"/>
+                    </td>
+                </tr>
+	</table>
+		<div class="form-button">
+			<button class="button button-submission" type="submit">登録</button>
+		</div>
+	</form>
+</section>
 </body>
 </html>

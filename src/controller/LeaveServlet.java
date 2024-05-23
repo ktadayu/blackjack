@@ -1,4 +1,4 @@
-package src.controller;
+package controller;
 
 import java.io.IOException;
 
@@ -10,16 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.AccountDao;
+import dao.UserDao;
 import exception.MyException;
 import model.User;
 
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+
+@WebServlet("/LeaveServlet")
+public class LeaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
-    public LoginServlet() {
+    public LeaveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,38 +31,44 @@ public class LoginServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	//ログイン
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int user_id = Integer.parseInt(request.getParameter("user_id"));
-		String user_password = request.getParameter("user_password");
+		HttpSession session = request.getSession();
+		User USER = (User) session.getAttribute("USER");
+
+//		String user_nickname = USER.getUserNickname();
+//		System.out.println(user_nickname);
+
+		String inputPassword = request.getParameter("user_password");
+
 		String nextPage = null;
-		try {
 
-			UserDao userDao = new AccountDao();
-			User user = userDao.doLogin(user_id, user_password);
+		if(inputPassword.equals(USER.getUserPassword())) {
+			System.out.println("正しいパスワードです");
+			try {
+			UserDao userDao = new UserDao();
+			userDao.doDelete(USER.getUserName());
 
-			//sessionにインスタンスを格納
-			//ログアウト時にinvalidateにする
-			HttpSession session = request.getSession();
-			session.setAttribute("USER", user);
-
-			// ContentServletのPOSTに移動
-			//nextPage = "ContentServlet";
-			nextPage ="ContentServlet";
-		} catch (MyException e) {
-
-			String message = e.getMessage();
+			String message = "ユーザーを削除しました";
 			request.setAttribute("message", message);
-			request.setAttribute("error", "true");
+			nextPage = "/view/users/login.jsp";
 
-			// ログイン画面へ
-			nextPage = "/view/login.jsp";
+			}catch(MyException e) {
+				String message = e.getMessage();
+				request.setAttribute("message", message);
+			}
+
+		}else {
+			String message = "パスワードが間違っています。";
+			request.setAttribute("message", message);
+			nextPage = "/view/users/leave.jsp";
 		}
 
 		// 次の画面に遷移
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);
+
 	}
 
 }

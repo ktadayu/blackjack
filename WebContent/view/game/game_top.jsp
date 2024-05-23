@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="model.User" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +16,10 @@
 </section>
 <section>
 
+<% User USER = (User) session.getAttribute("USER"); %>s
 <div class="section-greeting">
-<h2>ようこそ <% %>さん</h2>
-<form class="game_start_form"><!-- formかaにするかで迷う -->
+<h2>ようこそ <%= USER.getUserNickname() %>さん</h2>
+<form class="game_start_form" action="<%= request.getContextPath() %>/view/game/game_betting.jsp"> <!-- formかaにするかで迷う -->
 	<div class="div_game_start_button" >
 		<button class="game_start_button" type="submit" > ゲームをはじめる(ディール？)</button>
 	</div>
@@ -30,8 +33,8 @@
 
   <footer class="footer">
 
-  	<a href="">管理者ページ</a>
-  	<a href="">ユーザー消去</a>
+  	<a href="<%= request.getContextPath()%>/view/users/certification.jsp">管理者ページ</a>
+  	<a href="<%= request.getContextPath()%>/view/users/leave.jsp">ユーザー消去</a>
 
   </footer>
 </body>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="model.User" %>
+<% User USER = (User) session.getAttribute("USER"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +11,18 @@
 <body>
        <section class="section">
               <h1 class="section-headline">ユーザーの削除</h1>
-
+        		<div class="header-notice">
+        		<% String msg = (String) request.getAttribute("message");%>
+        		<% if(msg!=null){ %>
+        		<p><%= msg %></p>
+        		<%}else{} %>
+        		</div>
               <form action="<%= request.getContextPath() %>/LeaveServlet" method="post" class="form">
                 <table class="form-table" >
                 <tr>
-                <th class="form-table-headline"><label for="id">ユーザー名（自動入力）</label></th>
+                <th class="form-table-headline"><label for="id">ニックネーム（自動入力）</label></th>
                 <td class="form-table-data">
-                      <input type="text" class="input" name="user_name" id="id"/>
-        			<% //jspでsessionからuser名を取得し入力しておく %>
+        			<span class="form-table-user-nickname"><%= USER.getUserNickname() %></span>
                   </td>
                 </tr>
                 <tr>
