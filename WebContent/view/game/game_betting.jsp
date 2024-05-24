@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Black Jack</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/view/game/style/style.css">
+
 </head>
 <body>
 <nav class="nav-header">
@@ -24,9 +25,8 @@
         <button class="reset-button" id="reset-button"> Reset </button>
       </div>
       <div class="pos-c">
-      <form class="betting-form" method="get" action="<%= request.getContextPath()%>/BlackJackServlet">
-          <span class="em" id="betting-counter" name="bet-value" > 0 </span>
-       </form>
+
+          <span class="em" id="betting-counter"> 0 </span>
       </div>
       <div class="pos-d" id="tip-10">
           <img src="<%= request.getContextPath() %>/img/tips/10.png" alt="10チップ" >
@@ -37,12 +37,16 @@
       <div class="pos-f"></div>
     </div>
     <div class="div-betting-form">
-        <button class="betting-form-button"> bet </button>
+
+    <form class="betting-form" action="<%= request.getContextPath()%>/HelloServlet">
+    	<input type="text" value="初期値" id="betting-form" name="bet">
+    	<button type="submit" class="betting-form-button" >bet</button>
+    </form>
+
+
 	</div>
 </div>
-
-</body>
-
 <script src="<%= request.getContextPath() %>/view/game/app/game.js">
 </script>
+</body>
 </html>

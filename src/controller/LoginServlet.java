@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,14 +33,11 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(user.getUserNickname()); //（ログインしているユーザーのニックネーム）
 		*/
 		session.invalidate();
-		/* セッションが無効化されているため以下ちゃんとエラーになる:
-		User user2 = (User) session.getAttribute("USER");
-		System.out.println(user2.getUserNickname());
-		 */
-		request.setAttribute("message", "ログアウトしました");
-		String s = "/view/users/login.jsp";
 
-		RequestDispatcher rd = request.getRequestDispatcher(s);
+		request.setAttribute("message", "ログアウトしました");
+		String next = "/view/users/login.jsp";
+
+		RequestDispatcher rd = request.getRequestDispatcher(next);
 		rd.forward(request, response);
 	}
 
@@ -50,26 +48,25 @@ public class LoginServlet extends HttpServlet {
 		String user_password = request.getParameter("user_password");
 		String nextPage = null;
 		try {
-
 			UserDao userDao = new UserDao();
 			User user = userDao.doLogin(user_name, user_password);
 
 			//sessionにuser型インスタンスを格納
-			//ログアウト時にinvalidateにする予定
 			HttpSession session = request.getSession();
 			session.setAttribute("USER", user);
 
-			// ContentServletのPOSTに移動
-			//nextPage = "ContentServlet";
+			//Top5ユーザー取得
+			//別のコントローラーに移したい
+			UserDao newUserDao = new UserDao();
+			List<User> users = newUserDao.selectTopUsers();
+			session.setAttribute("TOPUSERLIST", users);
+
 			nextPage ="/view/game/game_top.jsp";
+
 		} catch (MyException e) {
-			/*UserDaoで、
-			 * throw new MyException("ユーザー名・パスワードのいずれかに誤りがあります。");
-			 * として新規例外を作成して投げている　
-			 */
+
 			String message = e.getMessage();
 			request.setAttribute("message", message);
-			request.setAttribute("error", "true");
 
 			// ログイン画面へ
 			nextPage = "/view/users/login.jsp";

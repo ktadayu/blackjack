@@ -16,7 +16,6 @@
         	<p><%= msg %></p>
         <%}else{} %>
         </div>
-
               <form action="<%= request.getContextPath() %>/LoginServlet" method="post" class="form">
                 <table class="form-table" >
                 <tr>

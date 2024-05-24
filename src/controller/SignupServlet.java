@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,8 +35,9 @@ public class SignupServlet extends HttpServlet {
 	//登録用
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		//日本語ニックネーム対応
 		request.setCharacterEncoding("UTF-8");
-		//パスワード一致かどうかはとりあえずサーブレット側で書くけど変更するかも
+
 		String user_name = request.getParameter("user_name");
 		String user_password_1 = request.getParameter("user_password1");
 		String user_password_2 = request.getParameter("user_password2");
@@ -45,24 +47,30 @@ public class SignupServlet extends HttpServlet {
 
 		if(!user_password_1.equals(user_password_2) ) {
 			String msg = "二つのパスワードが一致しません。";
-			System.out.println(user_password_1);
-			System.out.println(user_password_2);
 			request.setAttribute("message", msg);
 			nextPage = "/view/users/sign_up.jsp";
-		}else {
-			try {
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+			requestDispatcher.forward(request, response);
+		}
 
+		try {
 			String user_password = user_password_1;
 			UserDao userDao = new UserDao();
 			//データベース登録
 			userDao.doCreate(user_name, user_password,user_nickname);
 			System.out.println("アカウント作成完了" + user_nickname);
-			//以下の処理はLoginServletに任せたいが方法がわからない。
-			//別の方法として、一度login.jspに戻る仕様にするなど。
+
+			//以下の処理(doLogin~TOP5取得まで)はLoginServletに任せたいが方法がわからない。
 			UserDao userDao_new = new UserDao();
 			User user = userDao_new.doLogin(user_name, user_password);
+
 			HttpSession session = request.getSession();
 			session.setAttribute("USER", user);
+
+			//Top5ユーザー取得
+			UserDao newUserDao = new UserDao();
+			List<User> users = newUserDao.selectTopUsers();
+			session.setAttribute("TOPUSERLIST", users);
 
 			nextPage = "/view/game/game_top.jsp";
 
@@ -72,11 +80,10 @@ public class SignupServlet extends HttpServlet {
 				request.setAttribute("message", message);
 				nextPage = "/view/users/login.jsp";
 			}
-		}
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);
+		}
 
 	}
 
-}

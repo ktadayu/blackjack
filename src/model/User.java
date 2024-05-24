@@ -1,10 +1,20 @@
 package model;
 
 public class  User{
+	private int user_id;
 	private String user_name;
 	private String user_password;
 	private String user_nickname;
 	private int number_of_tips;
+
+	//new User(id, name, password, user_nickname, number_of_tips);
+	public User(int user_id, String user_name, String user_password, String user_nickname,int number_of_tips) {
+		this.user_id = user_id;
+		this.user_name = user_name;
+		this.user_password = user_password;
+		this.user_nickname = user_nickname;
+		this.number_of_tips = number_of_tips;
+		}
 
 	//id,name,pass全部貰う
 	public User(String user_name, String user_password, String user_nickname) {
@@ -12,6 +22,12 @@ public class  User{
 		this.user_password = user_password;
 		this.user_nickname = user_nickname;
 		}
+	//ニックネームとチップ数だけ
+	public User(String user_nickname, String number_of_tips) {
+		this.user_nickname = user_nickname;
+		this.number_of_tips = Integer.parseInt(number_of_tips);
+		}
+
 
 	/*
 	 * ユーザーネーム

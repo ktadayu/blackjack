@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import exception.MyException;
 import model.User;
@@ -28,10 +30,13 @@ public class UserDao extends BaseDao{
 				ps.setString(2, user_password);
 				rs = ps.executeQuery();
 				while(rs.next()) {
+					int id = Integer.parseInt(rs.getString("user_id"));
 					String name = rs.getString("user_name");
 					String password = rs.getString("user_password");
 					String user_nickname = rs.getString("user_nickname");
-					loginUser = new User(name, password, user_nickname);
+					int number_of_tips = Integer.parseInt(rs.getString("number_of_tips"));
+					loginUser = new User(id, name, password, user_nickname, number_of_tips);
+					//loginUser = new User(name,password,user_nickname)からの変更
 				}
 
 				// ログイン結果を確認
@@ -80,6 +85,62 @@ public class UserDao extends BaseDao{
 
 
 /*
+ * 検索して全件取得
+ */
+
+	public List<User> selectAllUsers() throws MyException{
+
+		List<User> userList = new ArrayList<>();
+
+		try {
+			String sql = "SELECT * FROM users";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				String user_nickname = rs.getString("user_nickname");
+				String number_of_tips = rs.getString("number_of_tips");
+				//勝率を追加すること
+				User user = new User(user_nickname,number_of_tips);
+				userList.add(user);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			throw new MyException("リスト取得について予期せぬ失敗");
+		}
+
+		return userList;
+	}
+
+/*
+ * ランキングTOP5取得
+ */
+
+
+
+	public List<User> selectTopUsers() throws MyException{
+
+		List<User> userList = new ArrayList<>();
+
+		try {
+			String sql = "SELECT * FROM users ORDER BY `users`.`number_of_tips` DESC LIMIT 5";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				String user_nickname = rs.getString("user_nickname");
+				String number_of_tips = rs.getString("number_of_tips");
+				//勝率を追加すること
+				User user = new User(user_nickname,number_of_tips);
+				userList.add(user);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			throw new MyException("リスト取得について予期せぬ失敗");
+		}
+
+		return userList;
+	}
+
+/*
  * 削除処理
  */
 
@@ -98,8 +159,23 @@ public class UserDao extends BaseDao{
 		}finally {
 			close();
 		}
+	}
 
+	public void doDeleteByNickname(String user_nickname) throws  MyException{
 
+		try {
+			String sql = "DELETE FROM users WHERE `users`.`user_nickname` = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, user_nickname);
+			ps.executeUpdate();
+			System.out.println("削除完了");
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+			throw new MyException("SQLエラー");
+		}finally {
+			close();
+		}
 	}
 
 

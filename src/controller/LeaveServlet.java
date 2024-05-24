@@ -26,9 +26,30 @@ public class LeaveServlet extends HttpServlet {
     }
 
 
+    //doDeleteByNickname
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		String remove_user_nickname = request.getParameter("user_nickname");
+
+		String nextPage = null;
+
+		try {
+			UserDao userDao = new UserDao();
+			userDao.doDeleteByNickname(remove_user_nickname);
+
+			String message = "ユーザーを削除しました";
+			request.setAttribute("message", message);
+			nextPage = "/view/game/game_top.jsp";
+
+			}catch(MyException e) {
+				String message = e.getMessage();
+				request.setAttribute("message", message);
+				nextPage = "/view/users/list.jsp";
+			}
+
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+		requestDispatcher.forward(request, response);
+
 	}
 
 
@@ -44,8 +65,8 @@ public class LeaveServlet extends HttpServlet {
 
 		String nextPage = null;
 
+		//doLoginメソッドの方がいいかもしれない。
 		if(inputPassword.equals(USER.getUserPassword())) {
-			System.out.println("正しいパスワードです");
 			try {
 			UserDao userDao = new UserDao();
 			userDao.doDelete(USER.getUserName());
@@ -65,10 +86,7 @@ public class LeaveServlet extends HttpServlet {
 			nextPage = "/view/users/leave.jsp";
 		}
 
-		// 次の画面に遷移
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);
-
 	}
-
 }
