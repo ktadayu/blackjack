@@ -7,6 +7,7 @@ public class  User{
 	private String user_nickname;
 	private int number_of_tips;
 
+	//コンストラクタ
 	//new User(id, name, password, user_nickname, number_of_tips);
 	public User(int user_id, String user_name, String user_password, String user_nickname,int number_of_tips) {
 		this.user_id = user_id;
@@ -74,6 +75,18 @@ public class  User{
 
 	public void setNumberOfTips(int tips) {
 		this.number_of_tips = tips;
+	}
+
+	/*
+	 * id
+	 */
+
+	public int getUserId() {
+		return this.user_id;
+	}
+
+	public void setUserId(int user_id) {
+		this.user_id = user_id;
 	}
 
 

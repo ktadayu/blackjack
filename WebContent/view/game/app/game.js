@@ -1,9 +1,9 @@
-/**
- *
- */
 
 'use strict'
 
+/*
+ * bet画面
+ */
 let i=0;
 let k=0;
 
@@ -57,3 +57,19 @@ btn_2.addEventListener('click', function (e) {
     counter.textContent = i;
     form.value= i;
 }, false);
+
+
+
+/*
+ *playing画面
+ */
+//function opt1() {
+//    document.opt_form.value = 'hit'
+//    document.opt_form.submit();
+//}s
+//function opt2() {
+//	document.opt_form.value = 'stand'
+//	document.opt_form.submit();
+//}
+//
+

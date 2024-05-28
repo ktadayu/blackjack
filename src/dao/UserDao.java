@@ -72,8 +72,46 @@ public class UserDao extends BaseDao{
 		}finally {
 			close();
 		}
+	}
+
+/*
+ * チップ数更新処理
+ */
+
+
+
+
+
+
+
+/*
+ * 戦績更新処理→ではなく戦歴の登録
+ */
+
+	public void addToHistory(User user, int amount_of_changes) throws MyException {
+
+		try {
+			String sql = "INSERT INTO `score_history` (`history_id`, `user_id`, `amount_of_changes`, `timestamp`, `datetime`) VALUES (NULL, ?, ?, current_timestamp(), current_timestamp());";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, user.getUserId());
+			ps.setInt(2, amount_of_changes);
+			ps.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			throw new MyException("履歴の登録ができませんでした");
+		}finally {
+			close();
+		}
 
 	}
+
+
+
+
+
+
+
+
 
 /*
  * 検索
@@ -114,9 +152,6 @@ public class UserDao extends BaseDao{
 /*
  * ランキングTOP5取得
  */
-
-
-
 	public List<User> selectTopUsers() throws MyException{
 
 		List<User> userList = new ArrayList<>();
@@ -143,7 +178,6 @@ public class UserDao extends BaseDao{
 /*
  * 削除処理
  */
-
 	public void doDelete(String user_name) throws  MyException{
 
 		try {

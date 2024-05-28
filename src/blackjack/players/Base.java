@@ -24,6 +24,10 @@ public abstract class Base {
 		hand.getCards().add(card);
 	}
 
+	public void removeHand() {
+		hand.getCards().clear();
+	}
+
 	//カードを引くことについての操作
 	public abstract Hand drawCard(Deck deck) ;
 

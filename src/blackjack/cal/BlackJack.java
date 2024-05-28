@@ -10,10 +10,10 @@ public class BlackJack {
 		Deck deck = new Deck(); //デッキ生成
 		Player player = new Player();//プレイヤー生成
 		Dealer dealer = new Dealer();//ディーラー生成
-		
+
 		//山のシャッフル
 		deck.deckShuffle();
-		
+
 		//カードを2枚ずつ引く
 		player.addCard(deck.deal());
 		player.addCard(deck.deal());
