@@ -6,6 +6,7 @@ public class  User{
 	private String user_password;
 	private String user_nickname;
 	private int number_of_tips;
+	private int wincount;
 
 	//コンストラクタ
 	//new User(id, name, password, user_nickname, number_of_tips);
@@ -28,6 +29,16 @@ public class  User{
 		this.user_nickname = user_nickname;
 		this.number_of_tips = Integer.parseInt(number_of_tips);
 		}
+	//テスト用
+	public User(int user_id, int wincount) {
+		this.user_id = user_id;
+		this.wincount = wincount;
+	}
+
+	//カウント(テスト用)
+	public int getWinCount() {
+		return this.wincount;
+	}
 
 
 	/*

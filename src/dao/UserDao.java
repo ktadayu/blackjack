@@ -209,6 +209,34 @@ public class UserDao extends BaseDao{
 		return userList;
 	}
 
+
+	public List<User> selectTopRateUsers() throws MyException{
+
+		List<User> userList = new ArrayList<>();
+
+		try {
+			//勝利したデータを集計
+			String sql = "select user_id,sum(amount_of_changes),count(*) from score_history where amount_of_changes > 0 group by user_id;";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				int user_id = rs.getInt("user_nickname");
+				int countAll = rs.getInt("count(*)");
+				//勝率を追加すること
+				User user = new User(user_id,countAll);
+				userList.add(user);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			throw new MyException("リスト取得について予期せぬ失敗");
+		}
+
+		return userList;
+	}
+
+
+
+
 /*
  * 削除処理
  */

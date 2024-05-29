@@ -26,6 +26,10 @@ List<History> historyList = newUserDao.selectAllHistory(USER);
 %>
 
 <div>
+<h3>現在のチップ数 : <%= USER.getNumberOfTips() %>枚</h3>
+</div>
+
+<div>
 <table>
 	<tr>
 		<th class="table-header">No</th>

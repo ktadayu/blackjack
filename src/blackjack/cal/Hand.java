@@ -18,9 +18,10 @@ public class Hand {
 	//手札の合計値を計算
 	public int totalValue() {
 
-		//手札の1以外のカードの和を計算
+
 		int sum = 0;
 		int aceCount = 0;
+		//手札の1以外のカードの和を計算
 		for(Card card : cards) {
 			if(card.getCardNumber() != 1) {
 			sum += card.getValue();
