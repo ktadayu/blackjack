@@ -13,19 +13,18 @@ import javax.servlet.http.HttpSession;
 import blackjack.cal.Deck;
 import blackjack.players.Dealer;
 import blackjack.players.Player;
+import model.User;
 
 
 @WebServlet("/PlayingServlet")
 public class PlayingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
     public PlayingServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-
+//NewGame with the same bets
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
@@ -33,60 +32,58 @@ public class PlayingServlet extends HttpServlet {
 		Deck deck = (Deck) session.getAttribute("DECK");
 		Player player =(Player) session.getAttribute("PLAYER");
 		Dealer dealer = (Dealer) session.getAttribute("DEALER");
+		Integer betPoint = (Integer) session.getAttribute("BETPOINT");
+		User user = (User) session.getAttribute("USER");
 
-		//手札を初期化
-		player.removeHand();
-		dealer.removeHand();
+		//bet処理
+		user.setNumberOfTips(user.getNumberOfTips() - betPoint);
+		session.setAttribute("BETPOINT", betPoint);
 
-		//デッキ枚数が減ったら初期化
+		//デッキ枚数が減ったらデッキの初期化
 		if(deck.size()<20) {
 			deck = new Deck();
 			deck.deckShuffle();
 			session.setAttribute("DECK", deck);
 		}
 
-		//プレイヤー達にカードを引けと指示
-		player.addCard(deck.deal());
-		player.addCard(deck.deal());
-		dealer.addCard(deck.deal());
-		dealer.addCard(deck.deal());
+		//手札を初期化
+		player.removeHand();
+		dealer.removeHand();
+		drawCard(player,dealer,deck);
 
+		//ゲームの段階判定 初期値設定
 		request.setAttribute("dic", true);
 
-		String nextPage = "/view/game/game_playing.jsp";
+		String nextPage = "CheckBlackJack";
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);
 
 	}
 
-
+//ゲーム開始
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String nextPage = "/view/game/game_playing.jsp";
-
 		HttpSession session = request.getSession();
-
 		Deck deck = (Deck) session.getAttribute("DECK");
 		Player player =(Player) session.getAttribute("PLAYER");
 		Dealer dealer = (Dealer) session.getAttribute("DEALER");
 
-		//デッキのシャッフルの指示
+		//山札シャッフル
 		deck.deckShuffle();
+		//初期手札配布
+		drawCard(player,dealer,deck);
 
-		//プレイヤー達にカードを引けと指示
-		player.addCard(deck.deal());
-		player.addCard(deck.deal());
-		dealer.addCard(deck.deal());
-		dealer.addCard(deck.deal());
-
-		request.setAttribute("dic", true);
-
-		System.out.println(deck.size() + "枚(残)");
-
+		String nextPage = "CheckBlackJack";
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);
+	}
 
+	public void drawCard(Player player, Dealer dealer,Deck deck) {
+		player.addCard(deck.deal());
+		player.addCard(deck.deal());
+		dealer.addCard(deck.deal());
+		dealer.addCard(deck.deal());
 	}
 
 }

@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="blackjack.cal.Deck" %>
 <%@ page import="blackjack.cal.*" %>
-<%@ page import="blackjack.players.Player" %>
-<%@ page import="blackjack.players.Dealer" %>
 <%@ page import="blackjack.players.*" %>
 
 <%@ page import="model.User" %>
@@ -19,6 +16,7 @@ Deck deck = (Deck) session.getAttribute("DECK");
 Player player =(Player) session.getAttribute("PLAYER");
 Dealer dealer = (Dealer) session.getAttribute("DEALER");
 User user = (User) session.getAttribute("USER");
+Integer betPoint = (Integer) session.getAttribute("BETPOINT");
 
 Hand playerHand = player.getHand();
 Hand dealerHand = dealer.getHand();
@@ -26,11 +24,19 @@ Hand dealerHand = dealer.getHand();
 Boolean dic = false ;
 if ((Boolean) request.getAttribute("dic") != null ) {dic = (Boolean) request.getAttribute("dic") ; }
 %>
+
 <nav class="nav-header">
     <div class="header">
-        <a href="<%=request.getContextPath() %>/view/game/game_top.jsp">ゲームトップへ戻る</a>
+        <a href="BlackJackServlet">ゲームトップへ戻る</a>
     </div>
 </nav>
+
+<%String message = (String) request.getAttribute("message"); %>
+<%if(message != null){ %>
+<div>
+<%=message %>
+</div>
+<%} %>
 
 <div>
 	<div>

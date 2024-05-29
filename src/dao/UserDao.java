@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import exception.MyException;
+import model.History;
 import model.User;
 
 public class UserDao extends BaseDao{
@@ -77,21 +78,30 @@ public class UserDao extends BaseDao{
 /*
  * チップ数更新処理
  */
+	public void updateNumberOfTips(User user) throws MyException{
+		try {
+		String sql = "UPDATE `users` SET `number_of_tips` = ? WHERE `users`.`user_id` = ?";
+		ps = con.prepareStatement(sql);
+		ps.setInt(1, user.getNumberOfTips());
+		ps.setInt(2, user.getUserId());
+		ps.executeUpdate();
 
-
-
-
-
+		}catch(SQLException e){
+			e.printStackTrace();
+			throw new MyException("履歴の登録ができませんでした");
+		}finally {
+			close();
+		}
+	}
 
 
 /*
  * 戦績更新処理→ではなく戦歴の登録
  */
-
 	public void addToHistory(User user, int amount_of_changes) throws MyException {
 
 		try {
-			String sql = "INSERT INTO `score_history` (`history_id`, `user_id`, `amount_of_changes`, `timestamp`, `datetime`) VALUES (NULL, ?, ?, current_timestamp(), current_timestamp());";
+			String sql = "INSERT INTO `score_history` (`history_id`, `user_id`, `amount_of_changes`, `timestamp`, `datetime`) VALUES (NULL, ?, ?, current_timestamp(), current_timestamp())";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, user.getUserId());
 			ps.setInt(2, amount_of_changes);
@@ -102,11 +112,35 @@ public class UserDao extends BaseDao{
 		}finally {
 			close();
 		}
-
 	}
 
+/*
+ * 戦績取得
+ */
 
+	public List<History> selectAllHistory(User user) throws MyException{
 
+		List<History> historyList = new ArrayList<>();
+
+		try {
+			String sql = "SELECT * FROM score_history where `user_id` = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, user.getUserId());
+			rs = ps.executeQuery();
+			while(rs.next()) {
+			int historyId = rs.getInt("history_id");
+			int amountOfChanges =rs.getInt("amount_of_changes");
+			String time =	rs.getString("timestamp");
+			History history = new History(historyId,amountOfChanges,time);
+			historyList.add(history);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			throw new MyException("リスト取得について予期せぬ失敗");
+		}
+
+		return historyList;
+	}
 
 
 

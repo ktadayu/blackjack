@@ -39,7 +39,7 @@
     <div class="div-betting-form">
 
     <form class="betting-form" action="<%= request.getContextPath()%>/BlackJackServlet" method="post" >
-    	<input type="text" value="初期値" id="betting-form" name="betPoint">
+    	<input type="text" value="0" id="betting-form" name="betPoint">
     	<button type="submit" class="betting-form-button" >bet</button>
     </form>
 

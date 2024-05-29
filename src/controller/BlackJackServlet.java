@@ -29,10 +29,10 @@ public class BlackJackServlet extends HttpServlet {
     //restart
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
-		
-		//データベースに登録するチップ数を登録する処理
-		//+したか-したか？
-		
+
+		String nextPage = "/view/game/game_top.jsp";
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+		requestDispatcher.forward(request, response);
 
 	}
 
@@ -44,10 +44,21 @@ public class BlackJackServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("USER");
 
+		//選択されたベット額を取得しuserとsessionに登録
 		int betPoint = Integer.parseInt(request.getParameter("betPoint"));
 		user.setNumberOfTips(user.getNumberOfTips() - betPoint);
-		System.out.println("現在のユーザーのチップ数:"+user.getNumberOfTips());
+		session.setAttribute("BETPOINT", betPoint);
 
+		//ゲームの初期化(デッキ生成, プレイヤとディーラーの生成)
+		startGame(session);
+
+		String nextPage = "/PlayingServlet";
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
+		requestDispatcher.forward(request, response);
+	}
+
+
+	public void startGame(HttpSession session) {
 		//ゲーム初期化
 		Deck deck = new Deck(); //デッキ生成
 		Player player = new Player();//プレイヤー生成
@@ -56,11 +67,7 @@ public class BlackJackServlet extends HttpServlet {
 		session.setAttribute("DECK", deck );
 		session.setAttribute("PLAYER", player );
 		session.setAttribute("DEALER", dealer );
-		session.setAttribute("BETPOINT", betPoint);
 
-		String nextPage = "/PlayingServlet";
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
-		requestDispatcher.forward(request, response);
 	}
 
 }

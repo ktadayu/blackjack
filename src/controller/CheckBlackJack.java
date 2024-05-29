@@ -10,42 +10,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import blackjack.cal.Deck;
 import blackjack.cal.Hand;
-import blackjack.players.Dealer;
 import blackjack.players.Player;
 import dao.UserDao;
 import exception.MyException;
 import model.User;
 
 
-@WebServlet("/BlackjackAfterSelectServlet")
-public class BlackjackAfterSelectServlet extends HttpServlet {
+@WebServlet("/CheckBlackJack")
+public class CheckBlackJack extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
-    public BlackjackAfterSelectServlet() {
+    public CheckBlackJack() {
         super();
-
+        // TODO Auto-generated constructor stub
     }
 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
-	//opt = hit or standで画面遷移
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
 
 		User user = (User) session.getAttribute("USER");
-		Deck deck = (Deck) session.getAttribute("DECK");
 		Player player =(Player) session.getAttribute("PLAYER");
-		Dealer dealer = (Dealer) session.getAttribute("DEALER");
 		Integer betPoint = (Integer) session.getAttribute("BETPOINT");
-
-		//選択の取得
-		String opt = request.getParameter("opt");
 
 		//画面遷移先の設定
 		String nextPage = "/view/game/game_playing.jsp";
@@ -53,58 +47,22 @@ public class BlackjackAfterSelectServlet extends HttpServlet {
 
 		//手札の取得
 		Hand playerHand = player.getHand();
-		Hand dealerHand = dealer.getHand();
 
 		Boolean dic = true;//true:ゲーム中 false:ゲーム終了
 		request.setAttribute("dic", dic);
 
-		//プレイヤーの選択による分岐
-		//汚いので後で修正
-		if(opt.equals("hit") && playerHand.totalValue() < 21) {
-			player.drawCard(deck);
-			if(playerHand.totalValue() >21) {
-				String e = "プレイヤーの負けです";
-				updateStatus(user,request);
-				addHistory(user,-betPoint,request);
-				dic = false;
-				request.setAttribute("msg", e);
-				request.setAttribute("dic", dic);
-				requestDispatcher.forward(request, response);
-				return ;
-			}else if(playerHand.totalValue() == 21){
-				dic = false ;
-			}else{//再選択
-				requestDispatcher.forward(request, response);
-				return ;
-			}
-		}else if(opt.equals("stand")) {
-			 dic = false;
+		if(playerHand.totalValue() == 21 && (playerHand.getCards().get(0).getCardNumber() == 1 || playerHand.getCards().get(1).getCardNumber() == 1  )) {
+			String e = "ブラックジャック！";
+			user.setNumberOfTips((int) (user.getNumberOfTips() + (2.5)*betPoint));
+			addHistory(user,+betPoint,request);
+			updateStatus(user,request);
+			dic = false;
+			request.setAttribute("msg", e); request.setAttribute("dic", dic);
+			requestDispatcher.forward(request, response);
+			return ;
 		}
 
-		//dealerのターン
-		dealer.drawCard(deck);
-
-		//勝敗
-		String e;
-
-		 if(playerHand.totalValue() > dealerHand.totalValue() || dealerHand.totalValue() > 21){
-				 e = "プレイヤーの勝利";
-				 user.setNumberOfTips(user.getNumberOfTips() + 2*betPoint);
-				 addHistory(user,+betPoint,request);
-				 updateStatus(user,request);
-			}else if(playerHand.totalValue() == dealerHand.totalValue()){
-				 e = "引き分け";
-				 user.setNumberOfTips(user.getNumberOfTips() + betPoint);
-				 addHistory(user,0,request);
-			}else {
-				 e = "ディーラーの勝利";
-				 updateStatus(user,request);
-				 addHistory(user,-betPoint,request);
-			}
-			request.setAttribute("msg", e);
-			request.setAttribute("dic", false);
 		requestDispatcher.forward(request, response);
-
 	}
 
 	//DBのuserへ現在のチップ数を反映させるメソッド
@@ -134,7 +92,5 @@ public class BlackjackAfterSelectServlet extends HttpServlet {
 
 		}
 	}
-
-
 
 }

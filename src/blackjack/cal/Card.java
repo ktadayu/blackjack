@@ -48,7 +48,7 @@ public class Card {
 		case 13:
 			return 10;
 		case 1:
-			return 1; //Aの挙動
+			return 1;
 		default:
 			return this.cardNumber;
 		}

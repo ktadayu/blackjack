@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -55,11 +54,11 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("USER", user);
 
-			//Top5ユーザー取得
-			//別のコントローラーに移したい
-			UserDao newUserDao = new UserDao();
-			List<User> users = newUserDao.selectTopUsers();
-			session.setAttribute("TOPUSERLIST", users);
+//			//Top5ユーザー取得
+//			//別のコントローラーに移したい
+//			UserDao newUserDao = new UserDao();
+//			List<User> users = newUserDao.selectTopUsers();
+//			session.setAttribute("TOPUSERLIST", users);
 
 			nextPage ="/view/game/game_top.jsp";
 

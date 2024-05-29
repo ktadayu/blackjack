@@ -24,6 +24,7 @@ public abstract class Base {
 		hand.getCards().add(card);
 	}
 
+	//手札を0枚にする
 	public void removeHand() {
 		hand.getCards().clear();
 	}

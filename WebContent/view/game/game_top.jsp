@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="model.User" %>
+<%@ page import="model.History" %>
 <%@ page import="java.util.List" %>
+<%@ page import="dao.UserDao" %>
 
 <!DOCTYPE html>
 <html>
@@ -14,12 +16,16 @@
 <section class="header-section">
 <div class="header">
 <a href="<%=request.getContextPath() %>/LoginServlet">ログアウト</a>
+<a href="<%=request.getContextPath() %>/view/users/my_history.jsp">戦績確認</a>
 </div>
 </section>
 
 <section>
 <% User USER = (User) session.getAttribute("USER"); %>
-<% List<User> users = (List<User>) session.getAttribute("TOPUSERLIST"); %>
+<%
+UserDao newUserDao = new UserDao();
+List<User> users = newUserDao.selectTopUsers();
+%>
 <div class="section-greeting">
 <% String msg = (String) request.getAttribute("message");%>
 <% if(msg != null){%>
