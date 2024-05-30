@@ -1,4 +1,4 @@
-package controller;
+package garbage;
 
 import java.io.IOException;
 
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import blackjack.cal.Deck;
-import blackjack.cal.Hand;
+import blackjack.Deck;
+import blackjack.Hand;
 import blackjack.players.Dealer;
 import blackjack.players.Player;
 import dao.UserDao;
@@ -60,9 +60,9 @@ public class BlackjackAfterSelectServlet extends HttpServlet {
 
 		//プレイヤーの選択による分岐
 		//汚いので後で修正
-		if(opt.equals("hit") && playerHand.totalValue() < 21) {
+		if(opt.equals("hit") && !playerHand.isBurst()) {
 			player.drawCard(deck);
-			if(playerHand.totalValue() >21) {
+			if(playerHand.isBurst()) {
 				String e = "プレイヤーの負けです";
 				updateStatus(user,request);
 				addHistory(user,-betPoint,request);

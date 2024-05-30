@@ -1,4 +1,4 @@
-package blackjack.cal;
+package blackjack;
 
 public class BlackJack {
 

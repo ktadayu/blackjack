@@ -1,10 +1,10 @@
-package blackjack.cal;
+package blackjack;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import blackjack.cal.Card.Mark;
+import blackjack.Card.Mark;
 
 public class Deck {
 

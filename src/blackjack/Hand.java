@@ -1,4 +1,4 @@
-package blackjack.cal;
+package blackjack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,6 @@ public class Hand {
 	//手札の合計値を計算
 	public int totalValue() {
 
-
 		int sum = 0;
 		int aceCount = 0;
 		//手札の1以外のカードの和を計算
@@ -35,7 +34,13 @@ public class Hand {
 		}else {
 			return sum +  aceCount ;
 		}
+	}
 
+	public Boolean isBurst() {
+		if(this.totalValue() >21) {
+			return true;
+		}
+		return false;
 	}
 
 }

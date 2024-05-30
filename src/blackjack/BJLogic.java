@@ -1,0 +1,127 @@
+package blackjack;
+
+import javax.servlet.http.HttpSession;
+
+import blackjack.players.Dealer;
+import blackjack.players.Player;
+import model.User;
+
+
+public class BJLogic {
+
+	//ゲーム初期化
+	private Deck deck ;
+	private Player player ;
+	private Dealer dealer ;
+	Integer betPoint ;
+	User user ;
+
+	//(todo)
+	//メソッドを全てstaticにするのもありだろうか？
+	//
+
+	//コンストラクタ
+	//ここでゲームに必要なものをsessionから全て取り出したいが、
+	//ゲーム初期化前にはデッキもプレイヤーもディーラーもnullなので思案中
+	public BJLogic(HttpSession session) {
+		user = (User) session.getAttribute("USER");
+		betPoint = (int) session.getAttribute("BETPOINT");
+		user.setNumberOfTips(user.getNumberOfTips() - betPoint);
+	}
+
+	//ゲームの初期化
+	public HttpSession initializeBJ(HttpSession session) {
+
+		deck = new Deck(); //デッキ生成
+		player = new Player();//プレイヤー生成
+		dealer = new Dealer();//ディーラー生成
+
+		//山札シャッフル
+		deck.deckShuffle();
+
+		//初期手札配布
+		drawCard(player,dealer,deck);
+
+		//ナチュラルBJ判定
+		if(checkBlackJack(player.getHand())) {
+			session.setAttribute("BLACKJACK",true);
+			user.setNumberOfTips((int) (user.getNumberOfTips() + (2.5)*betPoint));
+		}
+
+		session.setAttribute("DECK", deck );
+		session.setAttribute("PLAYER", player );
+		session.setAttribute("DEALER", dealer );
+		session.setAttribute("USER", user); //bet額を支払ったuser,BJで稼いだuser:更新
+
+		return session;
+	}
+
+	//再プレイ
+	public HttpSession ReplayBJ(HttpSession session) {
+
+		Deck deck = (Deck) session.getAttribute("DECK");
+		Player player =(Player) session.getAttribute("PLAYER");
+		Dealer dealer = (Dealer) session.getAttribute("DEALER");
+		Integer betPoint = (Integer) session.getAttribute("BETPOINT");
+		User user = (User) session.getAttribute("USER");
+
+		//user.setNumberOfTips(user.getNumberOfTips() - betPoint);
+
+		//デッキが20枚以下ならデッキの初期化
+		deck = deckInit(deck);
+
+		//手札を初期化
+		player.removeHand();
+		dealer.removeHand();
+		drawCard(player,dealer,deck);
+
+		//ナチュラルBJ判定
+		if(checkBlackJack(player.getHand())) {
+			session.setAttribute("BLACKJACK",true);
+			user.setNumberOfTips((int) (user.getNumberOfTips() + (2.5)*betPoint));
+		}
+
+		session.setAttribute("USER", user);
+		session.setAttribute("DECK", deck);
+		session.setAttribute("PLAYER", player);
+		session.setAttribute("DEALER", dealer);
+		session.setAttribute("BETPOINT",betPoint);
+
+		return session;
+
+	}
+
+
+
+
+
+	//手札配布
+	public void drawCard(Player player, Dealer dealer,Deck deck) {
+		player.addCard(deck.deal());
+		player.addCard(deck.deal());
+		dealer.addCard(deck.deal());
+		dealer.addCard(deck.deal());
+	}
+
+	//手札を受け取りTotalValueが21かどうか判定する
+	//手札配布時に呼び出すこと(なので上のdrawCardとセットにするべきかもしれない)
+	public boolean checkBlackJack(Hand playerHand) {
+		System.out.println(playerHand.getCards());
+		if(playerHand.totalValue() == 21 && (playerHand.getCards().get(0).getCardNumber() == 1 || playerHand.getCards().get(1).getCardNumber() == 1  )) {
+			return true;
+		}
+		return false;
+	}
+
+	//デッキの初期化
+	public Deck deckInit(Deck deck) {
+		if(deck.size()<20) {
+			deck = new Deck();
+			deck.deckShuffle();
+			return deck;
+		}
+		return deck;
+	}
+
+
+}

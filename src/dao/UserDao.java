@@ -37,12 +37,9 @@ public class UserDao extends BaseDao{
 					String user_nickname = rs.getString("user_nickname");
 					int number_of_tips = Integer.parseInt(rs.getString("number_of_tips"));
 					loginUser = new User(id, name, password, user_nickname, number_of_tips);
-					//loginUser = new User(name,password,user_nickname)からの変更
 				}
-
 				// ログイン結果を確認
 				if(loginUser == null) {
-					System.out.println("ログイン処理失敗");
 					throw new MyException("ユーザー名・パスワードのいずれかに誤りがあります。");
 				}
 			} catch (SQLException e) {
@@ -96,7 +93,7 @@ public class UserDao extends BaseDao{
 
 
 /*
- * 戦績更新処理→ではなく戦歴の登録
+ * 戦歴の登録
  */
 	public void addToHistory(User user, int amount_of_changes) throws MyException {
 
@@ -128,42 +125,27 @@ public class UserDao extends BaseDao{
 			ps.setInt(1, user.getUserId());
 			rs = ps.executeQuery();
 			while(rs.next()) {
-			int historyId = rs.getInt("history_id");
-			int amountOfChanges =rs.getInt("amount_of_changes");
-			String time =	rs.getString("timestamp");
-			History history = new History(historyId,amountOfChanges,time);
-			historyList.add(history);
+				int historyId = rs.getInt("history_id");
+				int amountOfChanges =rs.getInt("amount_of_changes");
+				String time =	rs.getString("timestamp");
+				History history = new History(historyId,amountOfChanges,time);
+				historyList.add(history);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 			throw new MyException("リスト取得について予期せぬ失敗");
-		}
+		 }
 
 		return historyList;
 	}
 
-
-
-
-
-
-/*
- * 検索
- */
-	public boolean doSearch(int id, String name, String pass) {
-		boolean value = true;
-		return value;
-	}
-
-
 /*
  * 検索して全件取得
  */
-
+	//全ユーザーリスト取得
 	public List<User> selectAllUsers() throws MyException{
 
 		List<User> userList = new ArrayList<>();
-
 		try {
 			String sql = "SELECT * FROM users";
 			ps = con.prepareStatement(sql);
@@ -171,7 +153,6 @@ public class UserDao extends BaseDao{
 			while(rs.next()) {
 				String user_nickname = rs.getString("user_nickname");
 				String number_of_tips = rs.getString("number_of_tips");
-				//勝率を追加すること
 				User user = new User(user_nickname,number_of_tips);
 				userList.add(user);
 			}
@@ -190,7 +171,6 @@ public class UserDao extends BaseDao{
 	public List<User> selectTopUsers() throws MyException{
 
 		List<User> userList = new ArrayList<>();
-
 		try {
 			String sql = "SELECT * FROM users ORDER BY `users`.`number_of_tips` DESC LIMIT 5";
 			ps = con.prepareStatement(sql);
@@ -206,7 +186,6 @@ public class UserDao extends BaseDao{
 			e.printStackTrace();
 			throw new MyException("リスト取得について予期せぬ失敗");
 		}
-
 		return userList;
 	}
 
@@ -214,9 +193,7 @@ public class UserDao extends BaseDao{
 	public List<User> selectTopRateUsers() throws MyException{
 
 		List<User> userList = new ArrayList<>();
-
 		try {
-			//勝利したデータを集計
 			String sql = "select	users.user_nickname,\r\n" +
 					"		score_history.user_id,\r\n" +
 					"        users.number_of_tips,\r\n" +
@@ -237,7 +214,6 @@ public class UserDao extends BaseDao{
 				float rate = rs.getFloat("rate");
 				User user = new User(user_nickname,tips,rate);
 				userList.add(user);
-				System.out.println(user.getRate());
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -246,8 +222,6 @@ public class UserDao extends BaseDao{
 
 		return userList;
 	}
-
-
 
 
 /*

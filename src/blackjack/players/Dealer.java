@@ -1,7 +1,7 @@
 package blackjack.players;
 
-import blackjack.cal.Deck;
-import blackjack.cal.Hand;
+import blackjack.Deck;
+import blackjack.Hand;
 
 public class Dealer extends Base{
 

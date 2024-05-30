@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>登録画面</title>
+<% String msg = (String) request.getAttribute("message");%>
 </head>
 <body>
 <section class="section">
 	<h1 class="section-headline">登録</h1>
 
 	<div class="header-notice">
-        <% String msg = (String) request.getAttribute("message");%>
         <% if(msg!=null){ %>
         	<p><%= msg %></p>
         <%}else{} %>
@@ -29,7 +29,6 @@
                     <td class="form-table-data">
                       <input type="text" class="input" name="user_password1" id="pass1"/>
                     </td>
-        		<% //サーブレット側でパスワードの一致を確認する %>
                 </tr>
                 <tr>
                     <th class="form-table-headline"> <label for="pass"> パスワード(確認用) </label></th>

@@ -1,4 +1,4 @@
-package controller;
+package garbage;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import blackjack.cal.Deck;
+import blackjack.Deck;
 import blackjack.players.Dealer;
 import blackjack.players.Player;
 import model.User;

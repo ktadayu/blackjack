@@ -1,8 +1,8 @@
 package blackjack.players;
 
-import blackjack.cal.Card;
-import blackjack.cal.Deck;
-import blackjack.cal.Hand;
+import blackjack.Card;
+import blackjack.Deck;
+import blackjack.Hand;
 
 public abstract class Base {
 

@@ -9,6 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>戦績</title>
+<%
+User USER = (User) session.getAttribute("USER");
+UserDao newUserDao = new UserDao();
+List<History> historyList = newUserDao.selectAllHistory(USER);
+%>
 </head>
 <body>
 <%  %>
@@ -18,17 +23,9 @@
         <a href="<%=request.getContextPath() %>/BlackJackServlet">ゲームトップへ戻る</a>
     </div>
 </nav>
-
-<%
-User USER = (User) session.getAttribute("USER");
-UserDao newUserDao = new UserDao();
-List<History> historyList = newUserDao.selectAllHistory(USER);
-%>
-
 <div>
 <h3>現在のチップ数 : <%= USER.getNumberOfTips() %>枚</h3>
 </div>
-
 <div>
 <table>
 	<tr>

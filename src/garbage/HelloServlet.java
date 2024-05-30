@@ -1,4 +1,4 @@
-package controller;
+package garbage;
 
 import java.io.IOException;
 

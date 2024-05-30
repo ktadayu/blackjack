@@ -5,13 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
+     <% String msg = (String) request.getAttribute("message");%>
 </head>
 <body>
        <section class="section">
               <h1 class="section-headline">ログイン</h1>
-
         <div class="header-notice">
-        <% String msg = (String) request.getAttribute("message");%>
         <% if(msg!=null){ %>
         	<p><%= msg %></p>
         <%}else{} %>
