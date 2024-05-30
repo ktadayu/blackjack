@@ -6,7 +6,7 @@ public class  User{
 	private String user_password;
 	private String user_nickname;
 	private int number_of_tips;
-	private int wincount;
+	private float rate;
 
 	//コンストラクタ
 	//new User(id, name, password, user_nickname, number_of_tips);
@@ -29,15 +29,16 @@ public class  User{
 		this.user_nickname = user_nickname;
 		this.number_of_tips = Integer.parseInt(number_of_tips);
 		}
-	//テスト用
-	public User(int user_id, int wincount) {
-		this.user_id = user_id;
-		this.wincount = wincount;
+	//rate
+	public User(String user_nickname, int number_of_tips, float rate) {
+		this.user_nickname = user_nickname;
+		this.number_of_tips = number_of_tips;
+		this.rate = rate;
 	}
 
 	//カウント(テスト用)
-	public int getWinCount() {
-		return this.wincount;
+	public float getRate() {
+		return  this.rate * 100;
 	}
 
 

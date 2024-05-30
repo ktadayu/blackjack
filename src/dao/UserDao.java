@@ -186,6 +186,7 @@ public class UserDao extends BaseDao{
 /*
  * ランキングTOP5取得
  */
+	//チップ数トップ5
 	public List<User> selectTopUsers() throws MyException{
 
 		List<User> userList = new ArrayList<>();
@@ -209,22 +210,34 @@ public class UserDao extends BaseDao{
 		return userList;
 	}
 
-
+	//勝率TOP5
 	public List<User> selectTopRateUsers() throws MyException{
 
 		List<User> userList = new ArrayList<>();
 
 		try {
 			//勝利したデータを集計
-			String sql = "select user_id,sum(amount_of_changes),count(*) from score_history where amount_of_changes > 0 group by user_id;";
+			String sql = "select	users.user_nickname,\r\n" +
+					"		score_history.user_id,\r\n" +
+					"        users.number_of_tips,\r\n" +
+					"		sum(case when amount_of_changes > 0 then 1 else 0 end) as wins,\r\n" +
+					"        count(*),\r\n" +
+					"        sum(case when amount_of_changes > 0 then 1 else 0 end)/count(*) as rate\r\n" +
+					"from score_history\r\n" +
+					"inner join users\r\n" +
+					"on users.user_id = score_history.user_id\r\n" +
+					"GROUP by score_history.user_id\r\n" +
+					"desc limit 5;";
+
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				int user_id = rs.getInt("user_nickname");
-				int countAll = rs.getInt("count(*)");
-				//勝率を追加すること
-				User user = new User(user_id,countAll);
+				String user_nickname = rs.getString("user_nickname");
+				int tips = rs.getInt("number_of_tips");
+				float rate = rs.getFloat("rate");
+				User user = new User(user_nickname,tips,rate);
 				userList.add(user);
+				System.out.println(user.getRate());
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

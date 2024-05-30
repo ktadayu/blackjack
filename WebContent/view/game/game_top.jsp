@@ -10,6 +10,12 @@
 <head>
 <meta charset="UTF-8">
 <title>BlackJack</title>
+<%
+User USER = (User) session.getAttribute("USER");
+UserDao newUserDao = new UserDao();
+List<User> users = newUserDao.selectTopRateUsers();
+String msg = (String) request.getAttribute("message");
+%>
 </head>
 <body>
 
@@ -21,13 +27,7 @@
 </section>
 
 <section>
-<% User USER = (User) session.getAttribute("USER"); %>
-<%
-UserDao newUserDao = new UserDao();
-List<User> users = newUserDao.selectTopUsers();
-%>
 <div class="section-greeting">
-<% String msg = (String) request.getAttribute("message");%>
 <% if(msg != null){%>
 <h3 class="alert"><%=msg %></h3>
 <%} %>
@@ -55,8 +55,8 @@ List<User> users = newUserDao.selectTopUsers();
             <tr>
             	<th><%= i %></th>
                 <th><%=user.getUserNickname() %></th>
-                <th><%=user.getNumberOfTips()%></th>
-                <th>勝率</th>
+                <th><%=user.getNumberOfTips() %></th>
+                <th><%=user.getRate()%></th>
             </tr>
             <% i++; %>
             <% } %>
