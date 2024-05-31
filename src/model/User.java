@@ -36,9 +36,10 @@ public class  User{
 		this.rate = rate;
 	}
 
-	//カウント(テスト用)
-	public float getRate() {
-		return  this.rate * 100;
+	//勝率取得
+	public String getRate() {
+		String strate = String.format("%.2f", this.rate * 100.0 );
+		return strate;
 	}
 
 

@@ -2,11 +2,8 @@ package blackjack.players;
 
 import blackjack.Deck;
 import blackjack.Hand;
-import blackjack.PlayerStats;
 
 public class Player extends Base{
-
-	PlayerStats stats;
 
 	public Player() {
 		super();

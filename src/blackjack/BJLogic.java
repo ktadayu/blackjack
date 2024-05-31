@@ -16,10 +16,6 @@ public class BJLogic {
 	Integer betPoint ;
 	User user ;
 
-	//(todo)
-	//メソッドを全てstaticにするのもありだろうか？
-	//
-
 	//コンストラクタ
 	//ここでゲームに必要なものをsessionから全て取り出したいが、
 	//ゲーム初期化前にはデッキもプレイヤーもディーラーもnullなので思案中
@@ -65,8 +61,6 @@ public class BJLogic {
 		Integer betPoint = (Integer) session.getAttribute("BETPOINT");
 		User user = (User) session.getAttribute("USER");
 
-		//user.setNumberOfTips(user.getNumberOfTips() - betPoint);
-
 		//デッキが20枚以下ならデッキの初期化
 		deck = deckInit(deck);
 
@@ -91,10 +85,6 @@ public class BJLogic {
 
 	}
 
-
-
-
-
 	//手札配布
 	public void drawCard(Player player, Dealer dealer,Deck deck) {
 		player.addCard(deck.deal());
@@ -106,8 +96,9 @@ public class BJLogic {
 	//手札を受け取りTotalValueが21かどうか判定する
 	//手札配布時に呼び出すこと(なので上のdrawCardとセットにするべきかもしれない)
 	public boolean checkBlackJack(Hand playerHand) {
+		int a = Math.min(playerHand.getCards().get(0).getCardNumber(), playerHand.getCards().get(1).getCardNumber() );
 		System.out.println(playerHand.getCards());
-		if(playerHand.totalValue() == 21 && (playerHand.getCards().get(0).getCardNumber() == 1 || playerHand.getCards().get(1).getCardNumber() == 1  )) {
+		if(playerHand.totalValue() == 21 && a == 1) {
 			return true;
 		}
 		return false;
@@ -121,6 +112,24 @@ public class BJLogic {
 			return deck;
 		}
 		return deck;
+	}
+
+	//勝者を決定する
+	// return 1 : プレイヤー勝利
+	// return 0 : 引き分け
+	// return -1 ： ディーラー勝利
+ 	public static int detWinner(Hand playerHand, Hand dealerHand) {
+
+		if(playerHand.totalValue() > dealerHand.totalValue() || dealerHand.totalValue() > 21) {
+			 return 1;
+		}
+
+		if(playerHand.totalValue() == dealerHand.totalValue()) {
+			return 0;
+		}
+
+		return -1;
+
 	}
 
 

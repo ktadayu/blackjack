@@ -5,16 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
-     <% String msg = (String) request.getAttribute("message");%>
 </head>
+<jsp:include page="../components/nav.jsp"/>
 <body>
        <section class="section">
               <h1 class="section-headline">ログイン</h1>
-        <div class="header-notice">
-        <% if(msg!=null){ %>
-        	<p><%= msg %></p>
-        <%}else{} %>
-        </div>
               <form action="<%= request.getContextPath() %>/LoginServlet" method="post" class="form">
                 <table class="form-table" >
                 <tr>
@@ -32,7 +27,7 @@
                 </table>
                 <div class="form-button">
                   <button class="button button-submission" type="submit">
-                   	ログイン
+                   	ログインする
                   </button>
                 </div>
               </form>

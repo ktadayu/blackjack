@@ -6,8 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>退会</title>
+<title>ユーザーの削除</title>
 </head>
+<jsp:include page="../components/nav-game.jsp"/>
+<jsp:include page="../components/nav-top.jsp"/>
 <body>
        <section class="section">
               <h1 class="section-headline">ユーザーの削除</h1>

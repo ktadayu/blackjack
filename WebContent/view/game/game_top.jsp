@@ -4,6 +4,7 @@
 <%@ page import="model.History" %>
 <%@ page import="java.util.List" %>
 <%@ page import="dao.UserDao" %>
+<%@ page import="dao.HistoryDao" %>
 
 <!DOCTYPE html>
 <html>
@@ -12,19 +13,12 @@
 <title>BlackJack</title>
 <%
 User USER = (User) session.getAttribute("USER");
-UserDao newUserDao = new UserDao();
-List<User> users = newUserDao.selectTopRateUsers();
+List<User> users = (List<User>) request.getAttribute("users");
 String msg = (String) request.getAttribute("message");
 %>
 </head>
+<jsp:include page="../components/nav-top.jsp"/>
 <body>
-
-<section class="header-section">
-<div class="header">
-<a href="<%=request.getContextPath() %>/LoginServlet">ログアウト</a>
-<a href="<%=request.getContextPath() %>/view/users/my_history.jsp">戦績確認</a>
-</div>
-</section>
 
 <section>
 <div class="section-greeting">

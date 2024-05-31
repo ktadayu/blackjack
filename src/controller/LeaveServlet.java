@@ -58,9 +58,6 @@ public class LeaveServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User USER = (User) session.getAttribute("USER");
 
-//		String user_nickname = USER.getUserNickname();
-//		System.out.println(user_nickname);
-
 		String inputPassword = request.getParameter("user_password");
 
 		String nextPage = null;

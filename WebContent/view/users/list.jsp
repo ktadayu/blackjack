@@ -11,6 +11,8 @@
 <% String msg = (String) request.getAttribute("message");%>
 <% List<User> users = (List<User>) request.getAttribute("USERLIST"); %>
 </head>
+<jsp:include page="../components/nav-game.jsp"/>
+<jsp:include page="../components/nav-top.jsp"/>
 <body>
 <section>
     <div class="user-container">

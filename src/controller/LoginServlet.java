@@ -27,10 +27,7 @@ public class LoginServlet extends HttpServlet {
     //ログアウトメソッド
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		/*
-		User user = (User) session.getAttribute("USER");
-		System.out.println(user.getUserNickname()); //（ログインしているユーザーのニックネーム）
-		*/
+
 		session.invalidate();
 
 		request.setAttribute("message", "ログアウトしました");
@@ -54,13 +51,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("USER", user);
 
-//			//Top5ユーザー取得
-//			//別のコントローラーに移したい
-//			UserDao newUserDao = new UserDao();
-//			List<User> users = newUserDao.selectTopUsers();
-//			session.setAttribute("TOPUSERLIST", users);
-
-			nextPage ="/view/game/game_top.jsp";
+			nextPage ="ToGameTopServlet";
 
 		} catch (MyException e) {
 

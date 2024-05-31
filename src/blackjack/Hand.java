@@ -36,7 +36,7 @@ public class Hand {
 		}
 	}
 
-	public Boolean isBurst() {
+	public Boolean isBust() {
 		if(this.totalValue() >21) {
 			return true;
 		}

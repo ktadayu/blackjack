@@ -15,6 +15,7 @@ import blackjack.Deck;
 import blackjack.Hand;
 import blackjack.players.Dealer;
 import blackjack.players.Player;
+import dao.HistoryDao;
 import dao.UserDao;
 import exception.MyException;
 import model.User;
@@ -32,23 +33,22 @@ public class BJServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-
+//hit or standの後遷移
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
+		//画面遷移先の設定
+		String nextPage = "/view/game/play.jsp";
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 
+		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("USER");
 		Deck deck = (Deck) session.getAttribute("DECK");
 		Player player =(Player) session.getAttribute("PLAYER");
 		Dealer dealer = (Dealer) session.getAttribute("DEALER");
 		Integer betPoint = (Integer) session.getAttribute("BETPOINT");
 
-		//選択の取得
+		//hit,standの選択の取得
 		String opt = request.getParameter("opt");
-
-		//画面遷移先の設定
-		String nextPage = "/view/game/play.jsp";
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 
 		//手札の取得
 		Hand playerHand = player.getHand();
@@ -58,15 +58,13 @@ public class BJServlet extends HttpServlet {
 		request.setAttribute("dic", dic);
 
 		//プレイヤーの選択による分岐
-		//汚いので後で修正
-
 		if(opt.equals("stand")) {
 			 dic = false;
 			//dealerのターン
 			dealer.drawCard(deck);
 		}else{
 			player.drawCard(deck);
-			if(playerHand.isBurst()) {
+			if(playerHand.isBust()) {
 				String e = "プレイヤーの負けです";
 				updateStatus(user,-betPoint,request);
 				dic = false;
@@ -82,6 +80,7 @@ public class BJServlet extends HttpServlet {
 				return ;
 			}
 		}
+
 
 		//勝敗
 		String e;
@@ -161,8 +160,8 @@ public class BJServlet extends HttpServlet {
 		try {
 		UserDao userDao = new UserDao();
 		userDao.updateNumberOfTips(user); //DBのユーザーテーブルのチップ数を更新
-		UserDao userDao2 = new UserDao();
-		userDao2.addToHistory(user,amountOfChange); //DBの戦績を登録
+		HistoryDao historyDao = new HistoryDao();
+		historyDao.addToHistory(user,amountOfChange); //DBの戦績を登録
 		}catch(MyException e) {
 			String message = e.getMessage();
 			request.setAttribute("message", message);
@@ -173,8 +172,8 @@ public class BJServlet extends HttpServlet {
 	//DBで勝敗を記録する
 	public void addHistory(User user, int amountOfChange ,HttpServletRequest request) {
 		try {
-		UserDao userDao = new UserDao();
-		userDao.addToHistory(user,amountOfChange);
+		HistoryDao historyDao = new HistoryDao();
+		historyDao.addToHistory(user,amountOfChange);
 		}catch(MyException e) {
 			String message = e.getMessage();
 			request.setAttribute("message", message);

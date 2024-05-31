@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+/*
+grid area
+*/
+
+.grid-area{
+
+        position: relative;
+        margin: 0 auto;
+        height: 50%;
+        width: 50%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr; /* 2列 1/(1+1) 1/(1+1)の横幅(列なので)*/
+        grid-template-rows: 1fr 1fr; /* 2行 1/(1+1) 1/(1+1)の縦幅(行なので)*/
+        grid-template-areas: "a b e"
+                             "c d f";
+        text-align: center;
+        /* margin-bottom:1000px; */
+    }
+
+    .pos-a,.pos-b,.pos-c,.pos-d,.pos-e,.pos-f{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* 色はあとで消す */
+    .pos-a{
+        grid-area: a;
+        border: 1px solid black;
+    /*    background-color: aqua; */
+    }
+    .pos-b{
+        grid-area: b;
+        border: 1px solid black;
+      /*  background-color: blanchedalmond; */
+    }
+    .pos-c{
+        grid-area: c;
+        border: 1px solid black;
+     /*   background-color: blue; */
+    }
+    .pos-d{
+        grid-area:d;
+        border: 1px solid black;
+     /*   background-color: brown; */
+    }
+    .pos-e{
+        grid-area:e;
+        border: 1px solid black;
+       /* background-color: rgb(42, 165, 75);*/
+    }
+    .pos-f{
+        grid-area:f;
+        border: 1px solid black;
+        /* background-color: rgb(165, 42, 134); */
+    }
+
+    /*
+    betボタン
+    */
+
+    .div-betting-form{
+        position: relative;
+        text-align: center;
+    }
+    .betting-form{
+        margin: 0 auto;
+
+    }
+    .betting-form-button{
+        margin: 0 auto;
+
+    }
+
+    /*
+    カウンター　とりあえずem指定
+    あとでカウンター用意
+    */
+    .em{
+        font-size: 5em    ;
+    }
+
+	/*
+	リスト用
+	*/
+.user-container{
+}
+.table-header{
+    font-size: 25px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+  /*
+* ゲーム画面
+*/
+
+.dealerhand{
+	display:flex;
+	justify-content: center;
+	position: relative;
+	margin: 0px auto 50px;
+	text-align: center;
+
+}
+
+.playerhand{
+	display:flex;
+	justify-content: center;
+	position:relative;
+	margin: 50px auto 0px;
+	text-align: center;
+}
+
+.div-opt-game{
+	display:flex;
+	justify-content: center;
+}
+
+form{
+	display:flex;
+	justify-content: center;
+}
+
+
+
+

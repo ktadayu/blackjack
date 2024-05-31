@@ -3,21 +3,21 @@ package blackjack;
 public class Card {
 
 	public enum Mark{
-			CLUB("クラブ",1),
-			DIA("ダイヤ",2),
-			HEART("ハート",3),
-			SPADE("スペード",4);
+			CLUB("club",1),
+			DIA("diamond",2),
+			HEART("heart",3),
+			SPADE("spade",4);
 
-			private String jname;
+			private String name;
 			private int markNum;
 
 			private Mark(String jname, int markNum) {
-				this.jname = jname;
+				this.name = jname;
 				this.markNum =markNum ;
 			}
 
 			public String getJname() {
-				return this.jname;
+				return this.name;
 			}
 
 			public int getMarkNum() {
@@ -34,7 +34,6 @@ public class Card {
 		this.mark = mark;
 		this.cardNumber = cardNumber;
 	}
-
 
 	public int getCardNumber() {
 		return this.cardNumber;
@@ -56,8 +55,9 @@ public class Card {
 
 	//カードの値→カードの数字の表示必要？？？？？
 	public String toString() {
-		String[] numbers = {"1","2","3","4","5","6","7","8","9","10","J","Q","K"};
-		return "[" + this.mark.getJname()+ " , " + numbers[this.cardNumber-1] + "]";
+		String[] numbers = {"01","02","03","04","05","06","07","08","09","10","11","12","13"};
+//		String cardNumber = String.format("%02c", numbers[this.cardNumber-1] );
+		return   this.mark.getJname()+ "_" + numbers[this.cardNumber-1] ;
 	}
 
 }

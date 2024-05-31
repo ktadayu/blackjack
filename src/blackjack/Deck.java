@@ -27,6 +27,7 @@ public class Deck {
 		return cards;
 	}
 
+	//山札の一番上を取得した後消去
 	public Card deal() {
 		Card card = cards.get(0);
 		cards.remove(0);

@@ -3,6 +3,7 @@
 <%@ page import="model.User" %>
 <%@ page import="model.History" %>
 <%@ page import="dao.UserDao" %>
+<%@ page import="dao.HistoryDao" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
@@ -11,18 +12,15 @@
 <title>戦績</title>
 <%
 User USER = (User) session.getAttribute("USER");
-UserDao newUserDao = new UserDao();
-List<History> historyList = newUserDao.selectAllHistory(USER);
+HistoryDao historyDao = new HistoryDao();
+List<History> historyList = historyDao.selectAllHistory(USER);
 %>
 </head>
+<jsp:include page="../components/nav-game.jsp"/>
+<jsp:include page="../components/nav-top.jsp"/>
 <body>
 <%  %>
 
-<nav class="nav-header">
-    <div class="header">
-        <a href="<%=request.getContextPath() %>/BlackJackServlet">ゲームトップへ戻る</a>
-    </div>
-</nav>
 <div>
 <h3>現在のチップ数 : <%= USER.getNumberOfTips() %>枚</h3>
 </div>
