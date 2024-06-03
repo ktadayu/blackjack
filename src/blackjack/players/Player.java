@@ -3,7 +3,7 @@ package blackjack.players;
 import blackjack.Deck;
 import blackjack.Hand;
 
-public class Player extends Base{
+public class Player extends Base {
 
 	public Player() {
 		super();

@@ -6,14 +6,13 @@ import blackjack.players.Dealer;
 import blackjack.players.Player;
 import model.User;
 
-
 public class BJLogic {
 
-	private Deck deck ;
-	private Player player ;
-	private Dealer dealer ;
-	Integer betPoint ;
-	User user ;
+	private Deck deck;
+	private Player player;
+	private Dealer dealer;
+	Integer betPoint;
+	User user;
 
 	public static String msg;
 
@@ -35,17 +34,22 @@ public class BJLogic {
 		deck.deckShuffle();
 
 		//初期手札配布
-		drawCard(player,dealer,deck);
+		drawCard(player, dealer, deck);
 
 		//ナチュラルBJ判定
-		if(checkBlackJack(player.getHand())) {
-			session.setAttribute("BLACKJACK",true);
-			user.setNumberOfTips((int) (user.getNumberOfTips() + (2.5)*betPoint));
+		if (checkBlackJack(player.getHand())) {
+			session.setAttribute("BLACKJACK", true);
+			user.setNumberOfTips((int) (user.getNumberOfTips() + (2.5) * betPoint));
 		}
 
-		session.setAttribute("DECK", deck );
-		session.setAttribute("PLAYER", player );
-		session.setAttribute("DEALER", dealer );
+		//splitが可能かどうか
+		if(player.getHand().isSplitable()) {
+			session.setAttribute("SPLITABLE", true);
+		}
+
+		session.setAttribute("DECK", deck);
+		session.setAttribute("PLAYER", player);
+		session.setAttribute("DEALER", dealer);
 		session.setAttribute("USER", user); //bet額を支払ったuser,BJで稼いだuser:更新
 
 		return session;
@@ -55,7 +59,7 @@ public class BJLogic {
 	public HttpSession ReplayBJ(HttpSession session) {
 
 		Deck deck = (Deck) session.getAttribute("DECK");
-		Player player =(Player) session.getAttribute("PLAYER");
+		Player player = (Player) session.getAttribute("PLAYER");
 		Dealer dealer = (Dealer) session.getAttribute("DEALER");
 		Integer betPoint = (Integer) session.getAttribute("BETPOINT");
 		User user = (User) session.getAttribute("USER");
@@ -66,26 +70,31 @@ public class BJLogic {
 		//手札を初期化
 		player.removeHand();
 		dealer.removeHand();
-		drawCard(player,dealer,deck);
+		drawCard(player, dealer, deck);
 
 		//ナチュラルBJ判定
-		if(checkBlackJack(player.getHand())) {
-			session.setAttribute("BLACKJACK",true);
-			user.setNumberOfTips((int) (user.getNumberOfTips() + (2.5)*betPoint));
+		if (checkBlackJack(player.getHand())) {
+			session.setAttribute("BLACKJACK", true);
+			user.setNumberOfTips((int) (user.getNumberOfTips() + (2.5) * betPoint));
+		}
+
+		//splitが可能かどうか
+		if(player.getHand().isSplitable()) {
+			session.setAttribute("SPLITTABLE", true);
 		}
 
 		session.setAttribute("USER", user);
 		session.setAttribute("DECK", deck);
 		session.setAttribute("PLAYER", player);
 		session.setAttribute("DEALER", dealer);
-		session.setAttribute("BETPOINT",betPoint);
+		session.setAttribute("BETPOINT", betPoint);
 
 		return session;
 
 	}
 
 	//手札配布
-	public void drawCard(Player player, Dealer dealer,Deck deck) {
+	public void drawCard(Player player, Dealer dealer, Deck deck) {
 		player.addCard(deck.deal());
 		player.addCard(deck.deal());
 		dealer.addCard(deck.deal());
@@ -96,19 +105,19 @@ public class BJLogic {
 	//手札配布時に呼び出すこと(なので上のdrawCardとセットにするべきかもしれない)
 	public boolean checkBlackJack(Hand playerHand) {
 		int firstCardNum = playerHand.getCards().get(0).getCardNumber();
-		int secondCardNum =playerHand.getCards().get(1).getCardNumber();
+		int secondCardNum = playerHand.getCards().get(1).getCardNumber();
 
-		int a = Math.min(firstCardNum, secondCardNum );
-		System.out.println(playerHand.getCards());
-		if(playerHand.totalValue() == 21 && a == 1) {
+		int a = Math.min(firstCardNum, secondCardNum);
+		if (playerHand.totalValue() == 21 && a == 1) {
 			return true;
 		}
 		return false;
 	}
 
+
 	//デッキの初期化
 	public Deck deckInit(Deck deck) {
-		if(deck.size()<20) {
+		if (deck.size() < 20) {
 			deck = new Deck();
 			deck.deckShuffle();
 			return deck;
@@ -120,13 +129,13 @@ public class BJLogic {
 	// return 1 : プレイヤー勝利
 	// return 0 : 引き分け
 	// return -1 ： ディーラー勝利
- 	public static int detWinner(Hand playerHand, Hand dealerHand) {
-		if(playerHand.totalValue() > dealerHand.totalValue() || dealerHand.totalValue() > 21) {
-			 msg = "プレイヤーの勝利！";
-			 return 1;
+	public static int detWinner(Hand playerHand, Hand dealerHand) {
+		if (playerHand.totalValue() > dealerHand.totalValue() || dealerHand.totalValue() > 21) {
+			msg = "プレイヤーの勝利！";
+			return 1;
 		}
 
-		if(playerHand.totalValue() == dealerHand.totalValue()) {
+		if (playerHand.totalValue() == dealerHand.totalValue()) {
 			msg = "引き分け";
 			return 0;
 		}
@@ -134,6 +143,9 @@ public class BJLogic {
 		msg = "ディーラーの勝利！";
 		return -1;
 	}
+
+
+
 
 
 }

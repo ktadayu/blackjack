@@ -18,14 +18,14 @@ import model.User;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	public LoginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-    //ログアウトメソッド
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	//ログアウトメソッド
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 
 		session.invalidate();
@@ -38,7 +38,8 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	//ログインメソッド
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String user_name = request.getParameter("user_name");
 		String user_password = request.getParameter("user_password");
@@ -51,7 +52,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("USER", user);
 
-			nextPage ="ToGameTopServlet";
+			nextPage = "ToGameTopServlet";
 
 		} catch (MyException e) {
 

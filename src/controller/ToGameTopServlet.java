@@ -22,27 +22,26 @@ import model.User;
 public class ToGameTopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
-    public ToGameTopServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request,response);
+	public ToGameTopServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
 		String nextPage;
 		String message;
 
-		if(session.getAttribute("USER") == null) {
-			 nextPage = "/view/users/login.jsp";
-			 message = "不正なアクセス";
+		if (session.getAttribute("USER") == null) {
+			nextPage = "/view/users/login.jsp";
+			message = "不正なアクセス";
 
 			request.setAttribute("message", message);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
@@ -51,12 +50,11 @@ public class ToGameTopServlet extends HttpServlet {
 			return;
 		}
 
-
 		try {
 			HistoryDao historyDao = new HistoryDao();
 			List<User> users = historyDao.selectTopRateUsers();
 			request.setAttribute("users", users);
-		}catch(MyException e){
+		} catch (MyException e) {
 			e.printStackTrace();
 
 		}

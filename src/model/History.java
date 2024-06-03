@@ -6,8 +6,7 @@ public class History {
 	private int amountOfChanges;
 	private String timeStamp;
 
-
-	public History(int history_id, int amountOfChanges, String timeStamp){
+	public History(int history_id, int amountOfChanges, String timeStamp) {
 		this.amountOfChanges = amountOfChanges;
 		this.timeStamp = timeStamp;
 	}
@@ -15,9 +14,11 @@ public class History {
 	public int getAmountOfChanges() {
 		return amountOfChanges;
 	}
+
 	public int getHistoryId() {
 		return history_id;
 	}
+
 	public String getTimeStamp() {
 		return timeStamp;
 	}

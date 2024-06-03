@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,25 +14,24 @@ import dao.UserDao;
 import exception.MyException;
 import model.User;
 
-
 @WebServlet("/SignupServlet")
 public class SignupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	public SignupServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public SignupServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	//登録用
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		//日本語ニックネーム対応
 		request.setCharacterEncoding("UTF-8");
@@ -45,7 +43,7 @@ public class SignupServlet extends HttpServlet {
 
 		String nextPage = null;
 
-		if(!user_password_1.equals(user_password_2) ) {
+		if (!user_password_1.equals(user_password_2)) {
 			String msg = "二つのパスワードが一致しません。";
 			request.setAttribute("message", msg);
 			nextPage = "/view/users/sign_up.jsp";
@@ -57,7 +55,7 @@ public class SignupServlet extends HttpServlet {
 			String user_password = user_password_1;
 			UserDao userDao = new UserDao();
 			//データベース登録
-			userDao.doCreate(user_name, user_password,user_nickname);
+			userDao.doCreate(user_name, user_password, user_nickname);
 			System.out.println("アカウント作成完了" + user_nickname);
 
 			//以下の処理(doLogin~TOP5取得まで)はLoginServletに任せたいが方法がわからない。
@@ -67,23 +65,22 @@ public class SignupServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("USER", user);
 
-			//Top5ユーザー取得
-			UserDao newUserDao = new UserDao();
-			List<User> users = newUserDao.selectTopUsers();
-			session.setAttribute("TOPUSERLIST", users);
+//			//Top5ユーザー取得
+//			UserDao newUserDao = new UserDao();
+//			List<User> users = newUserDao.selectTopUsers();
+//			session.setAttribute("TOPUSERLIST", users);
 
 			nextPage = "/view/game/game_top.jsp";
 
-			}catch(MyException e) {
-				String message = e.getMessage();
-				System.out.println(e);
-				request.setAttribute("message", message);
-				nextPage = "/view/users/login.jsp";
-			}
+		} catch (MyException e) {
+			String message = e.getMessage();
+			System.out.println(e);
+			request.setAttribute("message", message);
+			nextPage = "/view/users/login.jsp";
+		}
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);
-		}
-
 	}
 
+}

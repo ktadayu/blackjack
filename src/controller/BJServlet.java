@@ -24,14 +24,14 @@ import model.User;
 public class BJServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	public BJServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public BJServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-//hit or standの後遷移
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	//hit or standの後遷移
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		//画面遷移先の設定
 		String nextPage = "/view/game/play.jsp";
@@ -41,7 +41,7 @@ public class BJServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("USER");
 		Deck deck = (Deck) session.getAttribute("DECK");
-		Player player =(Player) session.getAttribute("PLAYER");
+		Player player = (Player) session.getAttribute("PLAYER");
 		Dealer dealer = (Dealer) session.getAttribute("DEALER");
 		Integer betPoint = (Integer) session.getAttribute("BETPOINT");
 
@@ -52,115 +52,113 @@ public class BJServlet extends HttpServlet {
 		Hand playerHand = player.getHand();
 		Hand dealerHand = dealer.getHand();
 
-//		Boolean dic = true;//true:ゲーム中 false:ゲーム終了
+		//Boolean dic = true;//true:ゲーム中 false:ゲーム終了
 		request.setAttribute("dic", true);
 
 		//プレイヤーの選択による分岐
-		if(opt.equals("hit")) {
+		if (opt.equals("hit")) {
 			player.drawCard(deck);
-			if(playerHand.isBust()) {
-				//バーストと表示
-				request.setAttribute("msg", BJLogic.msg);
+			if (playerHand.isBust()) {
+				request.setAttribute("msg", "バースト!");
 				request.setAttribute("dic", false);
-				updateStatus(user,-betPoint,request);
+				updateStatus(user, -betPoint, request);
 				requestDispatcher.forward(request, response);
-				return ;
-			}else if(!playerHand.isBust()){
+				return;
+			} else {
 				//再選択
 				requestDispatcher.forward(request, response);
-				return ;
+				return;
 			}
 		}
 
 		dealer.drawCard(deck);
 
 		//勝敗
-		if(BJLogic.detWinner(playerHand, dealerHand) == 1) {
-			user.setNumberOfTips(user.getNumberOfTips() + 2*betPoint);
-			updateStatus(user,+betPoint,request);
-		}else if(BJLogic.detWinner(playerHand, dealerHand) == 0) {
-			 user.setNumberOfTips(user.getNumberOfTips() + betPoint);
-			 addHistory(user,0,request);
-		}else {
-			 updateStatus(user,-betPoint,request);
+		if (BJLogic.detWinner(playerHand, dealerHand) == 1) {
+			user.setNumberOfTips(user.getNumberOfTips() + 2 * betPoint);
+			updateStatus(user, +betPoint, request);
+		} else if (BJLogic.detWinner(playerHand, dealerHand) == 0) {
+			user.setNumberOfTips(user.getNumberOfTips() + betPoint);
+			updateStatus(user, 0, request);
+		} else {
+			updateStatus(user, -betPoint, request);
 		}
 
-		 	session.setAttribute("USER", user);
-			request.setAttribute("msg", BJLogic.msg);
-			request.setAttribute("dic", false);
+		session.setAttribute("USER", user);
+		request.setAttribute("msg", BJLogic.msg);
+		request.setAttribute("dic", false);
 		requestDispatcher.forward(request, response);
 	}
 
 	//ゲームの開始と再プレイ
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String nextPage = "/view/game/play.jsp";
 		//初回か再プレイかのフラグ, 実際には不要
-		boolean thisIsFirstTurn = true;
-		int betPoint ;
+		boolean firstTurn = true;
+		int betPoint;
 
 		//セッションの取得
 		HttpSession session = request.getSession();
 
 		//選択されたベット額を取得
 		//requestのbetPointがnullかどうかで初回プレイか否かの判定
-		if(request.getParameter("betPoint") != null) {
+		if (request.getParameter("betPoint") != null) {
 			betPoint = Integer.parseInt(request.getParameter("betPoint"));
 			session.setAttribute("BETPOINT", betPoint);
-		}else {
-			thisIsFirstTurn = false;
+		} else {
+			firstTurn = false;
 			betPoint = (int) session.getAttribute("BETPOINT");
 		}
 
-		//セッションからユーザーとbetPointを取り出し、ユーザーのチップを徴収
+		//BJロジック: セッションからユーザーとbetPointを取り出し、ユーザーのチップを徴収
 		//BJLogicをnewしているのは気持ち悪い
 		BJLogic bjLogic = new BJLogic(session);
 
-		//ゲームの初期化 or リプレイ
-		if(thisIsFirstTurn) {
-		session = bjLogic.initializeBJ(session);
-		}else {
-		session = bjLogic.ReplayBJ(session);
+		//ゲームの初期化 or リプレイ(デッキとbet額を変えずにプレイ)
+		if (firstTurn) {
+			session = bjLogic.initializeBJ(session);
+		} else {
+			session = bjLogic.ReplayBJ(session);
 		}
+
 
 		//ナチュラルBJ成立の場合
-		if((Boolean) session.getAttribute("BLACKJACK") != null) {
+		if ((Boolean) session.getAttribute("BLACKJACK") != null) {
 			session.removeAttribute("BLACKJACK");
 			User user = (User) session.getAttribute("USER");
-			updateStatus(user,(int) 2.5 * betPoint,request);
+			updateStatus(user, (int) 2.5 * betPoint, request);
 			session.setAttribute("USER", user);
-			request.setAttribute("msg", "ブラックジャック！"); request.setAttribute("dic", false);
+			request.setAttribute("msg", "ブラックジャック！");
+			request.setAttribute("dic", false);
 		}
 
+		//split可能かどうか？
+		if((Boolean) session.getAttribute("SPLITTABLE") != null) {
+			session.removeAttribute("SPLITTABLE");
+			request.setAttribute("SPLITTABLE", true);
+		}
+
+		//1ゲーム初回のフラグ
+		request.setAttribute("FLAG", true);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);
 
 	}
 
 	//DBのuserへ現在のチップ数を反映させるメソッド
-	public void updateStatus(User user , int amountOfChange,HttpServletRequest request) {
+	public void updateStatus(User user, int amountOfChange, HttpServletRequest request) {
 		try {
-		UserDao userDao = new UserDao();
-		userDao.updateNumberOfTips(user); //DBのユーザーテーブルのチップ数を更新
-		HistoryDao historyDao = new HistoryDao();
-		historyDao.addToHistory(user,amountOfChange); //DBの戦績を登録
-		}catch(MyException e) {
+			UserDao userDao = new UserDao();
+			userDao.updateNumberOfTips(user); //DBのユーザーテーブルのチップ数を更新
+			HistoryDao historyDao = new HistoryDao();
+			historyDao.addToHistory(user, amountOfChange); //DBの戦績を登録
+		} catch (MyException e) {
 			String message = e.getMessage();
 			request.setAttribute("message", message);
-		}finally {
 		}
 	}
 
-	//DBで勝敗を記録する
-	public void addHistory(User user, int amountOfChange ,HttpServletRequest request) {
-		try {
-		HistoryDao historyDao = new HistoryDao();
-		historyDao.addToHistory(user,amountOfChange);
-		}catch(MyException e) {
-			String message = e.getMessage();
-			request.setAttribute("message", message);
-		}finally {
-		}
-	}
 
 }

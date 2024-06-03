@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 import exception.MyException;
 
-
 public abstract class BaseDao {
 
 	protected Connection con = null;
@@ -25,7 +24,7 @@ public abstract class BaseDao {
 			if (con == null) {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
-				String url  = "jdbc:mysql://localhost/blackjack";
+				String url = "jdbc:mysql://localhost/blackjack";
 				String user = "root";
 				String password = "";
 				// DB接続

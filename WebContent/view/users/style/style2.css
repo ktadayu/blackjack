@@ -1,25 +1,39 @@
 @charset "UTF-8";
 
-
-a:link { color: #ffff; }
-a:visited { color: #ffff; }
-a:hover { color: #ff0000; }
-a:active { color: #ff8000; }
-
-.section-headline{
-    text-align:center
+body {
+	font-family: "Noto Serif JP", serif;
 }
 
-.form-table{
-    display:flex;
-    justify-content:center
+a:link {
+	color: #ffff;
 }
 
-.form-table-user-nickname{
-    padding:100px
+a:visited {
+	color: #ffff;
 }
 
-.button-submission{
-    display: block;
-    margin:0 auto;
+a:hover {
+	color: #ff0000;
+}
+
+a:active {
+	color: #ff8000;
+}
+
+.section-headline {
+	text-align: center
+}
+
+.form-table {
+	display: flex;
+	justify-content: center
+}
+
+.form-table-user-nickname {
+	padding: 100px
+}
+
+.button-submission {
+	display: block;
+	margin: 0 auto;
 }

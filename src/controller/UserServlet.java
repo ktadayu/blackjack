@@ -15,38 +15,36 @@ import dao.UserDao;
 import exception.MyException;
 import model.User;
 
-
 @WebServlet("/UserServlet")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	public UserServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public UserServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-    //ユーザーのリストを取得する
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	//ユーザーのリストを取得する
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String nextPage = null;
 
 		HttpSession session = request.getSession();
 		User myUser = (User) session.getAttribute("USER");
 
-
-		if(myUser.getUserName().equals("admin")) {
+		if (myUser.getUserName().equals("admin")) {
 
 			try {
 				UserDao userDao = new UserDao();
 				List<User> users = userDao.selectAllUsers();
 				request.setAttribute("USERLIST", users);
 				nextPage = "/view/users/list.jsp";
-			}catch(MyException e) {
+			} catch (MyException e) {
 				e.getMessage();
 				nextPage = "/view/users/login.jsp";
 			}
-		}else {
+		} else {
 			String msg = "管理者権限がありません";
 			String status = "true";
 

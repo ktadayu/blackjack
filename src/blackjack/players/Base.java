@@ -6,7 +6,7 @@ import blackjack.Hand;
 
 public abstract class Base {
 
-	protected Hand hand ; //手札
+	protected Hand hand; //手札
 	protected int tips; //チップ数
 	protected boolean burst; //バーストしているかの判定 1＝バースト
 
@@ -30,8 +30,6 @@ public abstract class Base {
 	}
 
 	//カードを引くことについての操作
-	public abstract Hand drawCard(Deck deck) ;
-
-
+	public abstract Hand drawCard(Deck deck);
 
 }

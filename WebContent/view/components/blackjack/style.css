@@ -1,44 +1,38 @@
 @charset "UTF-8";
-  /*
+/*
 * ゲーム画面
 */
-.dealerhand{
+.dealerhand {
 	position: relative;
 	margin: 0px auto 50px;
 	text-align: center;
 }
 
-.playerhands{
-	display:flex;
+.playerhands {
+	display: flex;
 	justify-content: center;
-	position:relative;
+	position: relative;
 	margin: 50px auto 0px;
 	text-align: center;
 }
 
-.div-opt-game{
-	display:flex;
+.div-opt-game {
+	display: flex;
 	justify-content: center;
 }
 
-form{
-	display:flex;
+form {
+	display: flex;
 	justify-content: center;
 }
 
-.section-gamefield{
-	display:flex;
+.section-gamefield {
+	display: flex;
 	justify-content: center;
-	padding:0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 }
 
-.message{
-	padding-right:100px;
-	margin:auto 0;
+.message {
+	padding-right: 100px;
+	margin: auto 0;
 }
-
-
-
-
-
-
