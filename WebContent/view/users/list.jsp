@@ -39,9 +39,5 @@
     </div>
 </section>
 
-
-
-
-
 </body>
 </html>

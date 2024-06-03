@@ -38,6 +38,7 @@ public class Hand {
 
 	public Boolean isBust() {
 		if(this.totalValue() >21) {
+			BJLogic.msg = "バースト！";
 			return true;
 		}
 		return false;

@@ -12,8 +12,8 @@
 <title>Insert title here</title>
 <style type="text/css">
 img {
-width:120px;
-height:170px
+width:80px;
+height:120px
 }
 </style>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/view/components/blackjack/style.css">
@@ -31,21 +31,36 @@ Hand dealerHand = dealer.getHand();
 String imgFileRootName = request.getContextPath() + "/img/trump/card_";
 %>
 
+<section class="section-gamefield">
+<div class="message">
+<jsp:include page="./message.jsp"/>
+</div>
 <div>
 	<div class="dealerhand">
 		<h3>ディーラー手札:</h3>
 		 <%for(Card card : dealerHand.getCards() ){%>
 			<img src="<%=imgFileRootName + card%>.png"  alt="<%=card %>">
 		 <% }%>
+		 <h4>合計 <%=dealerHand.totalValue() %> </h4>
 	</div>
-	<div class="playerhand">
-		<h3>プレイヤー手札: </h3>
-		 <%for(Card card : playerHand.getCards() ){%>
+	<div class="playerhands">
+		<div class="playerhand-1">
+			<h3>プレイヤー手札: </h3>
+		 	<%for(Card card : playerHand.getCards() ){%>
 			<img src="<%=imgFileRootName + card%>.png"  alt="<%=card %>">
-		 <% }%>
+			 <% }%>
+		 	<h4>合計 <%=playerHand.totalValue() %> </h4>
+		 </div>
+		 <div class="playerhand-2" style="display:none">
+			<h3>プレイヤー手札: </h3>
+		 	<%for(Card card : playerHand.getCards() ){%>
+			<img src="<%=imgFileRootName + card%>.png"  alt="<%=card %>">
+			 <% }%>
+		 	<h4>合計 <%=playerHand.totalValue() %> </h4>
+		 </div>
 	</div>
-	<h3>合計 <%=playerHand.totalValue() %> </h3>
 </div>
+</section>
 
 </body>
 </html>

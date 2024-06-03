@@ -7,6 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>ユーザーの削除</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/view/users/style/style2.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <jsp:include page="../components/nav-game.jsp"/>
 <jsp:include page="../components/nav-top.jsp"/>

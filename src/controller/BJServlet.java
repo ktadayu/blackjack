@@ -20,9 +20,6 @@ import dao.UserDao;
 import exception.MyException;
 import model.User;
 
-/**
- * Servlet implementation class BJServlet
- */
 @WebServlet("/BJServlet")
 public class BJServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -40,6 +37,7 @@ public class BJServlet extends HttpServlet {
 		String nextPage = "/view/game/play.jsp";
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 
+		//ゲーム要素取得
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("USER");
 		Deck deck = (Deck) session.getAttribute("DECK");
@@ -54,52 +52,41 @@ public class BJServlet extends HttpServlet {
 		Hand playerHand = player.getHand();
 		Hand dealerHand = dealer.getHand();
 
-		Boolean dic = true;//true:ゲーム中 false:ゲーム終了
-		request.setAttribute("dic", dic);
+//		Boolean dic = true;//true:ゲーム中 false:ゲーム終了
+		request.setAttribute("dic", true);
 
 		//プレイヤーの選択による分岐
-		if(opt.equals("stand")) {
-			 dic = false;
-			//dealerのターン
-			dealer.drawCard(deck);
-		}else{
+		if(opt.equals("hit")) {
 			player.drawCard(deck);
 			if(playerHand.isBust()) {
-				String e = "プレイヤーの負けです";
+				//バーストと表示
+				request.setAttribute("msg", BJLogic.msg);
+				request.setAttribute("dic", false);
 				updateStatus(user,-betPoint,request);
-				dic = false;
-				request.setAttribute("msg", e);
-				request.setAttribute("dic", dic);
 				requestDispatcher.forward(request, response);
 				return ;
-			}else if(playerHand.totalValue() == 21){
-				dic = false ;
-				dealer.drawCard(deck);
-			}else{//再選択
+			}else if(!playerHand.isBust()){
+				//再選択
 				requestDispatcher.forward(request, response);
 				return ;
 			}
 		}
 
+		dealer.drawCard(deck);
 
 		//勝敗
-		String e;
-
-		 if(playerHand.totalValue() > dealerHand.totalValue() || dealerHand.totalValue() > 21){
-				 e = "プレイヤーの勝利";
-				 user.setNumberOfTips(user.getNumberOfTips() + 2*betPoint);
-				 updateStatus(user,+betPoint,request);
-			}else if(playerHand.totalValue() == dealerHand.totalValue()){
-				 e = "引き分け";
-				 user.setNumberOfTips(user.getNumberOfTips() + betPoint);
-				 addHistory(user,0,request);
-			}else {
-				 e = "ディーラーの勝利";
-				 updateStatus(user,-betPoint,request);
-			}
+		if(BJLogic.detWinner(playerHand, dealerHand) == 1) {
+			user.setNumberOfTips(user.getNumberOfTips() + 2*betPoint);
+			updateStatus(user,+betPoint,request);
+		}else if(BJLogic.detWinner(playerHand, dealerHand) == 0) {
+			 user.setNumberOfTips(user.getNumberOfTips() + betPoint);
+			 addHistory(user,0,request);
+		}else {
+			 updateStatus(user,-betPoint,request);
+		}
 
 		 	session.setAttribute("USER", user);
-			request.setAttribute("msg", e);
+			request.setAttribute("msg", BJLogic.msg);
 			request.setAttribute("dic", false);
 		requestDispatcher.forward(request, response);
 	}
@@ -126,13 +113,11 @@ public class BJServlet extends HttpServlet {
 		}
 
 		//セッションからユーザーとbetPointを取り出し、ユーザーのチップを徴収
+		//BJLogicをnewしているのは気持ち悪い
 		BJLogic bjLogic = new BJLogic(session);
 
-		//ゲームの初期化↓ or リプレイ
-		//デッキ、プレイヤー、ディーラーの生成
-		//デッキのシャッフル、手札配布、ナチュラルBJ判定
-		//return HttpSession
-		if(thisIsFirstTurn == true) {
+		//ゲームの初期化 or リプレイ
+		if(thisIsFirstTurn) {
 		session = bjLogic.initializeBJ(session);
 		}else {
 		session = bjLogic.ReplayBJ(session);
@@ -145,9 +130,6 @@ public class BJServlet extends HttpServlet {
 			updateStatus(user,(int) 2.5 * betPoint,request);
 			session.setAttribute("USER", user);
 			request.setAttribute("msg", "ブラックジャック！"); request.setAttribute("dic", false);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
-			requestDispatcher.forward(request, response);
-			return ;
 		}
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);

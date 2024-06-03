@@ -10,14 +10,20 @@
 <head>
 <meta charset="UTF-8">
 <title>戦績</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/view/users/style/style2.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 <%
 User USER = (User) session.getAttribute("USER");
 HistoryDao historyDao = new HistoryDao();
 List<History> historyList = historyDao.selectAllHistory(USER);
 %>
 </head>
+<div class="header">
 <jsp:include page="../components/nav-game.jsp"/>
 <jsp:include page="../components/nav-top.jsp"/>
+</div>
 <body>
 <%  %>
 

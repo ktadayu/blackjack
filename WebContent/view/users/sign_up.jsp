@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>登録画面</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/view/users/style/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 <% String msg = (String) request.getAttribute("message");%>
 </head>
 <body>

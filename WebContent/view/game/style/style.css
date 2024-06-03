@@ -1,26 +1,68 @@
 @charset "UTF-8";
 
 
+body{
+    font-family: "Noto Serif JP", serif;
+    background-color: #2d2d2d;
+    color: #ffff;
+}
+
+.header{
+	margin:0 50px
+}
+
+.header>a{
+padding:10px
+}
+
+section{
+    padding: 30px 15px;
+}
+
+a:link { color: #ffff; }
+a:visited { color: #ffff; }
+a:hover { color: #ff0000; }
+a:active { color: #ff8000; }
+
+.section-greeting{
+ 	text-align:center;
+	 padding: 20px;
+	 font-size:20px;
+}
+
+button{
+    display: inline-block;
+    background-color: #333;
+    color:#ffff;
+    font-weight:bold;
+    font-size:15px;
+    border-radius:7px;
+    padding:15px;
+}
+
+.ranking-container{
+	text-align:center;
+}
+
+.ranking-container > table{
+	margin:0 auto
+}
+
+
 /*
 grid area
 */
 
 .grid-area{
-
         position: relative;
-        margin: 0 auto;
-        height: 50%;
-        width: 50%;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr; /* 2列 1/(1+1) 1/(1+1)の横幅(列なので)*/
-        grid-template-rows: 1fr 1fr; /* 2行 1/(1+1) 1/(1+1)の縦幅(行なので)*/
-        grid-template-areas: "a b e"
-                             "c d f";
-        text-align: center;
+        grid-template-columns: 1fr 1fr 1fr; /* 3列 1/(1+1+1)の横幅(列なので)*/
+        grid-template-areas: "a d e";
+        display: flex;
+    	justify-content: center;
         /* margin-bottom:1000px; */
     }
-
-.pos-a,.pos-b,.pos-c,.pos-d,.pos-e,.pos-f{
+.pos-a,.pos-d,.pos-e{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -31,16 +73,7 @@ grid area
         grid-area: a;
        /* background-color: aqua; */
     }
-.pos-b{
-        grid-area: b;
 
-     /*   background-color: blanchedalmond; */
-    }
-.pos-c{
-        grid-area: c;
-
-     /*   background-color: blue; */
-    }
 .pos-d{
         grid-area:d;
 
@@ -50,34 +83,44 @@ grid area
         grid-area:e;
 
    /*     background-color: rgb(42, 165, 75); */
-    }
-.pos-f{
-        grid-area:f;
-    /*    background-color: rgb(165, 42, 134); */
-    }
+  }
+
+
+.input{
+	border-radius: 5px;
+    padding: 10px;
+    border: 2px solid #cccc;
+}
+
 
     /*
     betボタン
     */
+.betting{
+	text-align:center;
+}
+
 
 .div-betting-form{
-        position: relative;
-        text-align: center;
-    }
+	position: relative;
+	text-align: center;
+}
 .betting-form{
-        margin: 0 auto;
+   margin: 0 auto;
+	align-items:center;
+	text-align:center;
+	padding: 40px 0px;
+ }
 
-    }
 .betting-form-button{
         margin: 0 auto;
     }
 
     /*
-    カウンター　とりあえずem指定
-    あとでカウンター用意
+    カウンター　
     */
 .em{
-        font-size: 5em    ;
+     font-size: 5em    ;
     }
 
 	/*
@@ -86,9 +129,14 @@ grid area
 
 .user-container{
 	}
+
 .table-header{
     font-size: 25px;
     padding: 10px;
     font-weight: bold;
   }
+
+.footer{
+ text-align:right;
+}
 

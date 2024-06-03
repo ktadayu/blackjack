@@ -10,9 +10,7 @@ public class Deck {
 
 	List<Card> cards;
 
-	//デッキの実態？をListで作成
-	//Listの初期値をトランプ全カード
-	//イメージとしては[(s,1),(s,2)...(h,1)(h,2)....]で、成分毎に取り出せるようにしておく。
+	//コンストラクタでデッキ(List)の生成
 	public Deck() {
 		cards = new ArrayList<>();
 		for(Mark mark : Mark.values() ) {

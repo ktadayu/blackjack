@@ -9,16 +9,15 @@ import model.User;
 
 public class BJLogic {
 
-	//ゲーム初期化
 	private Deck deck ;
 	private Player player ;
 	private Dealer dealer ;
 	Integer betPoint ;
 	User user ;
 
+	public static String msg;
+
 	//コンストラクタ
-	//ここでゲームに必要なものをsessionから全て取り出したいが、
-	//ゲーム初期化前にはデッキもプレイヤーもディーラーもnullなので思案中
 	public BJLogic(HttpSession session) {
 		user = (User) session.getAttribute("USER");
 		betPoint = (int) session.getAttribute("BETPOINT");
@@ -96,7 +95,10 @@ public class BJLogic {
 	//手札を受け取りTotalValueが21かどうか判定する
 	//手札配布時に呼び出すこと(なので上のdrawCardとセットにするべきかもしれない)
 	public boolean checkBlackJack(Hand playerHand) {
-		int a = Math.min(playerHand.getCards().get(0).getCardNumber(), playerHand.getCards().get(1).getCardNumber() );
+		int firstCardNum = playerHand.getCards().get(0).getCardNumber();
+		int secondCardNum =playerHand.getCards().get(1).getCardNumber();
+
+		int a = Math.min(firstCardNum, secondCardNum );
 		System.out.println(playerHand.getCards());
 		if(playerHand.totalValue() == 21 && a == 1) {
 			return true;
@@ -119,17 +121,18 @@ public class BJLogic {
 	// return 0 : 引き分け
 	// return -1 ： ディーラー勝利
  	public static int detWinner(Hand playerHand, Hand dealerHand) {
-
 		if(playerHand.totalValue() > dealerHand.totalValue() || dealerHand.totalValue() > 21) {
+			 msg = "プレイヤーの勝利！";
 			 return 1;
 		}
 
 		if(playerHand.totalValue() == dealerHand.totalValue()) {
+			msg = "引き分け";
 			return 0;
 		}
 
+		msg = "ディーラーの勝利！";
 		return -1;
-
 	}
 
 

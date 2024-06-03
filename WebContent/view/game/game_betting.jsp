@@ -21,7 +21,7 @@ String imgFileRootName = request.getContextPath() + "/img/tips/";
           <img src="<%=imgFileRootName %>1.png" alt="1チップ">
       </div>
       <div class="pos-b">
-        <button class="reset-button" id="reset-button"> Reset </button>
+
       </div>
       <div class="pos-c">
          <!--  <span class="em" id="betting-counter">  </span> -->
@@ -34,12 +34,13 @@ String imgFileRootName = request.getContextPath() + "/img/tips/";
       </div>
       <div class="pos-f"></div>
     </div>
-    <div class="div-betting-form">
 
+    <div class="div-betting-form">
     <form class="betting-form" action="<%= request.getContextPath()%>/BJServlet" method="post" >
-    	<input type="text" value="0" id="betting-form" name="betPoint">
+    	<input class="input" type="text" value="0" id="betting-form" name="betPoint">
     	<button type="submit" class="betting-form-button" >bet</button>
     </form>
+    <button class="reset-button" id="reset-button"> Reset </button>
 	</div>
 </div>
 <script src="<%= request.getContextPath() %>/view/game/app/game.js">

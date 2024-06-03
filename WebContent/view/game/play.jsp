@@ -10,25 +10,19 @@
 <head>
 <meta charset="UTF-8">
 <title>BlackJack</title>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/view/game/style/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 <%
 Deck deck = (Deck) session.getAttribute("DECK");
 User user = (User) session.getAttribute("USER");
-
-String msg = (String) request.getAttribute("msg");
 
 %>
 </head>
 <jsp:include page="../components/nav-game.jsp"/>
 <body>
 
-<div>
-	<div>
-		<h2>残り<%=deck.size() %>枚</h2>
-	</div>
-	<div>
-		現在のチップ枚数: <%=user.getNumberOfTips() %>
-	</div>
-</div>
 
 <!--  カードを展開する -->
 <jsp:include page="../components/blackjack/gamefield.jsp"/>
@@ -36,9 +30,6 @@ String msg = (String) request.getAttribute("msg");
 <!--  hitかstandの選択 -->
 <jsp:include page="../components/blackjack/hit-or-stand.jsp"/>
 
-<%if(msg !=null){  %>
-<h3><%=msg %></h3>
-<% } %>
 
 <!--  ベット額を変えるか、同じベット額で再プレイ -->
 <jsp:include page="../components/blackjack/replay.jsp"/>

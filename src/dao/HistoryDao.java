@@ -19,7 +19,6 @@ public class HistoryDao extends BaseDao{
 /*
  * 戦績の登録
  */
-
 	public void addToHistory(User user, int amount_of_changes) throws MyException {
 
 		try {
@@ -39,7 +38,6 @@ public class HistoryDao extends BaseDao{
 /*
  * 全戦績の取得
  */
-
 	public List<History> selectAllHistory(User user) throws MyException{
 
 		List<History> historyList = new ArrayList<>();

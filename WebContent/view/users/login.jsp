@@ -5,23 +5,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/view/users/style/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 </head>
-<jsp:include page="../components/nav.jsp"/>
 <body>
        <section class="section">
               <h1 class="section-headline">ログイン</h1>
               <form action="<%= request.getContextPath() %>/LoginServlet" method="post" class="form">
                 <table class="form-table" >
                 <tr>
-                <th class="form-table-headline"><label for="id">ユーザー名</label></th>
                 <td class="form-table-data">
-                      <input type="text" class="input" name="user_name" id="id"/>
+                      <input type="text" class="input" name="user_name" id="id" placeholder="ユーザー名"/>
                   </td>
                 </tr>
                 <tr>
-                    <th class="form-table-headline"> <label for="pass"> パスワード </label></th>
                     <td class="form-table-data">
-                      <input type="text" class="input" name="user_password" id="pass"/>
+                      <input type="password" class="input" name="user_password" id="pass" placeholder="パスワード"/>
                     </td>
                 </tr>
                 </table>
@@ -31,9 +32,7 @@
                   </button>
                 </div>
               </form>
-         </section>
         <!-- 登録を促す画面 -->
-        <section class="section">
                 <div class="form-button">
                 <h4>-----または-----</h4><!-- 線をcssで作る -->
                 <button type="submit" class="button button-signin" onclick="location.href='<%= request.getContextPath()%>/view/users/sign_up.jsp'" >登録 </button>
