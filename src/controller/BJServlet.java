@@ -18,6 +18,7 @@ import blackjack.players.Player;
 import dao.HistoryDao;
 import dao.UserDao;
 import exception.MyException;
+import model.FlagOwner;
 import model.User;
 
 @WebServlet("/BJServlet")
@@ -29,7 +30,7 @@ public class BJServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	//hit or standの後遷移
+	//hit or stand, splitの後遷移
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -52,15 +53,21 @@ public class BJServlet extends HttpServlet {
 		Hand playerHand = player.getHand();
 		Hand dealerHand = dealer.getHand();
 
-		//Boolean gameEndFlag = true;//true:ゲーム中 false:ゲーム終了
-		request.setAttribute("endFlag",false);
+		//BJLogicに書けることかもしれないがとりあえず記述する
+		if(opt.equals("split")) {
+			//遷移
+			nextPage = "/BJSplitServlet";
+			requestDispatcher = request.getRequestDispatcher(nextPage);
+			requestDispatcher.forward(request, response);
+			return;
+		}
 
 		//プレイヤーの選択による分岐
 		if (opt.equals("hit")) {
 			player.drawCard(deck);
 			if (playerHand.isBust()) {
 				request.setAttribute("msg", "バースト!");
-				request.setAttribute("endFlag", true);
+				FlagOwner.validate0();
 				updateStatus(user, -betPoint, request);
 				requestDispatcher.forward(request, response);
 				return;
@@ -86,7 +93,7 @@ public class BJServlet extends HttpServlet {
 
 		session.setAttribute("USER", user);
 		request.setAttribute("msg", BJLogic.msg);
-		request.setAttribute("endFlag", true);
+		FlagOwner.validate0();
 		requestDispatcher.forward(request, response);
 	}
 
@@ -131,7 +138,7 @@ public class BJServlet extends HttpServlet {
 			updateStatus(user, (int) 2.5 * betPoint, request);
 			session.setAttribute("USER", user);
 			request.setAttribute("msg", "ブラックジャック！");
-			request.setAttribute("endFlag", true);
+			FlagOwner.validate0();
 		}
 
 		//split可能かどうか？
@@ -140,7 +147,7 @@ public class BJServlet extends HttpServlet {
 			request.setAttribute("SPLITTABLE", true);
 		}
 
-		//1ゲーム初回のフラグ
+		//ゲーム初回のフラグ
 		request.setAttribute("FLAG", true);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);

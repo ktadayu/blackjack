@@ -31,10 +31,12 @@ public class BJLogic {
 		dealer = new Dealer();//ディーラー生成
 
 		//山札シャッフル
-		deck.deckShuffle();
+		//deck.deckShuffle();
+		deck.deckToTestSplit();
 
 		//初期手札配布
 		drawCard(player, dealer, deck);
+
 
 		//ナチュラルBJ判定
 		if (checkBlackJack(player.getHand())) {
@@ -44,8 +46,11 @@ public class BJLogic {
 
 		//splitが可能かどうか
 		if(player.getHand().isSplitable()) {
-			session.setAttribute("SPLITABLE", true);
+			session.setAttribute("SPLITTABLE", true);
 		}
+
+		session.removeAttribute("pHand1");
+		session.removeAttribute("pHand2");
 
 		session.setAttribute("DECK", deck);
 		session.setAttribute("PLAYER", player);
@@ -82,6 +87,9 @@ public class BJLogic {
 		if(player.getHand().isSplitable()) {
 			session.setAttribute("SPLITTABLE", true);
 		}
+
+		session.removeAttribute("pHand1");
+		session.removeAttribute("pHand2");
 
 		session.setAttribute("USER", user);
 		session.setAttribute("DECK", deck);

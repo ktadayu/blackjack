@@ -20,9 +20,21 @@ public class Deck {
 		}
 	}
 
+	public List<Card> deckToTestSplit() {
+		List<Card> newCards = new ArrayList<>();
+			for(int i = 1 ; i <=13; i++) {
+				for(Mark mark : Mark.values()) {
+					newCards.add(new Card(mark,i));
+				}
+			}
+			cards = newCards;
+			return cards;
+	}
+
 	//デッキをシャフル
 	public List<Card> deckShuffle() {
 		Collections.shuffle(cards);
+		System.out.println(cards);
 		return cards;
 	}
 

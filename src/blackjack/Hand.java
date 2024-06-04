@@ -23,6 +23,10 @@ public class Hand {
 		return cards.get(i);
 	}
 
+	public Boolean isEmpty() {
+		return cards.isEmpty();
+	}
+
 	//手札の合計値を計算
 	public int totalValue() {
 

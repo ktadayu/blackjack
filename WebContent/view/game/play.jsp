@@ -18,20 +18,20 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
 	rel="stylesheet">
 <%
-	Deck deck = (Deck) session.getAttribute("DECK");
 	User user = (User) session.getAttribute("USER");
 %>
 </head>
-<jsp:include page="../components/nav-game.jsp" />
 <body>
-
+	<header>
+	<!-- ゲームナビゲーションバー -->
+	<jsp:include page="../components/nav-game.jsp" />
+	</header>
 
 	<!--  カードを展開する -->
 	<jsp:include page="../components/blackjack/gamefield.jsp" />
 
-	<!--  hitかstandの選択 -->
+	<!-- hitr or stand, splitの選択-->
 	<jsp:include page="../components/blackjack/hit-or-stand.jsp" />
-
 
 	<!--  ベット額を変えるか、同じベット額で再プレイ -->
 	<jsp:include page="../components/blackjack/replay.jsp" />

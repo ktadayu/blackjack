@@ -8,7 +8,7 @@ public abstract class Base {
 
 	protected Hand hand; //手札
 	protected int tips; //チップ数
-	protected boolean burst; //バーストしているかの判定 1＝バースト
+
 
 	//コンストラクタ 手札の初期化
 	public Base() {
