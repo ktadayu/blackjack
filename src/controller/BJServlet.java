@@ -52,15 +52,15 @@ public class BJServlet extends HttpServlet {
 		Hand playerHand = player.getHand();
 		Hand dealerHand = dealer.getHand();
 
-		//Boolean dic = true;//true:ゲーム中 false:ゲーム終了
-		request.setAttribute("dic", true);
+		//Boolean gameEndFlag = true;//true:ゲーム中 false:ゲーム終了
+		request.setAttribute("endFlag",false);
 
 		//プレイヤーの選択による分岐
 		if (opt.equals("hit")) {
 			player.drawCard(deck);
 			if (playerHand.isBust()) {
 				request.setAttribute("msg", "バースト!");
-				request.setAttribute("dic", false);
+				request.setAttribute("endFlag", true);
 				updateStatus(user, -betPoint, request);
 				requestDispatcher.forward(request, response);
 				return;
@@ -86,7 +86,7 @@ public class BJServlet extends HttpServlet {
 
 		session.setAttribute("USER", user);
 		request.setAttribute("msg", BJLogic.msg);
-		request.setAttribute("dic", false);
+		request.setAttribute("endFlag", true);
 		requestDispatcher.forward(request, response);
 	}
 
@@ -131,7 +131,7 @@ public class BJServlet extends HttpServlet {
 			updateStatus(user, (int) 2.5 * betPoint, request);
 			session.setAttribute("USER", user);
 			request.setAttribute("msg", "ブラックジャック！");
-			request.setAttribute("dic", false);
+			request.setAttribute("endFlag", true);
 		}
 
 		//split可能かどうか？

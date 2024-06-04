@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%
-	Boolean dic = (Boolean) request.getAttribute("dic");
+	Boolean endFlag = (Boolean) request.getAttribute("endFlag");
 %>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/view/components/blackjack/style.css">
@@ -14,7 +14,7 @@
 <body>
 
 	<%
-		if (dic != null && dic == false) {
+		if (endFlag != null && endFlag == true) {
 	%>
 	<div class=div-opt-game>
 		<form class="game_start_form"
