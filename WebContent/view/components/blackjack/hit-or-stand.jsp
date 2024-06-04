@@ -10,6 +10,8 @@
 	if ((Boolean) request.getAttribute("dic") != null) {
 		dic = (Boolean) request.getAttribute("dic");
 	}
+	//スプリット可能かどうか決めてボタンを追加しボタンを押すといろいろ分離するような仕様にする.
+	//js使った方が楽かも
 %>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/view/components/blackjack/style.css">

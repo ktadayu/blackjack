@@ -78,7 +78,7 @@ img {
 					</h4>
 				</div>
 				<!-- 明日修正 -->
-				<div class="playerhand-2" <% if(SPLITTABLE == null){ %> style="display: none"  <% }%> >
+				<div class="playerhand-2" style="display: none"  >
 					<h3>プレイヤー手札:</h3>
 					<%
 						for (Card card : playerHand.getCards()) {
