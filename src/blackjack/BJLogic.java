@@ -152,12 +152,12 @@ public class BJLogic {
 	// return 0 : 引き分け
 	// return -1 ： ディーラー勝利
 	public static int detWinner(Hand playerHand, Hand dealerHand) {
-		if (playerHand.totalValue() > dealerHand.totalValue() || dealerHand.totalValue() > 21) {
+		if (!playerHand.isBust() && playerHand.totalValue() > dealerHand.totalValue() || dealerHand.totalValue() > 21) {
 			msg = "プレイヤーの勝利！";
 			return 1;
 		}
 
-		if (playerHand.totalValue() == dealerHand.totalValue()) {
+		if (!playerHand.isBust() && playerHand.totalValue() == dealerHand.totalValue()) {
 			msg = "引き分け";
 			return 0;
 		}

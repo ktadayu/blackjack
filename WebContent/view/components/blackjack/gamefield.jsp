@@ -22,14 +22,16 @@ img {
 <body>
 
 	<section class="section-gamefield">
-		<div class="message">
-			<jsp:include page="./message.jsp" />
-		</div>
+
 		<div>
 			<!--  ディーラーの手札 -->
 			<div class="dealerhand">
 				<jsp:include page="./hands/dealerhand.jsp" />
 			</div>
+			<div class="message">
+		<!-- 勝敗等の表示 -->
+			<jsp:include page="./message.jsp" />
+		</div>
 
 			<!-- プレイヤーの手札 -->
 			<div class="playerhands">

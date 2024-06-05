@@ -12,15 +12,19 @@
 	href="<%=request.getContextPath()%>/view/components/blackjack/style.css">
 </head>
 <%
-Player player = (Player) session.getAttribute("PLAYER");
-Player player1 = (Player) session.getAttribute("plyr1");
-Player player2 = (Player) session.getAttribute("plyr2");
-
-String imgFileRootName = request.getContextPath() + "/img/trump/card_";
+	Player player = (Player) session.getAttribute("PLAYER");
+	Player player1 = (Player) session.getAttribute("plyr1");
+	Player player2 = (Player) session.getAttribute("plyr2");
+	String msg = (String) request.getAttribute("msg");
+	String msg1 = (String) request.getAttribute("msg1");
+	String msg2 = (String) request.getAttribute("msg2");
+	String imgFileRootName = request.getContextPath() + "/img/trump/card_";
 %>
 <body>
 
-	<div class="playerhand-1" id="playerhand1" <%if(player1 !=null && player1.getHand() != null){ %> style="display: none" <% }%> >
+	<div class="playerhand-1" id="playerhand1"
+		<%if (player1 != null && player1.getHand() != null) {%>
+		style="display: none" <%}%>>
 		<h3>プレイヤー手札:</h3>
 		<%
 			for (Card card : player.getHand().getCards()) {
@@ -33,7 +37,15 @@ String imgFileRootName = request.getContextPath() + "/img/trump/card_";
 			合計
 			<%=player.getHand().totalValue()%>
 		</h4>
+		<%
+			if (msg != null) {
+		%>
+		<span class="grid1"><%=msg%></span>
+		<%
+			}
+		%>
 	</div>
+
 	<!-- スプリット時 -->
 	<%
 		if (player1 != null && player1.getHand() != null && player2.getHand() != null) {
@@ -52,6 +64,13 @@ String imgFileRootName = request.getContextPath() + "/img/trump/card_";
 				合計
 				<%=player1.getHand().totalValue()%>
 			</h4>
+			<%
+				if (msg1 != null) {
+			%>
+			<span class="grid2"><%=msg1%></span>
+			<%
+				}
+			%>
 			<jsp:include page="./hit-or-stand-hand1.jsp" />
 		</div>
 		<div class="hand2">
@@ -67,11 +86,18 @@ String imgFileRootName = request.getContextPath() + "/img/trump/card_";
 				合計
 				<%=player2.getHand().totalValue()%>
 			</h4>
+			<%
+				if (msg2 != null) {
+			%>
+			<span class="grid3"><%=msg2%></span>
+			<%
+				}
+			%>
 			<jsp:include page="./hit-or-stand-hand2.jsp" />
 		</div>
 	</div>
 	<%
-	}
+		}
 	%>
 
 </body>

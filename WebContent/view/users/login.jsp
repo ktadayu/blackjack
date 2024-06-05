@@ -12,12 +12,18 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
 	rel="stylesheet">
+<%
+String message = (String) request.getAttribute("message");
+%>
 </head>
 <body>
 	   
 	<section class="section">
 		     
 		<h1 class="section-headline">ログイン</h1>
+		<%if(message != null){ %>
+		<h3><%=message %></h3>
+		<%} %>
 		     
 		<form action="<%=request.getContextPath()%>/LoginServlet"
 			method="post" class="form">

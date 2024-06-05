@@ -30,6 +30,8 @@ public class BJSplitServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
+
+	//スプリット選択後ここへ遷移
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -61,6 +63,7 @@ public class BJSplitServlet extends HttpServlet {
 
 	}
 
+	//スプリットしたゲームでのサーブレット
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -85,6 +88,7 @@ public class BJSplitServlet extends HttpServlet {
 		//standを選ぶorバーストでendFlag(n)属性をsessionに登録
 		if (opt1 != null && opt1.equals("hit")) {
 			player1.drawCard(deck);
+
 			if (player1.getHand().isBust()) {
 				request.setAttribute("msg1", "手札1バースト!");
 				FlagOwner.validatePlayer1(); //プレイヤー1終了
@@ -92,9 +96,6 @@ public class BJSplitServlet extends HttpServlet {
 			}else if(player1.getHand().totalValue() ==21 ) {
 				FlagOwner.validatePlayer1();
 			}
-
-			requestDispatcher.forward(request, response);
-			return;
 		}
 
 		if (opt1 != null && opt1.equals("stand")) {
@@ -102,7 +103,6 @@ public class BJSplitServlet extends HttpServlet {
 		}
 
 		//手札2についての選択
-
 		if (opt2 != null && opt2.equals("hit")) {
 			player2.drawCard(deck);
 			if (player2.getHand().isBust()) {
@@ -112,21 +112,23 @@ public class BJSplitServlet extends HttpServlet {
 			}else if(player2.getHand().totalValue() ==21 ) {
 				FlagOwner.validatePlayer2();
 			}
-			requestDispatcher.forward(request, response);
-			return;
 		}
 
 		if (opt2 != null && opt2.equals("stand")) {
 			FlagOwner.validatePlayer2(); //プレイヤー1終了
 		}
 
+		//ど手札選択が2つともendでない限りページに戻される
 		if (!FlagOwner.checkPlayer1End() || !FlagOwner.checkPlayer2End()) {
 			requestDispatcher.forward(request, response);
 			return;
 		}
 
-		//どちらの手札も選択が終了
-		dealer.drawCard(deck);
+		//両方バーストだった場合にディーラードローをスキップしたい
+		if (!player1.getHand().isBust() || !player2.getHand().isBust()) {
+			dealer.drawCard(deck);
+		}
+
 
 		//勝敗
 		//手札1について

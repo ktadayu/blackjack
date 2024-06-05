@@ -25,11 +25,6 @@ import model.User;
 public class BJServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public BJServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	//hit or stand, splitの後遷移
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -141,7 +136,6 @@ public class BJServlet extends HttpServlet {
 		} else {
 			session = bjLogic.ReplayBJ(session);
 		}
-
 
 		//ナチュラルBJ成立の場合
 		if ((Boolean) session.getAttribute("BLACKJACK") != null) {

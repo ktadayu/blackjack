@@ -50,8 +50,6 @@
 			</form>
 		</div>
 		<div class="ranking">
-
-
 			<div class="ranking-container">
 				<h1 class="ranking-header">ランクTOP5</h1>
 				<table>
