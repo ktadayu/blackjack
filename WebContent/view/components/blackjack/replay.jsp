@@ -12,7 +12,7 @@
 <body>
 
 	<%
-		if (FlagOwner.checkEndGame()) {
+		if ((FlagOwner.checkUsualGameEnd() && !FlagOwner.checkSplitting())|| FlagOwner.checkEndGame()) {
 	%>
 	<div class=div-opt-game>
 		<form class="game_start_form"

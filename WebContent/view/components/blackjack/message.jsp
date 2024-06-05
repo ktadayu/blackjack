@@ -13,6 +13,8 @@
 	Deck deck = (Deck) session.getAttribute("DECK");
 	User user = (User) session.getAttribute("USER");
 	String msg = (String) request.getAttribute("msg");
+	String msg1 = (String) request.getAttribute("msg1");
+	String msg2 = (String) request.getAttribute("msg2");
 %>
 </head>
 <body>
@@ -29,6 +31,20 @@
 			if (msg != null) {
 		%>
 		<h3><%=msg%></h3>
+		<%
+			}
+		%>
+				<%
+			if (msg1 != null) {
+		%>
+		<h3>手札1は<%=msg1%></h3>
+		<%
+			}
+		%>
+				<%
+			if (msg2 != null) {
+		%>
+		<h3>手札2は<%=msg2%></h3>
 		<%
 			}
 		%>

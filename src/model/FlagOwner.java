@@ -2,41 +2,79 @@ package model;
 
 public class FlagOwner {
 
-	//endFlag0 : 通常手札
-	//endFlag1 : split後手札1
-	//endFlag2 : split後手札2
-	static Boolean endFlag0 = false;
-	static Boolean endFlag1 = false;
-	static Boolean endFlag2 = false;
-	static Boolean endFlag = false;
+	static Boolean endGame = false; //ゲーム終了
+	static Boolean endUsualGame = false; //通常のゲームの終了
+	static Boolean endPlayer = false;
+	static Boolean endPlayer1 = false; //プレイヤー1の終了
+	static Boolean endPlayer2 = false; //プレイヤー2の終了
+	static Boolean splittable = false; //split可能ならtrue
+	static Boolean splittingFlag = false; //split中のフラグ
 
+//チェックメソッド
 	public static Boolean checkEndGame() {
-		return endFlag0 ;
-//		return endFlag0 && endFlag1 && endFlag2;
+		endGame = (endUsualGame && !splittingFlag) || (endPlayer1 && endPlayer2);
+		return endGame ;
+	}
+	public static Boolean checkUsualGameEnd() {
+		return endUsualGame ;
+	}
+	public static Boolean checkPlayerEnd() {
+		endPlayer = (endUsualGame && !splittingFlag)||(endPlayer1 && endPlayer2);
+		return endPlayer;
+	}
+	public static Boolean checkPlayer1End() {
+		return endPlayer1;
+	}
+	public static Boolean checkPlayer2End() {
+		return endPlayer2;
+	}
+	public static Boolean checkSplitting() {
+		return splittingFlag;
+	}
+	public static Boolean checkSplittable() {
+		return splittable;
+	}
+	public static Boolean checkEnd() {
+		return (endUsualGame && !splittingFlag) || endGame ;
 	}
 
-	public static void validate0() {
-		endFlag0 = true;
+//true化
+	public static void validateGameEnd() {
+		endGame = true;
 	}
-	public static void validate1() {
-		endFlag1 = true;
+	public static void validatePlayer() {
+		endPlayer = true;
 	}
-	public static void validate2() {
-		endFlag2 = true;
+	public static void validatePlayer1() {
+		endPlayer1 = true;
 	}
-	public static void validate() {
-		endFlag = true;
+	public static void validatePlayer2() {
+		endPlayer2 = true;
+	}
+	public static void validateUsualGameEnd() {
+		endUsualGame = true;
+	}
+	public static void validateSplittableFlag() {
+		splittable  = true;
+	}
+	public static void validateSplit() {
+		splittingFlag = true;
 	}
 
 
-	static void resetFlag() {
-		 endFlag0 = false;
-		 endFlag1 = false;
-		 endFlag2 = false;
-		 endFlag = false;
+	//false化
+	public static void unValidateSplittableFlag() {
+		splittable = false;
 	}
-
-
-
+//リセット
+	public static void resetFlag() {
+		 endGame = false;
+		 endPlayer  = false;
+		 endPlayer1 = false;
+		 endPlayer2 = false;
+		 endUsualGame = false;
+		 splittable = false;
+		 splittingFlag = false;
+	}
 
 }

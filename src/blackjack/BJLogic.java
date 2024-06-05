@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import blackjack.players.Dealer;
 import blackjack.players.Player;
+import model.FlagOwner;
 import model.User;
 
 public class BJLogic {
@@ -30,6 +31,9 @@ public class BJLogic {
 		player = new Player();//プレイヤー生成
 		dealer = new Dealer();//ディーラー生成
 
+		//フラグのリセット
+		FlagOwner.resetFlag();
+
 		//山札シャッフル
 		//deck.deckShuffle();
 		deck.deckToTestSplit();
@@ -46,10 +50,13 @@ public class BJLogic {
 
 		//splitが可能かどうか
 		if(player.getHand().isSplitable()) {
-			session.setAttribute("SPLITTABLE", true);
+			FlagOwner.validateSplittableFlag();;
 		}
 
+
+		session.removeAttribute("plyr1");
 		session.removeAttribute("pHand1");
+		session.removeAttribute("plyr2");
 		session.removeAttribute("pHand2");
 
 		session.setAttribute("DECK", deck);
@@ -69,6 +76,9 @@ public class BJLogic {
 		Integer betPoint = (Integer) session.getAttribute("BETPOINT");
 		User user = (User) session.getAttribute("USER");
 
+		//フラグのリセット
+		FlagOwner.resetFlag();
+
 		//デッキが20枚以下ならデッキの初期化
 		deck = deckInit(deck);
 
@@ -85,12 +95,16 @@ public class BJLogic {
 
 		//splitが可能かどうか
 		if(player.getHand().isSplitable()) {
-			session.setAttribute("SPLITTABLE", true);
+			FlagOwner.validateSplittableFlag();
 		}
 
+		//リセット
+		session.removeAttribute("plyr1");
 		session.removeAttribute("pHand1");
+		session.removeAttribute("plyr2");
 		session.removeAttribute("pHand2");
 
+		//再登録
 		session.setAttribute("USER", user);
 		session.setAttribute("DECK", deck);
 		session.setAttribute("PLAYER", player);
@@ -151,9 +165,5 @@ public class BJLogic {
 		msg = "ディーラーの勝利！";
 		return -1;
 	}
-
-
-
-
 
 }

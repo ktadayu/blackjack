@@ -55,6 +55,8 @@ public class BJServlet extends HttpServlet {
 
 		//BJLogicに書けることかもしれないがとりあえず記述する
 		if(opt.equals("split")) {
+			//チップの徴収
+			user.setNumberOfTips(user.getNumberOfTips() - betPoint);
 			//遷移
 			nextPage = "/BJSplitServlet";
 			requestDispatcher = request.getRequestDispatcher(nextPage);
@@ -62,16 +64,21 @@ public class BJServlet extends HttpServlet {
 			return;
 		}
 
+		//splitが選択されなかったので,splittableをfalseにする
+		FlagOwner.unValidateSplittableFlag();
+
 		//プレイヤーの選択による分岐
 		if (opt.equals("hit")) {
 			player.drawCard(deck);
 			if (playerHand.isBust()) {
 				request.setAttribute("msg", "バースト!");
-				FlagOwner.validate0();
+				FlagOwner.validateUsualGameEnd();
 				updateStatus(user, -betPoint, request);
 				requestDispatcher.forward(request, response);
 				return;
-			} else {
+			} else if(playerHand.totalValue() == 21){
+				FlagOwner.validateUsualGameEnd();
+			}else{
 				//再選択
 				requestDispatcher.forward(request, response);
 				return;
@@ -93,7 +100,7 @@ public class BJServlet extends HttpServlet {
 
 		session.setAttribute("USER", user);
 		request.setAttribute("msg", BJLogic.msg);
-		FlagOwner.validate0();
+		FlagOwner.validateUsualGameEnd();
 		requestDispatcher.forward(request, response);
 	}
 
@@ -106,12 +113,17 @@ public class BJServlet extends HttpServlet {
 		boolean firstTurn = true;
 		int betPoint;
 
+		//split等フラグのリセット
+		FlagOwner.resetFlag();
+
 		//セッションの取得
 		HttpSession session = request.getSession();
+
 
 		//選択されたベット額を取得
 		//requestのbetPointがnullかどうかで初回プレイか否かの判定
 		if (request.getParameter("betPoint") != null) {
+			//初回
 			betPoint = Integer.parseInt(request.getParameter("betPoint"));
 			session.setAttribute("BETPOINT", betPoint);
 		} else {
@@ -138,20 +150,17 @@ public class BJServlet extends HttpServlet {
 			updateStatus(user, (int) 2.5 * betPoint, request);
 			session.setAttribute("USER", user);
 			request.setAttribute("msg", "ブラックジャック！");
-			FlagOwner.validate0();
+			FlagOwner.validateUsualGameEnd();
 		}
 
 		//split可能かどうか？
-		if((Boolean) session.getAttribute("SPLITTABLE") != null) {
-			session.removeAttribute("SPLITTABLE");
-			request.setAttribute("SPLITTABLE", true);
+		if(FlagOwner.checkSplittable()) {
+			FlagOwner.validateSplittableFlag();
 		}
 
 		//ゲーム初回のフラグ
-		request.setAttribute("FLAG", true);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);
-
 	}
 
 	//DBのuserへ現在のチップ数を反映させるメソッド

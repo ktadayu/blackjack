@@ -22,7 +22,7 @@
 <body>
 
 	<div class="betting">
-		<h1 class="betting-title">betting処理</h1>
+		<h1 class="betting-title">betting</h1>
 		<div class="grid-area">
 			<div class="pos-a" id="tip-1">
 				<img src="<%=imgFileRootName%>1.png" alt="1チップ">
