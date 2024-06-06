@@ -20,22 +20,39 @@ public class Deck {
 		}
 	}
 
-	public List<Card> deckToTestSplit() {
-		List<Card> newCards = new ArrayList<>();
-			for(int i = 1 ; i <=13; i++) {
-				for(Mark mark : Mark.values()) {
-					newCards.add(new Card(mark,i));
-				}
-			}
-			cards = newCards;
-			return cards;
-	}
-
 	//デッキをシャフル
-	public List<Card> deckShuffle() {
+	public List<Card> shuffle() {
 		Collections.shuffle(cards);
 		System.out.println(cards);
 		return cards;
+	}
+
+	//スプリット機能テスト用デッキシャッフル
+	public List<Card> deckToTestSplit() {
+		List<Card> cards = new ArrayList<>();
+			for(int i = 1 ; i <=13; i++) {
+				for(Mark mark : Mark.values()) {
+					cards.add(new Card(mark,i));
+				}
+			}
+			this.cards = cards;
+			return this.cards;
+	}
+
+	//ブラックジャック機能テスト用デッキシャッフル
+	public List<Card> deckToNtBj(){
+		List<Card> cards = new ArrayList<>();
+		for(int i = 1 ; i <=6; i++) {
+			for(Mark mark : Mark.values()) {
+				cards.add(new Card(mark,i));
+				cards.add(new Card(mark,14-i));
+			}
+		}
+		for(Mark mark : Mark.values()) {
+			cards.add(new Card(mark,7));
+		}
+		this.cards = cards;
+		return this.cards;
 	}
 
 	//山札の一番上を取得した後消去

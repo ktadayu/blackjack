@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import blackjack.BJLogic;
+import blackjack.BJTable;
 import blackjack.Deck;
 import blackjack.Hand;
 import blackjack.players.Dealer;
@@ -24,12 +24,6 @@ import model.User;
 @WebServlet("/BJSplitServlet")
 public class BJSplitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	public BJSplitServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 
 	//スプリット選択後ここへ遷移
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -132,31 +126,31 @@ public class BJSplitServlet extends HttpServlet {
 
 		//勝敗
 		//手札1について
-		if (BJLogic.detWinner(player1.getHand(), dealer.getHand()) == 1) {
+		if (BJTable.detWinner(player1.getHand(), dealer.getHand()) == 1) {
 			user.setNumberOfTips(user.getNumberOfTips() + 2 * betPoint);
 			updateStatus(user, +betPoint, request);
-		} else if (BJLogic.detWinner(player1.getHand(), dealer.getHand()) == 0) {
+		} else if (BJTable.detWinner(player1.getHand(), dealer.getHand()) == 0) {
 			user.setNumberOfTips(user.getNumberOfTips() + betPoint);
 			updateStatus(user, 0, request);
 		} else {
 			updateStatus(user, -betPoint, request);
 		}
 		//msg1に勝敗を登録
-		request.setAttribute("msg1", BJLogic.msg);
+		request.setAttribute("msg1", BJTable.msg);
 
 
 		//手札2について
-		if (BJLogic.detWinner(player2.getHand(), dealer.getHand()) == 1) {
+		if (BJTable.detWinner(player2.getHand(), dealer.getHand()) == 1) {
 			user.setNumberOfTips(user.getNumberOfTips() + 2 * betPoint);
 			updateStatus(user, +betPoint, request);
-		} else if (BJLogic.detWinner(player2.getHand(), dealer.getHand()) == 0) {
+		} else if (BJTable.detWinner(player2.getHand(), dealer.getHand()) == 0) {
 			user.setNumberOfTips(user.getNumberOfTips() + betPoint);
 			updateStatus(user, 0, request);
 		} else {
 			updateStatus(user, -betPoint, request);
 		}
 		//msg2に勝敗を登録
-		request.setAttribute("msg2", BJLogic.msg);
+		request.setAttribute("msg2", BJTable.msg);
 
 		session.setAttribute("USER", user);
 		FlagOwner.validateGameEnd();

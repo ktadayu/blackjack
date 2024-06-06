@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import blackjack.BJLogic;
+import blackjack.BJTable;
 import blackjack.Deck;
 import blackjack.Hand;
 import blackjack.players.Dealer;
@@ -60,7 +60,7 @@ public class BJServlet extends HttpServlet {
 		}
 
 		//splitが選択されなかったので,splittableをfalseにする
-		FlagOwner.unValidateSplittableFlag();
+		FlagOwner.inValidateSplittableFlag();
 
 		//プレイヤーの選択による分岐
 		if (opt.equals("hit")) {
@@ -83,10 +83,10 @@ public class BJServlet extends HttpServlet {
 		dealer.drawCard(deck);
 
 		//勝敗
-		if (BJLogic.detWinner(playerHand, dealerHand) == 1) {
+		if (BJTable.detWinner(playerHand, dealerHand) == 1) {
 			user.setNumberOfTips(user.getNumberOfTips() + 2 * betPoint);
 			updateStatus(user, +betPoint, request);
-		} else if (BJLogic.detWinner(playerHand, dealerHand) == 0) {
+		} else if (BJTable.detWinner(playerHand, dealerHand) == 0) {
 			user.setNumberOfTips(user.getNumberOfTips() + betPoint);
 			updateStatus(user, 0, request);
 		} else {
@@ -94,7 +94,7 @@ public class BJServlet extends HttpServlet {
 		}
 
 		session.setAttribute("USER", user);
-		request.setAttribute("msg", BJLogic.msg);
+		request.setAttribute("msg", BJTable.msg);
 		FlagOwner.validateUsualGameEnd();
 		requestDispatcher.forward(request, response);
 	}
@@ -103,17 +103,15 @@ public class BJServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String nextPage = "/view/game/play.jsp";
-		//初回か再プレイかのフラグ, 実際には不要
-		boolean firstTurn = true;
 		int betPoint;
-
-		//split等フラグのリセット
+		//初回か再プレイかのフラグ
+		boolean firstOrNot = true;
+		//スプリット判定やゲーム終了判定用のフラグのリセット
 		FlagOwner.resetFlag();
 
 		//セッションの取得
 		HttpSession session = request.getSession();
-
+		User user = (User) session.getAttribute("USER");
 
 		//選択されたベット額を取得
 		//requestのbetPointがnullかどうかで初回プレイか否かの判定
@@ -122,42 +120,52 @@ public class BJServlet extends HttpServlet {
 			betPoint = Integer.parseInt(request.getParameter("betPoint"));
 			session.setAttribute("BETPOINT", betPoint);
 		} else {
-			firstTurn = false;
+			firstOrNot = false;
 			betPoint = (int) session.getAttribute("BETPOINT");
 		}
 
-		//BJロジック: セッションからユーザーとbetPointを取り出し、ユーザーのチップを徴収
-		//BJLogicをnewしているのは気持ち悪い
-		BJLogic bjLogic = new BJLogic(session);
+		//BJ用のテーブル: セッションからユーザーとbetPointを取り出し、ユーザーのチップを徴収,登録
+		BJTable bjTable = new BJTable(session);
+		insertUserTipIntoDB(user,request);
 
-		//ゲームの初期化 or リプレイ(デッキとbet額を変えずにプレイ)
-		if (firstTurn) {
-			session = bjLogic.initializeBJ(session);
-		} else {
-			session = bjLogic.ReplayBJ(session);
-		}
+		//ゲームのスタート
+		bjTable.startGame(firstOrNot, session);
 
-		//ナチュラルBJ成立の場合
-		if ((Boolean) session.getAttribute("BLACKJACK") != null) {
-			session.removeAttribute("BLACKJACK");
-			User user = (User) session.getAttribute("USER");
+		//ナチュラルBJ成立判定
+		if ((Boolean) session.getAttribute("BLACKJACK")) {
 			updateStatus(user, (int) 2.5 * betPoint, request);
 			session.setAttribute("USER", user);
+			session.setAttribute("BLACKJACK",false);
 			request.setAttribute("msg", "ブラックジャック！");
+			//ゲーム終了を宣言
 			FlagOwner.validateUsualGameEnd();
 		}
 
-		//split可能かどうか？
+		//split可能判定
 		if(FlagOwner.checkSplittable()) {
+			//スプリット可能を宣言
 			FlagOwner.validateSplittableFlag();
 		}
 
-		//ゲーム初回のフラグ
+		String nextPage = "/view/game/play.jsp";
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 		requestDispatcher.forward(request, response);
 	}
 
 	//DBのuserへ現在のチップ数を反映させるメソッド
+	public void insertUserTipIntoDB(User user , HttpServletRequest request) {
+		try {
+		UserDao userDao = new UserDao();
+		userDao.updateNumberOfTips(user);
+		}catch(MyException e) {
+			String message = e.getMessage();
+			request.setAttribute("message", message);
+		}finally {
+
+		}
+	}
+
+	//userオブジェクトのチップ数を更新し、DBのuserへ反映させるメソッド
 	public void updateStatus(User user, int amountOfChange, HttpServletRequest request) {
 		try {
 			UserDao userDao = new UserDao();
@@ -169,6 +177,8 @@ public class BJServlet extends HttpServlet {
 			request.setAttribute("message", message);
 		}
 	}
+
+
 
 
 }
