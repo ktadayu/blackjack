@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.HistoryDao;
+import dao.UserDao;
 import exception.MyException;
 import model.User;
 
@@ -39,6 +39,7 @@ public class ToGameTopServlet extends HttpServlet {
 		String nextPage;
 		String message;
 
+		//セッションの"USER"属性をトークン代わりに用いる
 		if (session.getAttribute("USER") == null) {
 			nextPage = "/view/users/login.jsp";
 			message = "不正なアクセス";
@@ -46,17 +47,17 @@ public class ToGameTopServlet extends HttpServlet {
 			request.setAttribute("message", message);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
 			requestDispatcher.forward(request, response);
-
 			return;
 		}
 
+		//game-topページに表示するランキングを取得する。
 		try {
-			HistoryDao historyDao = new HistoryDao();
-			List<User> users = historyDao.selectTopRateUsers();
-			request.setAttribute("users", users);
+			UserDao userDao = new UserDao();
+			List<User> ranking = userDao.selectTopUsers();
+			request.setAttribute("ranking", ranking);
+			//System.out.println("ランキング取得完了");
 		} catch (MyException e) {
 			e.printStackTrace();
-
 		}
 
 		nextPage = "/view/game/game_top.jsp";

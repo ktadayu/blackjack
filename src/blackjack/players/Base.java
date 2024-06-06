@@ -20,7 +20,7 @@ public abstract class Base {
 	}
 
 	//手札にカードを追加する
-	public void addCard(Card card) {
+	public void addCardToHand(Card card) {
 		hand.getCards().add(card);
 	}
 

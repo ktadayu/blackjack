@@ -40,11 +40,4 @@ public class Main {
 
 	}
 
-	public static void drawCard(Player player, Dealer dealer, Deck deck) {
-		player.addCard(deck.deal());
-		player.addCard(deck.deal());
-		dealer.addCard(deck.deal());
-		dealer.addCard(deck.deal());
-	}
-
 }

@@ -24,7 +24,8 @@ public class BJTable {
 		user.setNumberOfTips(user.getNumberOfTips() - betPoint);
 	}
 
-	public HttpSession startGame(Boolean firstOrNot,HttpSession session) {
+	//ゲームスタートor再開
+	public HttpSession startGame(Boolean firstOrNot, HttpSession session) {
 
 		/*
 		 * @parm firstOrNot 初回プレイはtrue、リプレイはfalseとして扱う
@@ -35,7 +36,7 @@ public class BJTable {
 		dealer = (Dealer) session.getAttribute("DEALER");
 		betPoint = (Integer) session.getAttribute("BETPOINT");
 
-		if(firstOrNot) {
+		if (firstOrNot) {
 			deck = new Deck(); //デッキ生成
 			player = new Player();//プレイヤー生成
 			dealer = new Dealer();//ディーラー生成
@@ -45,13 +46,15 @@ public class BJTable {
 		FlagOwner.resetFlag();
 
 		//山札シャッフル
-		//deck.deckShuffle();
-//		if(firstOrNot) {
-//		deck.deckToTestSplit();
-//		}
 		if(firstOrNot) {
-		deck.deckToNtBj();
+		deck.shuffle();
 		}
+		//		if(firstOrNot) {
+		//		deck.deckToTestSplit();
+		//		}
+//		if (firstOrNot) {
+//			deck.deckToNtBj();
+//		}
 
 		//デッキが20枚以下ならデッキの初期化
 		deck = deckInit(deck);
@@ -68,7 +71,7 @@ public class BJTable {
 		session.setAttribute("BLACKJACK", checkBlackJack(player.getHand()));
 
 		//splitが可能かどうか
-		if(player.getHand().isSplitable()) {
+		if (player.getHand().isSplitable()) {
 			FlagOwner.validateSplittableFlag();
 		}
 
@@ -91,10 +94,10 @@ public class BJTable {
 
 	//手札配布
 	public void drawCard(Player player, Dealer dealer, Deck deck) {
-		player.addCard(deck.deal());
-		player.addCard(deck.deal());
-		dealer.addCard(deck.deal());
-		dealer.addCard(deck.deal());
+		player.addCardToHand(deck.deal());
+		player.addCardToHand(deck.deal());
+		dealer.addCardToHand(deck.deal());
+		dealer.addCardToHand(deck.deal());
 	}
 
 	//手札を受け取りTotalValueが21かどうか判定する
@@ -110,9 +113,8 @@ public class BJTable {
 		return false;
 	}
 
-
 	//デッキの初期化
-	public Deck deckInit(Deck deck) {
+	public static Deck deckInit(Deck deck) {
 		if (deck.size() < 20) {
 			deck = new Deck();
 			deck.shuffle();

@@ -49,9 +49,10 @@ public class BJServlet extends HttpServlet {
 		Hand dealerHand = dealer.getHand();
 
 		//BJLogicに書けることかもしれないがとりあえず記述する
-		if(opt.equals("split")) {
+		if (opt.equals("split")) {
 			//チップの徴収
 			user.setNumberOfTips(user.getNumberOfTips() - betPoint);
+			insertUserTipIntoDB(user, request);
 			//遷移
 			nextPage = "/BJSplitServlet";
 			requestDispatcher = request.getRequestDispatcher(nextPage);
@@ -71,13 +72,12 @@ public class BJServlet extends HttpServlet {
 				updateStatus(user, -betPoint, request);
 				requestDispatcher.forward(request, response);
 				return;
-			} else if(playerHand.totalValue() == 21){
+			} else if (playerHand.totalValue() == 21) {
 				FlagOwner.validateUsualGameEnd();
-			}else{
-				//再選択
-				requestDispatcher.forward(request, response);
-				return;
 			}
+			//再選択
+			requestDispatcher.forward(request, response);
+			return;
 		}
 
 		dealer.drawCard(deck);
@@ -126,7 +126,7 @@ public class BJServlet extends HttpServlet {
 
 		//BJ用のテーブル: セッションからユーザーとbetPointを取り出し、ユーザーのチップを徴収,登録
 		BJTable bjTable = new BJTable(session);
-		insertUserTipIntoDB(user,request);
+		insertUserTipIntoDB(user, request);
 
 		//ゲームのスタート
 		bjTable.startGame(firstOrNot, session);
@@ -135,14 +135,14 @@ public class BJServlet extends HttpServlet {
 		if ((Boolean) session.getAttribute("BLACKJACK")) {
 			updateStatus(user, (int) 2.5 * betPoint, request);
 			session.setAttribute("USER", user);
-			session.setAttribute("BLACKJACK",false);
+			session.setAttribute("BLACKJACK", false);
 			request.setAttribute("msg", "ブラックジャック！");
 			//ゲーム終了を宣言
 			FlagOwner.validateUsualGameEnd();
 		}
 
 		//split可能判定
-		if(FlagOwner.checkSplittable()) {
+		if (FlagOwner.checkSplittable()) {
 			//スプリット可能を宣言
 			FlagOwner.validateSplittableFlag();
 		}
@@ -153,14 +153,14 @@ public class BJServlet extends HttpServlet {
 	}
 
 	//DBのuserへ現在のチップ数を反映させるメソッド
-	public void insertUserTipIntoDB(User user , HttpServletRequest request) {
+	public void insertUserTipIntoDB(User user, HttpServletRequest request) {
 		try {
-		UserDao userDao = new UserDao();
-		userDao.updateNumberOfTips(user);
-		}catch(MyException e) {
+			UserDao userDao = new UserDao();
+			userDao.updateNumberOfTips(user);
+		} catch (MyException e) {
 			String message = e.getMessage();
 			request.setAttribute("message", message);
-		}finally {
+		} finally {
 
 		}
 	}
@@ -177,8 +177,5 @@ public class BJServlet extends HttpServlet {
 			request.setAttribute("message", message);
 		}
 	}
-
-
-
 
 }

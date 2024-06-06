@@ -20,7 +20,7 @@
 	rel="stylesheet">
 <%
 	User USER = (User) session.getAttribute("USER");
-	List<User> users = (List<User>) request.getAttribute("users");
+	List<User> ranking = (List<User>) request.getAttribute("ranking");
 	String msg = (String) request.getAttribute("message");
 %>
 </head>
@@ -57,19 +57,19 @@
 						<th class="table-header">順位</th>
 						<th class="table-header">ニックネーム</th>
 						<th class="table-header">チップ枚数</th>
-						<th class="table-header">勝率</th>
+					<!-- <th class="table-header">勝率</th> -->
 					</tr>
 					<%
 						int i = 1;
 					%>
 					<%
-						for (User user : users) {
+						for (User user : ranking) {
 					%>
 					<tr>
 						<th><%=i%></th>
 						<th><%=user.getUserNickname()%></th>
 						<th><%=user.getNumberOfTips()%></th>
-						<th><%=user.getRate()%></th>
+					<!-- <th><%=user.getRate()%></th>-->
 					</tr>
 					<%
 						i++;

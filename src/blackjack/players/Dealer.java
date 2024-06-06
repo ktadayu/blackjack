@@ -8,7 +8,7 @@ public class Dealer extends Base {
 	//カードを引いて手札に加える処理
 	public Hand drawCard(Deck deck) {
 		while (hand.totalValue() < 17) {
-			addCard(deck.deal());
+			addCardToHand(deck.deal());
 		}
 		return hand;
 	}

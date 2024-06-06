@@ -41,10 +41,10 @@ public class BJSplitServlet extends HttpServlet {
 		Player player1 = new Player();
 		Player player2 = new Player();
 
-		player1.addCard(playerHand.get(0));
-		player2.addCard(playerHand.get(1));
-		player1.addCard(deck.deal());
-		player2.addCard(deck.deal());
+		player1.addCardToHand(playerHand.get(0));
+		player2.addCardToHand(playerHand.get(1));
+		player1.addCardToHand(deck.deal());
+		player2.addCardToHand(deck.deal());
 
 		//セッションに登録
 		session.setAttribute("plyr1", player1);
@@ -79,10 +79,8 @@ public class BJSplitServlet extends HttpServlet {
 
 
 		//手札1についての選択
-		//standを選ぶorバーストでendFlag(n)属性をsessionに登録
 		if (opt1 != null && opt1.equals("hit")) {
 			player1.drawCard(deck);
-
 			if (player1.getHand().isBust()) {
 				request.setAttribute("msg1", "手札1バースト!");
 				FlagOwner.validatePlayer1(); //プレイヤー1終了
@@ -112,7 +110,7 @@ public class BJSplitServlet extends HttpServlet {
 			FlagOwner.validatePlayer2(); //プレイヤー1終了
 		}
 
-		//ど手札選択が2つともendでない限りページに戻される
+		//手札選択が2つともendでない限りページに戻される
 		if (!FlagOwner.checkPlayer1End() || !FlagOwner.checkPlayer2End()) {
 			requestDispatcher.forward(request, response);
 			return;

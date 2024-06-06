@@ -16,7 +16,7 @@ public class Player extends Base {
 
 	public Hand drawCard(Deck deck) {
 
-		addCard(deck.deal());
+		addCardToHand(deck.deal());
 		return hand;
 	}
 
