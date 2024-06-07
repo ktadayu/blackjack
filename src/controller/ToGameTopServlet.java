@@ -22,11 +22,6 @@ import model.User;
 public class ToGameTopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ToGameTopServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -55,7 +50,6 @@ public class ToGameTopServlet extends HttpServlet {
 			UserDao userDao = new UserDao();
 			List<User> ranking = userDao.selectTopUsers();
 			request.setAttribute("ranking", ranking);
-			//System.out.println("ランキング取得完了");
 		} catch (MyException e) {
 			e.printStackTrace();
 		}

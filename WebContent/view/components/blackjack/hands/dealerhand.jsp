@@ -16,8 +16,8 @@
 	String imgFileRootName = request.getContextPath() + "/img/trump/card_";
 %>
 <body>
-
-
+<div class=delaer>
+	<div class="dealerhand">
 	<h3>ディーラー手札:</h3>
 	<%
 		//ディーラー2枚目のカードを裏向きに表示させておくための場合分け
@@ -35,13 +35,16 @@
 		}
 		}
 	%>
+	</div>
+	<div class="dealer-sum">
 	<%if(FlagOwner.checkEndGame()){ %>
 	<h4>
 		合計
 		<%=dealerHand.totalValue()%>
 	</h4>
 	<% } %>
-
+	</div>
+</div>
 	<script src="<%=request.getContextPath()%>/view/components/blackjack/hands/app.js">
 	</script>
 

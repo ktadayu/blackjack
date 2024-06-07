@@ -22,31 +22,36 @@
 %>
 <body>
 
-	<div class="playerhand-1" id="playerhand1"
+	<div class="player" id="playerhand1"
 		<%if (player1 != null && player1.getHand() != null) {%>
 		style="display: none" <%}%>>
-		<h3>プレイヤー手札:</h3>
-		<%
-			for (Card card : player.getHand().getCards()) {
-		%>
-		<img src="<%=imgFileRootName + card%>.png" alt="<%=card%>">
-		<%
-			}
-		%>
+		<div class="playerhand1">
+			<h3>プレイヤー手札:</h3>
+			<%
+				for (Card card : player.getHand().getCards()) {
+			%>
+			<img src="<%=imgFileRootName + card%>.png" alt="<%=card%>">
+			<%
+				}
+			%>
+		</div>
+		<div class="player1-sum">
 		<h4>
 			合計
 			<%=player.getHand().totalValue()%>
 		</h4>
-		<%
+		</div>
+			<%
 			if (msg != null) {
-		%>
-		<span class="grid1"><%=msg%></span>
-		<%
+			%>
+		<span class="grid1"><%=msg %></span>
+			<%
 			}
-		%>
+			%>
 	</div>
 
 	<!-- スプリット時 -->
+	<div class="players">>
 	<%
 		if (player1 != null && player1.getHand() != null && player2.getHand() != null) {
 	%>
@@ -99,6 +104,7 @@
 	<%
 		}
 	%>
+	</div>
 
 </body>
 </html>

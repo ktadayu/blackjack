@@ -18,10 +18,6 @@ import model.User;
 public class SignupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public SignupServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -43,12 +39,31 @@ public class SignupServlet extends HttpServlet {
 
 		String nextPage = null;
 
+		//ユーザー名空文字時
+		if(user_name.length() == 0) {
+			String msg = "ユーザー名を入力してください";
+			BJServlet.sendMessage(msg,"/view/users/sign_up.jsp",request,response);
+			return;
+		}
+
+		//パスワード入力間違い時
 		if (!user_password_1.equals(user_password_2)) {
 			String msg = "二つのパスワードが一致しません。";
-			request.setAttribute("message", msg);
-			nextPage = "/view/users/sign_up.jsp";
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher(nextPage);
-			requestDispatcher.forward(request, response);
+			BJServlet.sendMessage(msg,"/view/users/sign_up.jsp",request,response);
+			return;
+		}
+
+		if( user_password_1.length() * user_password_1.length() == 0 ) {
+			String msg = "パスワードを入力してください";
+			BJServlet.sendMessage(msg,"/view/users/sign_up.jsp",request,response);
+			return;
+		}
+
+		//ニックネーム空文字時
+		if(user_nickname.length() == 0) {
+			String msg = "ニックネームを入力してください";
+			BJServlet.sendMessage(msg,"/view/users/sign_up.jsp",request,response);
+			return;
 		}
 
 		try {
@@ -70,7 +85,7 @@ public class SignupServlet extends HttpServlet {
 //			List<User> users = newUserDao.selectTopUsers();
 //			session.setAttribute("TOPUSERLIST", users);
 
-			nextPage = "/view/game/game_top.jsp";
+			nextPage = "/ToGameTopServlet";
 
 		} catch (MyException e) {
 			String message = e.getMessage();

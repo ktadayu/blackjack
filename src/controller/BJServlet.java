@@ -64,7 +64,7 @@ public class BJServlet extends HttpServlet {
 		FlagOwner.inValidateSplittableFlag();
 
 		//プレイヤーの選択による分岐
-		if (opt.equals("hit")) {
+		Label:if (opt.equals("hit")) {
 			player.drawCard(deck);
 			if (playerHand.isBust()) {
 				request.setAttribute("msg", "バースト!");
@@ -74,6 +74,7 @@ public class BJServlet extends HttpServlet {
 				return;
 			} else if (playerHand.totalValue() == 21) {
 				FlagOwner.validateUsualGameEnd();
+				break Label;
 			}
 			//再選択
 			requestDispatcher.forward(request, response);
@@ -116,8 +117,12 @@ public class BJServlet extends HttpServlet {
 		//選択されたベット額を取得
 		//requestのbetPointがnullかどうかで初回プレイか否かの判定
 		if (request.getParameter("betPoint") != null) {
-			//初回
 			betPoint = Integer.parseInt(request.getParameter("betPoint"));
+			//bet額が不正な場合、ゲームトップへ戻るものとする。
+			if (betPoint > 10 || betPoint <= 0) {
+				sendMessage("bet額が不正です", "/ToGameTopServlet", request, response);
+				return;
+			}
 			session.setAttribute("BETPOINT", betPoint);
 		} else {
 			firstOrNot = false;
@@ -176,6 +181,13 @@ public class BJServlet extends HttpServlet {
 			String message = e.getMessage();
 			request.setAttribute("message", message);
 		}
+	}
+
+	public static void sendMessage(String msg, String to, HttpServletRequest request, HttpServletResponse res)
+			throws ServletException, IOException {
+		request.setAttribute("message", msg);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(to);
+		requestDispatcher.forward(request, res);
 	}
 
 }

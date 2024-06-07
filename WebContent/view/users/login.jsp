@@ -44,10 +44,8 @@ String message = (String) request.getAttribute("message");
 			</table>
 			       
 			<div class="form-button">
-				         
 				<button class="button button-submission" type="submit">   
-					        ログインする          </button>
-				       
+					        ログインする          </button> 
 			</div>
 			     
 		</form>

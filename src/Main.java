@@ -1,10 +1,3 @@
-import java.util.List;
-
-import blackjack.Card;
-import blackjack.Deck;
-import blackjack.players.Dealer;
-import blackjack.players.Player;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -20,14 +13,14 @@ public class Main {
 //		Card _card = new Card(Mark.DIA,1);
 //		System.out.println(_card);
 
-		Deck deck = new Deck();
-		Player player = new Player();//プレイヤー生成
-		Dealer dealer = new Dealer();//ディーラー生成
-
-		//山札シャッフル
-		List<Card> cards = deck.deckToNtBj();
-
-		System.out.println(cards);
+//		Deck deck = new Deck();
+//		Player player = new Player();//プレイヤー生成
+//		Dealer dealer = new Dealer();//ディーラー生成
+//
+//		//山札シャッフル
+//		List<Card> cards = deck.deckToNtBj();
+//
+//		System.out.println(cards);
 
 //		//初期手札配布
 //		drawCard(player, dealer, deck);

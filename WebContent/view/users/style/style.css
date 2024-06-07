@@ -1,9 +1,12 @@
 @charset "UTF-8";
 
 body {
-	font-family: "Noto Serif JP", serif;
-	background-color: #2d2d2d;
-	color: #ffff;
+	font-family: "Noto Sans JP", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: <weight>;
+	font-style: normal;
+	background-color: #f7f7f7;
+	color: ##1c1c1c;
 	display: flex;
 	justify-content: center;
 }
@@ -67,10 +70,28 @@ button {
 	display: inline-block;
 	background-color: #333;
 	color: #ffff;
+	font-weight:bold;
 	border-radius: 10px;
-	box-shadow: 3px 3px 0 #333;
+	/* box-shadow: 3px 3px 0 #333; */
 	padding: 10px 30px;
+	box-shadow: 1px 3px 3px 3px #ADADAD;
+	transition: all 0.2s;
 }
+
+button:active{
+    transform:translate(3px, 3px);
+    box-shadow:none;
+}
+
+button:hover{
+	color: rgb(58, 41, 204);
+	box-shadow: 0 0 #4C0F13;
+}
+
+
+
+
+
 
 .button-submission {
 

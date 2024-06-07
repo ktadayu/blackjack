@@ -91,17 +91,8 @@ public class UserDao extends BaseDao {
 	}
 
 	/*
-	 * 戦歴の登録
-	 */
-
-	/*
-	 * 戦績取得
-	 */
-
-	/*
 	 * 検索して全件取得
 	 */
-	//全ユーザーリスト取得
 	public List<User> selectAllUsers() throws MyException {
 
 		List<User> userList = new ArrayList<>();
@@ -148,7 +139,6 @@ public class UserDao extends BaseDao {
 		return userList;
 	}
 
-	//勝率TOP5
 
 	/*
 	 * 削除処理

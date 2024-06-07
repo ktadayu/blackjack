@@ -25,9 +25,7 @@ img {
 
 		<div>
 			<!--  ディーラーの手札 -->
-			<div class="dealerhand">
 				<jsp:include page="./hands/dealerhand.jsp" />
-			</div>
 			<div class="message">
 		<!-- 勝敗等の表示 -->
 			<jsp:include page="./message.jsp" />

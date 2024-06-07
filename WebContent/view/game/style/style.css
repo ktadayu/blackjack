@@ -1,16 +1,20 @@
 @charset "UTF-8";
 
 body {
-  font-family: "Noto Sans JP", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-	background-color: #2d2d2d;
-	color: #ffff;
+	font-family: "Noto Sans JP", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: <weight>;
+	font-style: normal;
+	background-color: #f7f7f7;
+	color: ##1c1c1c;
 }
 
 .header {
-	margin: 0 50px
+	margin: 0;
+	background-color: #f5deb3;
+	width: 100vw;
+	height: 50px;
+	display: flex;
 }
 
 .header>a {
@@ -22,11 +26,15 @@ section {
 }
 
 a:link {
-	color: #ffff;
+	color: #1c1c1c;
+	font-weight: bold;
+	text-decoration: none;
 }
 
 a:visited {
-	color: #ffff;
+	color: #1c1c1c;
+	font-weight: bold;
+	text-decoration: none;
 }
 
 a:hover {
@@ -45,12 +53,33 @@ a:active {
 
 button {
 	display: inline-block;
-	background-color: #333;
-	color: #ffff;
+	background-color: #4d4d4d;
+	color: #f7f7f7;
 	font-weight: bold;
 	font-size: 15px;
 	border-radius: 7px;
 	padding: 15px;
+	/*offset-x,offset-y,blur-radius,spread-radius */
+	box-shadow: 1px 3px 3px 3px #ADADAD;
+	transition: all 0.2s;
+}
+
+button:active {
+	transform: translate(3px, 3px);
+	box-shadow: none;
+}
+
+button:hover {
+	color: #3c323d;
+	box-shadow: 0 0 #4C0F13;
+}
+
+button:disabled {
+	pointer-events: none;
+	background: #8e8e8e;
+	border: 1px solid #999999;
+	background-color: #cccccc;
+	color: #666666;
 }
 
 .ranking-container {
@@ -131,6 +160,37 @@ grid area
     */
 .em {
 	font-size: 5em;
+}
+
+/*
+ゲーム画面
+*/
+h3 {
+	margin: 0;
+	padding-bottom: 5px;
+}
+
+nav {
+	height: 50px;
+}
+
+nav>.header {
+	align-items: center;
+	display: flex;
+	align-items: center;
+}
+
+.div-opt-game {
+	padding: 20px
+}
+
+.delaer {
+	display: flex;
+}
+
+.dealer-sum {
+	display: flex;
+	align-items: flex-end;
 }
 
 /*

@@ -37,7 +37,7 @@ public class LeaveServlet extends HttpServlet {
 
 			String message = "ユーザーを削除しました";
 			request.setAttribute("message", message);
-			nextPage = "/view/game/game_top.jsp";
+			nextPage = "/ToGameTopServlet";
 
 		} catch (MyException e) {
 			String message = e.getMessage();

@@ -68,6 +68,7 @@ public class BJTable {
 		if (checkBlackJack(player.getHand())) {
 			user.setNumberOfTips((int) (user.getNumberOfTips() + (2.5) * betPoint));
 		}
+
 		session.setAttribute("BLACKJACK", checkBlackJack(player.getHand()));
 
 		//splitが可能かどうか

@@ -67,7 +67,7 @@ public class HistoryDao extends BaseDao {
 
 		List<User> userList = new ArrayList<>();
 		try {
-			String sql = "select	users.user_nickname,\r\n" +
+			String sql = "select users.user_nickname,\r\n" +
 					"		score_history.user_id,\r\n" +
 					"        users.number_of_tips,\r\n" +
 					"		sum(case when amount_of_changes > 0 then 1 else 0 end) as wins,\r\n" +
