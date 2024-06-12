@@ -3,7 +3,7 @@ create table users
 user_id int not null  auto_increment,
 user_name varchar(25) not null unique,
 user_password varchar(25) not null,
-user_nicknamae varchar(25) not null unique,
+user_nickname varchar(25) not null unique,
 number_of_tips int not null default 100,
 primary key(user_id)
 );
