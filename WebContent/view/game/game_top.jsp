@@ -29,17 +29,17 @@
 
 <jsp:include page="../components/nav-top.jsp" />
 
-  <div id="animation-container">
-      <div class="animate-title">
-        <span class="char">B</span>
-        <span class="char">L</span>
-        <span class="char">A</span>
-        <span class="char">C</span>
-        <span class="char">K</span>
-        <span class="char">J</span>
-        <span class="char">A</span>
-        <span class="char">C</span>
-        <span class="char">K</span>
+  <div class="animation-container">
+      <div class="animation-characters">
+        <span class="character">B</span>
+        <span class="character">L</span>
+        <span class="character">A</span>
+        <span class="character">C</span>
+        <span class="character">K</span>
+        <span class="character">J</span>
+        <span class="character">A</span>
+        <span class="character">C</span>
+        <span class="character">K</span>
       </div>
     </div>
 

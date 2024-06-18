@@ -6,7 +6,7 @@
 <%@ page import="dao.HistoryDao"%>
 <%@ page import="java.util.List"%>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">

@@ -25,6 +25,20 @@ body {
 	color:black;
 }
 
+@media screen and (max-width: 450px) {
+.global-section > section {
+	padding:3px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+.global-section > section h2 {
+	padding:5px;
+	margin:0;
+	font-size:1.5rem;
+  }
+}
+
 .hit-or-stand{
 	z-index:100;
 }
@@ -184,71 +198,75 @@ grid area
 	font-weight: bold;
 }
 
+@media screen and (max-width: 450px) {
+.table-header{
+	padding:5px;
+	font-size:1.5rem;
+  }
+}
+
 .footer {
 	text-align: right;
 }
 
 
-/* アニメーション */
-
-.animate-title{
+/* 最初の文字アニメーション */
+.animation-characters{
     position: absolute;
     top: 50%;
     left:50%;
     transform:translate(-50%,-50%);
     color:black;
     opacity: 0;
-    /* 相対的な大きさ、現在の大きさの2倍 */
     font-size:2em;
 }
 
-.animate-title.inview{
+.animation-characters.viewing{
     opacity: 1;
 }
 
 /* 半角スペースを空けて子要素の指定 */
-.animate-title.inview .char{
+.animation-characters.viewing .character{
     display: inline-block;
-    animation-name: kf-animate-chars;
-    animation-duration: 3s;
-    /* よくわからないから調べる */
-    animation-timing-function: cubic-bezier(0.39,1.57,0.58,1);
+    animation-name: top-animation;
+    animation-duration: 2s;
+    animation-timing-function: cubic-bezier(.73,.29,.58,.93);
     animation-fill-mode: both;
     animation-direction: normal;
     animation-iteration-count: 1;
     animation-delay: 0s;
 }
 
-.animate-title.inview .char:nth-child(1){
+.animation-characters.viewing .character:nth-child(1){
     animation-delay: 40ms;
 
 }
-.animate-title.inview .char:nth-child(2){
+.animation-characters.viewing .character:nth-child(2){
     animation-delay: 80ms;
 }
-.animate-title.inview .char:nth-child(3){
+.animation-characters.viewing .character:nth-child(3){
     animation-delay: 120ms;
 }
-.animate-title.inview .char:nth-child(4){
+.animation-characters.viewing .character:nth-child(4){
     animation-delay: 160ms;
 }
-.animate-title.inview .char:nth-child(5){
+.animation-characters.viewing .character:nth-child(5){
     animation-delay: 200ms;
 }
-.animate-title.inview .char:nth-child(6){
+.animation-characters.viewing .character:nth-child(6){
     animation-delay: 240ms;
 }
-.animate-title.inview .char:nth-child(7){
+.animation-characters.viewing .character:nth-child(7){
     animation-delay: 280ms;
 }
-.animate-title.inview .char:nth-child(8){
+.animation-characters.viewing .character:nth-child(8){
     animation-delay: 320ms;
 }
-.animate-title.inview .char:nth-child(9){
+.animation-characters.viewing .character:nth-child(9){
     animation-delay: 360ms;
 }
 
-@keyframes kf-animate-chars{
+@keyframes top-animation{
     0%{
         opacity: 0;
         transform: translateY(-50%);
@@ -261,5 +279,5 @@ grid area
 
     100%{
         opacity: 0;
-        transform: translateY(-50%);
+        transform: translateY(50%);
     }

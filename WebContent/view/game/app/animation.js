@@ -1,14 +1,14 @@
-const container = document.querySelector("#animation-container");
+const container = document.querySelector(".animation-container");
 const globalSection = document.querySelector(".global-section");
-const animateTitle = document.querySelector(".animate-title");
+const animationCahracters = document.querySelector(".animation-characters");
 
 document.addEventListener("DOMContentLoaded", function () {
-  animateTitle.classList.add("inview");
-  globalSection.style.opacity = 0;
+	animationCahracters.classList.add("viewing");
+	globalSection.style.opacity = 0;
 //  setTimeout(() => {
 //    globalSection.style.opacity = 1;
 //  }, 2800);
-  animateTitle.addEventListener('animationend', () => {
+	animationCahracters.addEventListener('animationend', () => {
 	  globalSection.style.opacity = 1;
 	})
 });

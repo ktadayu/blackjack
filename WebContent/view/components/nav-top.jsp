@@ -23,3 +23,5 @@
 		<span></span>
 	</button>
 </div>
+
+<script src="<%=request.getContextPath()%>/view/components/mobile-btn.js"></script>
