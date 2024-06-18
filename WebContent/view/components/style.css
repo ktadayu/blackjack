@@ -26,6 +26,19 @@
 	justify-content:flex-end;
 }
 
+.header.mypage{
+	justify-content:flex-end;
+}
+
+.header.mypage > a:nth-child(1){
+	padding-right:20px;
+}
+.header.mypage > a:nth-child(2){
+	padding-right:20px;
+}
+.header.mypage > a:nth-child(3){
+	padding-right:20px;
+}
 
 .header.loginpage > a:nth-child(1){
 	paddig-right:120px;

@@ -1,40 +1,68 @@
 @charset "UTF-8";
 
 body {
-	font-family: "Noto Sans JP", sans-serif;
-	font-optical-sizing: auto;
-	font-weight: <weight>;
-	font-style: normal;
-	background-color: #f7f7f7;
-	color: ##1c1c1c;
+	font-family: "Noto Serif JP", serif;
+	background-color: #ffff;
+	color: #2d2d2d;
+	margin:0;
 }
 
 .header {
-	margin: 0;
-	background-color: #f5deb3;
-	width: 100vw;
-	height: 50px;
-	display: flex;
+	margin: 0 50px
 }
 
 .header>a {
 	padding: 10px
 }
 
+.global-section{
+	opacity:0;
+    transition: all 1s;
+}
+
 section {
 	padding: 30px 15px;
 }
 
+.hit-or-stand{
+	z-index:100;
+}
+
+
+.game-board{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+   /* background-color: #44b479;*/
+    background: radial-gradient(#44b479, black);
+   /*  z-index:-100; */
+}
+
+
+/*
+.game-board::before {
+   pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(#44b479, black);
+    z-index:-100;
+}
+*/
+
+
+
+/* リンク設定 */
+
 a:link {
-	color: #1c1c1c;
-	font-weight: bold;
-	text-decoration: none;
+	color: #ffff;
 }
 
 a:visited {
-	color: #1c1c1c;
-	font-weight: bold;
-	text-decoration: none;
+	color: #ffff;
 }
 
 a:hover {
@@ -51,35 +79,19 @@ a:active {
 	font-size: 20px;
 }
 
+img{
+	cursor:pointer;
+}
+
 button {
 	display: inline-block;
-	background-color: #4d4d4d;
-	color: #f7f7f7;
+	background-color: #333;
+	color: #ffff;
 	font-weight: bold;
 	font-size: 15px;
 	border-radius: 7px;
 	padding: 15px;
-	/*offset-x,offset-y,blur-radius,spread-radius */
-	box-shadow: 1px 3px 3px 3px #ADADAD;
-	transition: all 0.2s;
-}
-
-button:active {
-	transform: translate(3px, 3px);
-	box-shadow: none;
-}
-
-button:hover {
-	color: #3c323d;
-	box-shadow: 0 0 #4C0F13;
-}
-
-button:disabled {
-	pointer-events: none;
-	background: #8e8e8e;
-	border: 1px solid #999999;
-	background-color: #cccccc;
-	color: #666666;
+	cursor: pointer;
 }
 
 .ranking-container {
@@ -136,10 +148,27 @@ grid area
     betボタン
     */
 .betting {
+	position:relative;
 	text-align: center;
+	background: radial-gradient(#44b479, black);
+	height:100vh;
+	width:100vw;
 }
 
-.div-betting-form {
+.betting-container{
+	position:absolute;
+	top:70px;
+	right:0;
+	left:0;
+	bottom:0;
+}
+
+.betting-container > h1{
+	margin:0;
+	top:50px;
+}
+
+.betting-form-container {
 	position: relative;
 	text-align: center;
 }
@@ -151,8 +180,7 @@ grid area
 	padding: 40px 0px;
 }
 
-.betting-form-button {
-	margin: 0 auto;
+.betting-form > button {
 }
 
 /*
@@ -160,37 +188,6 @@ grid area
     */
 .em {
 	font-size: 5em;
-}
-
-/*
-ゲーム画面
-*/
-h3 {
-	margin: 0;
-	padding-bottom: 5px;
-}
-
-nav {
-	height: 50px;
-}
-
-nav>.header {
-	align-items: center;
-	display: flex;
-	align-items: center;
-}
-
-.div-opt-game {
-	padding: 20px
-}
-
-.delaer {
-	display: flex;
-}
-
-.dealer-sum {
-	display: flex;
-	align-items: flex-end;
 }
 
 /*
@@ -209,3 +206,79 @@ nav>.header {
 .footer {
 	text-align: right;
 }
+
+
+/* アニメーション */
+
+.animate-title{
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    color:white;
+    opacity: 0;
+    /* 相対的な大きさ、現在の大きさの2倍 */
+    font-size:2em;
+}
+
+.animate-title.inview{
+    opacity: 1;
+}
+
+/* 半角スペースを空けて子要素の指定 */
+.animate-title.inview .char{
+    display: inline-block;
+    animation-name: kf-animate-chars;
+    animation-duration: 3s;
+    /* よくわからないから調べる */
+    animation-timing-function: cubic-bezier(0.39,1.57,0.58,1);
+    animation-fill-mode: both;
+    animation-direction: normal;
+    animation-iteration-count: 1;
+    animation-delay: 0s;
+}
+
+.animate-title.inview .char:nth-child(1){
+    animation-delay: 40ms;
+
+}
+.animate-title.inview .char:nth-child(2){
+    animation-delay: 80ms;
+}
+.animate-title.inview .char:nth-child(3){
+    animation-delay: 120ms;
+}
+.animate-title.inview .char:nth-child(4){
+    animation-delay: 160ms;
+}
+.animate-title.inview .char:nth-child(5){
+    animation-delay: 200ms;
+}
+.animate-title.inview .char:nth-child(6){
+    animation-delay: 240ms;
+}
+.animate-title.inview .char:nth-child(7){
+    animation-delay: 280ms;
+}
+.animate-title.inview .char:nth-child(8){
+    animation-delay: 320ms;
+}
+.animate-title.inview .char:nth-child(9){
+    animation-delay: 360ms;
+}
+
+@keyframes kf-animate-chars{
+    0%{
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+
+    50%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100%{
+        opacity: 0;
+        transform: translateY(-50%);
+    }

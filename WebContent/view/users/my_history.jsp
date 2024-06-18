@@ -23,20 +23,8 @@
 	List<History> historyList = historyDao.selectAllHistory(USER);
 %>
 </head>
-<div class="header">
-	<jsp:include page="../components/nav-top.jsp" />
-</div>
 <body>
-	<%
-
-	%>
-
-	<div>
-		<h3>
-			現在のチップ数 :
-			<%=USER.getNumberOfTips()%>枚
-		</h3>
-	</div>
+<jsp:include page="../components/nav-mypage.jsp" />
 	<div>
 		<table>
 			<tr>

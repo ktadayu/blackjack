@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="model.FlagOwner"%>
 <!DOCTYPE html>
 <html>
@@ -11,12 +11,13 @@
 </head>
 <body>
 
-<form action="<%=request.getContextPath()%>/BJSplitServlet" method="post">
-		<button type="submit" value="hit" name="opt1"
-			<%if (FlagOwner.checkPlayer1End()) {%> disabled <%}%>>hit</button>
-		<button type="submit" value="stand" name="opt1"
-			<%if (FlagOwner.checkPlayer1End()) {%> disabled <%}%>>stand</button>
-</form>
+	<form action="<%=request.getContextPath()%>/BJSplitServlet"
+		method="post">
+		<button type="submit" value="hit" name="opt2"
+			<%if (FlagOwner.checkPlayer2End()) {%> style="display:none" <%}%>>hit</button>
+		<button type="submit" value="stand" name="opt2"
+			<%if (FlagOwner.checkPlayer2End()) {%> style="display:none" <%}%>>stand</button>
+	</form>
 
 
 </body>

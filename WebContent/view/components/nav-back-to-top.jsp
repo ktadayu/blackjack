@@ -26,7 +26,9 @@
 	<div class="header-container">
 	<nav class="header">
 	<div>現在のチップ枚数: <%=user.getNumberOfTips()%></div>
-	<div><%
+	<div>
+	<% //勝敗の表示  %>
+			<%
 			if (msg != null) {
 			%>
 		<span class="grid1"><%=msg %></span>

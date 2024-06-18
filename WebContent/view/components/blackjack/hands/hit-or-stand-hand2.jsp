@@ -8,12 +8,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/view/components/blackjack/style.css">
-<%
-	Boolean endFlag2 = false;//初期値
-	if (session.getAttribute("endFlag2") != null) {
-		endFlag2 = (Boolean) session.getAttribute("endFlag2");
-	}
-%>
 </head>
 <body>
 

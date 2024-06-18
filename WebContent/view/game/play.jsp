@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BlackJack</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/view/game/style/style.css">
@@ -27,14 +28,21 @@
 	<jsp:include page="../components/nav-back-to-top.jsp" />
 	</header>
 
+	<section class="game-board">
 	<!--  カードを展開する -->
+	<div class="gamefield">
 	<jsp:include page="../components/blackjack/gamefield.jsp" />
+	</div>
 
+	<div class="hit-or-stand" >
 	<!-- hitr or stand, splitの選択-->
 	<jsp:include page="../components/blackjack/hit-or-stand.jsp" />
+	</div>
 
+	<div  class="replay">
 	<!--  ベット額を変えるか、同じベット額で再プレイ -->
 	<jsp:include page="../components/blackjack/replay.jsp" />
-
+	</div>
+	</section>
 </body>
 </html>
