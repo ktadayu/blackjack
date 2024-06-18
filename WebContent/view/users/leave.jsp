@@ -17,7 +17,11 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
 	rel="stylesheet">
 </head>
+<<<<<<< HEAD
 <jsp:include page="../components/nav-top.jsp" />
+=======
+<jsp:include page="../components/nav-back-to-top.jsp" />
+>>>>>>> 9ec3f28 (test)
 <body>
 	   
 	<section class="section">

@@ -24,8 +24,13 @@
 	String msg = (String) request.getAttribute("message");
 %>
 </head>
+<<<<<<< HEAD
 <body>
 <jsp:include page="../components/nav-top.jsp" />
+=======
+<jsp:include page="../components/nav-top.jsp" />
+<body>
+>>>>>>> 9ec3f28 (test)
 
 	<section>
 		<div class="section-greeting">
