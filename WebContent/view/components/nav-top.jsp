@@ -5,7 +5,7 @@
 	href="<%=request.getContextPath()%>/view/components/style.css">
 
 <% User USER = (User) session.getAttribute("USER"); %>
-
+<div class="header-container">
 	<% if(USER != null){ %>
 	<div class="header">
 		<a href="<%=request.getContextPath()%>/view/users/my_history.jsp">戦績確認</a>
@@ -17,4 +17,4 @@
 		<a href="<%=request.getContextPath()%>/">ブラックジャックのルール</a>
 	</div>
 	<% } %>
-
+</div>

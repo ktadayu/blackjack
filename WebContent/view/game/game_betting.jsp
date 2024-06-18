@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Black Jack</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/view/game/style/style.css">
@@ -18,11 +19,12 @@
 %>
 
 </head>
-<jsp:include page="../components/nav-back-to-top.jsp" />
 <body>
+<jsp:include page="../components/nav-back-to-top.jsp" />
 
 	<div class="betting">
-		<h1 class="betting-title">betting</h1>
+	<div class="betting-container">
+		<h1>betするチップ枚数を選んでください</h1>
 		<div class="grid-area">
 			<div class="pos-a" id="tip-1">
 				<img src="<%=imgFileRootName%>1.png" alt="1チップ">
@@ -36,18 +38,19 @@
 			<div class="pos-f"></div>
 		</div>
 
-		<div class="div-betting-form">
+		<div class="betting-form-container">
 			<form class="betting-form"
 				action="<%=request.getContextPath()%>/BJServlet" method="post">
 				<input class="input" type="text" value="0" id="betting-form"
 					name="betPoint">
-				<button type="submit" class="betting-form-button">bet</button>
+				<button type="submit">bet</button>
 			</form>
 			<button class="reset-button" id="reset-button">Reset</button>
 		</div>
+		</div>
 	</div>
-	<script src="<%=request.getContextPath()%>/view/game/app/game.js">
 
-	</script>
+
+	<script src="<%=request.getContextPath()%>/view/game/app/game.js"></script>
 </body>
 </html>

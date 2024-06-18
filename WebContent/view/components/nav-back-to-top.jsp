@@ -23,6 +23,7 @@
 	String msg2 = (String) request.getAttribute("msg2");
 %>
 <body>
+	<div class="header-container">
 	<nav class="header">
 	<div>現在のチップ枚数: <%=user.getNumberOfTips()%></div>
 	<div><%
@@ -49,6 +50,7 @@
 	</div>
 	<div><a href="<%=request.getContextPath()%>/ToGameTopServlet">ゲームトップへ戻る</a></div>
 	</nav>
+	</div>
 
 </body>
 </html>

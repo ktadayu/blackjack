@@ -1,7 +1,14 @@
 @charset "UTF-8";
 
-.header{
+.header-container{
 	position:relative;
+	height:10vh;
+	width:100vw;
+}
+
+.header{
+	position:fixed;
+	top:0;
 	display:flex;
 /*	background-color:rgba(24,109,67); */
 	background-color:#176c42;
@@ -11,6 +18,8 @@
 	align-items:center;
 	justify-content:space-between;
 	box-shadow: 0px 31px 96px 16px #0c1a0a;
+	width:100%;
+	left:0;
 }
 
 .header.loginpage{

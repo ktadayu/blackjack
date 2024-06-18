@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Login</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/view/users/style/style.css">
@@ -12,18 +13,13 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
 	rel="stylesheet">
-<%
-String message = (String) request.getAttribute("message");
-%>
 </head>
 <body>
-	   
+
+<jsp:include page="../components/nav-top.jsp" />
 	<section class="section">
 		     
 		<h1 class="section-headline">ログイン</h1>
-		<%if(message != null){ %>
-		<h3><%=message %></h3>
-		<%} %>
 		     
 		<form action="<%=request.getContextPath()%>/LoginServlet"
 			method="post" class="form">
@@ -44,8 +40,10 @@ String message = (String) request.getAttribute("message");
 			</table>
 			       
 			<div class="form-button">
+				         
 				<button class="button button-submission" type="submit">   
-					        ログインする          </button> 
+					        ログインする          </button>
+				       
 			</div>
 			     
 		</form>

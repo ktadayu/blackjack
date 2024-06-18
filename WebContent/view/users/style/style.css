@@ -1,50 +1,27 @@
 @charset "UTF-8";
 
 body {
-	font-family: "Noto Sans JP", sans-serif;
+	font-family: "Noto Serif JP", serif;
 	font-optical-sizing: auto;
 	font-weight: <weight>;
 	font-style: normal;
 	background-color: #f7f7f7;
-	color: ##1c1c1c;
-	display: flex;
-	justify-content: center;
+	color: #1c1c1c;
 }
 
 section {
-	padding: 30px 15px;
+
 }
 
-a:link {
-	color: #ffff;
-}
-
-a:visited {
-	color: #ffff;
-}
-
-a:hover {
-	color: #ff0000;
-}
-
-a:active {
-	color: #ff8000;
-}
 
 .section-headline {
 	text-align: center;
 	font-size: 40px;
 }
 
-.form {
-	border-radius: 5px;
-	padding: 10px;
-	border: 2px solid #cccc;
-	min-width: 400px;
-}
-
 .form-table {
-
+    display: flex;
+    justify-content: center;
 }
 
 .form-table-headline {
@@ -52,7 +29,7 @@ a:active {
 }
 
 .form-table-data {
-	padding: 10px;
+
 }
 
 .input {
@@ -70,28 +47,11 @@ button {
 	display: inline-block;
 	background-color: #333;
 	color: #ffff;
-	font-weight:bold;
 	border-radius: 10px;
-	/* box-shadow: 3px 3px 0 #333; */
+	box-shadow: 3px 3px 0 #333;
+    margin: 20px;
 	padding: 10px 30px;
-	box-shadow: 1px 3px 3px 3px #ADADAD;
-	transition: all 0.2s;
 }
-
-button:active{
-    transform:translate(3px, 3px);
-    box-shadow:none;
-}
-
-button:hover{
-	color: rgb(58, 41, 204);
-	box-shadow: 0 0 #4C0F13;
-}
-
-
-
-
-
 
 .button-submission {
 
