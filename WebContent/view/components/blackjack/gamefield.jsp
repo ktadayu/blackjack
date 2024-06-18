@@ -27,8 +27,6 @@ img {
 			<!--  ディーラーの手札 -->
 				<jsp:include page="./hands/dealerhand.jsp" />
 			<div class="message">
-		<!-- 勝敗等の表示 -->
-			<jsp:include page="./message.jsp" />
 		</div>
 
 			<!-- プレイヤーの手札 -->
