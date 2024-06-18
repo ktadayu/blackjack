@@ -17,19 +17,21 @@
 	margin:0;
 	align-items:center;
 	justify-content:space-between;
-	box-shadow: 0px 31px 96px 16px #0c1a0a;
+/*	box-shadow: 0px 31px 96px 16px #0c1a0a; */
+	box-shadow: 0px 8px 15px -5px #071c19;
+	border-radius: 3px;
 	width:100%;
 	left:0;
 }
 
-.header.loginpage{
+.header.toppage{
 	justify-content:flex-end;
 }
+
 
 .header.mypage{
 	justify-content:flex-end;
 }
-
 .header.mypage > a:nth-child(1){
 	padding-right:20px;
 }
@@ -39,7 +41,9 @@
 .header.mypage > a:nth-child(3){
 	padding-right:20px;
 }
-
+.header.loginpage{
+	justify-content:flex-end;
+}
 .header.loginpage > a:nth-child(1){
 	paddig-right:120px;
 }
@@ -50,9 +54,9 @@
 }
 
 
-.header > div{
+.header > div,a{
 	font-weight:700;
-	font-size:24px;
+	font-size:18px;
 }
 
 .header > div > a{
@@ -60,26 +64,30 @@
 }
 
 .header > div:nth-child(1){
-	padding-left:10px;
+	padding-left:5%;
+	padding-right:5%;
+	color: #f1ebeb
 }
 .header > div:nth-child(2){
-
+		padding-right:5%;
+		padding-left:5%;
 }
 .header > div:nth-child(3){
-	padding-right:100px;
+	padding-right:5%;
+	padding-left:5%;
 }
+
 
 a {
 	 text-decoration: none;
 }
 
 a:link {
-	color: #ffff;
-
+	color: #f1ebeb
 }
 
 a:visited {
-	color: #ffff;
+	color: #f1ebeb
 }
 
 a:hover {

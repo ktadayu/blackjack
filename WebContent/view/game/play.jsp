@@ -23,10 +23,8 @@
 %>
 </head>
 <body>
-	<header>
 	<!-- ゲームナビゲーションバー -->
 	<jsp:include page="../components/nav-back-to-top.jsp" />
-	</header>
 
 	<section class="game-board">
 	<!--  カードを展開する -->

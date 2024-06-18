@@ -7,7 +7,7 @@
 <% User USER = (User) session.getAttribute("USER"); %>
 <div class="header-container">
 	<% if(USER != null){ %>
-	<div class="header">
+	<div class="header toppage">
 		<a href="<%=request.getContextPath()%>/view/users/my_history.jsp">マイページ</a>
 		<a href="<%=request.getContextPath()%>/LoginServlet">ログアウト</a>
 	</div>

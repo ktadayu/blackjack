@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>登録画面</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/view/users/style/style.css">
@@ -17,6 +18,8 @@
 %>
 </head>
 <body>
+<jsp:include page="../components/nav-top.jsp" />
+
 	<section class="section">
 		<h1 class="section-headline">登録</h1>
 

@@ -10,6 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BlackJack</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/view/game/style/style.css">
@@ -25,7 +26,24 @@
 %>
 </head>
 <body>
+
 <jsp:include page="../components/nav-top.jsp" />
+
+  <div id="animation-container">
+      <div class="animate-title">
+        <span class="char">B</span>
+        <span class="char">L</span>
+        <span class="char">A</span>
+        <span class="char">C</span>
+        <span class="char">K</span>
+        <span class="char">J</span>
+        <span class="char">A</span>
+        <span class="char">C</span>
+        <span class="char">K</span>
+      </div>
+    </div>
+
+<section class="global-section">
 	<section>
 		<div class="section-greeting">
 			<%
@@ -81,9 +99,10 @@
 			<!-- jsp記述 -->
 		</div>
 	</section>
+	</section>
 	<footer class="footer">
-		<a href="<%=request.getContextPath()%>/UserServlet">管理者ページ</a> <a
-			href="<%=request.getContextPath()%>/view/users/leave.jsp">ユーザー消去</a>
+		<a href="<%=request.getContextPath()%>/UserServlet">管理者ページ</a>
 	</footer>
+<script src="<%=request.getContextPath()%>/view/game/app/animation.js"></script>
 </body>
 </html>

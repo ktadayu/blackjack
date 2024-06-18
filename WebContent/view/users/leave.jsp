@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ユーザーの削除</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/view/users/style/style2.css">
