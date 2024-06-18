@@ -21,9 +21,8 @@
 	List<User> users = (List<User>) request.getAttribute("USERLIST");
 %>
 </head>
-<jsp:include page="../components/nav-game.jsp" />
-<jsp:include page="../components/nav-top.jsp" />
 <body>
+<jsp:include page="../components/nav-top.jsp" />
 	<section>
 		<div class="user-container">
 			<h1 class="list-header">ユーザー一覧</h1>

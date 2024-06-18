@@ -10,6 +10,7 @@
 	Hello BlackJack
 	<%
 	String msg = (String) request.getAttribute("message");
+
 	%>
 	<div class="header-notice">
 		<%

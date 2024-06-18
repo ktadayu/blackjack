@@ -24,7 +24,7 @@
 <body>
 	<header>
 	<!-- ゲームナビゲーションバー -->
-	<jsp:include page="../components/nav-game.jsp" />
+	<jsp:include page="../components/nav-back-to-top.jsp" />
 	</header>
 
 	<!--  カードを展開する -->

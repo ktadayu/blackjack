@@ -24,8 +24,8 @@
 	String msg = (String) request.getAttribute("message");
 %>
 </head>
-<jsp:include page="../components/nav-top.jsp" />
 <body>
+<jsp:include page="../components/nav-top.jsp" />
 
 	<section>
 		<div class="section-greeting">

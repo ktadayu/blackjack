@@ -24,7 +24,6 @@
 %>
 </head>
 <div class="header">
-	<jsp:include page="../components/nav-game.jsp" />
 	<jsp:include page="../components/nav-top.jsp" />
 </div>
 <body>

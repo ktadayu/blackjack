@@ -17,7 +17,6 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
 	rel="stylesheet">
 </head>
-<jsp:include page="../components/nav-game.jsp" />
 <jsp:include page="../components/nav-top.jsp" />
 <body>
 	   
