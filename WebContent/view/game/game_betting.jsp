@@ -22,6 +22,9 @@
 <body>
 <jsp:include page="../components/nav-back-to-top.jsp" />
 
+	<diV class="transitional-animation">
+	</diV>
+
 	<div class="betting">
 	<div class="betting-container">
 		<h1>betするチップ枚数を選んでください</h1>
@@ -49,6 +52,8 @@
 		</div>
 		</div>
 	</div>
+
+
 
 
 	<script src="<%=request.getContextPath()%>/view/game/app/game.js"></script>

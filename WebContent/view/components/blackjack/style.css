@@ -2,19 +2,6 @@
 /*
 * ゲーム画面
 */
-.dealerhand {
-	position: relative;
-	margin: 0px auto 50px;
-	text-align: center;
-}
-
-.playerhands {
-	display: flex;
-	justify-content: center;
-	position: relative;
-	margin: 50px auto 0px;
-	text-align: center;
-}
 
 .div-opt-game {
 	display: flex;
@@ -26,13 +13,3 @@ form {
 	justify-content: center;
 }
 
-.section-gamefield {
-	display: flex;
-	justify-content: center;
-	padding: 0px 0px 0px 0px;
-}
-
-.message {
-	padding-right: 100px;
-	margin: auto 0;
-}

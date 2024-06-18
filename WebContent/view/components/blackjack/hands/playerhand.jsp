@@ -20,9 +20,11 @@
 %>
 <body>
 
+<div class="playerhand-container">
 	<div class="player" id="playerhand1"
 		<% if (player1 != null && player1.getHand() != null) {%>
-		style="display: none" <%}%> >
+		style="display: none"
+		<%}%> >
 		<div class="playerhand1">
 			<h3>プレイヤー手札:</h3>
 			<%
@@ -32,21 +34,20 @@
 			<%
 				}
 			%>
-		</div>
-		<div class="player1-sum">
-		<h4>
-			合計
-			<%=player.getHand().totalValue()%>
-		</h4>
+			<h4 class="player1-sum">
+					合計
+					<%=player.getHand().totalValue()%>
+			</h4>
+
 		</div>
 
 	</div>
 
 	<!-- スプリット時 -->
-	<div class="players">
 	<%
 		if (player1 != null && player1.getHand() != null && player2.getHand() != null) {
 	%>
+	<div class="players" >
 	<div class="playerhands-2">
 		<div class="hand1">
 			<h3>プレイヤー手札1:</h3>
@@ -81,9 +82,13 @@
 			<jsp:include page="./hit-or-stand-hand2.jsp" />
 		</div>
 	</div>
+
+	</div>
 	<%
-		}
+	}
 	%>
+
+
 	</div>
 
 </body>

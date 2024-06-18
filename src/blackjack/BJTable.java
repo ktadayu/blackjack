@@ -47,8 +47,10 @@ public class BJTable {
 
 		//山札シャッフル
 		if(firstOrNot) {
-		deck.shuffle();
+		//deck.shuffle();
+		deck.deckToTestSplit();
 		}
+
 		//		if(firstOrNot) {
 		//		deck.deckToTestSplit();
 		//		}

@@ -28,9 +28,8 @@ img {
 				<jsp:include page="./hands/dealerhand.jsp" />
 
 			<!-- プレイヤーの手札 -->
-			<div class="playerhands">
 				<jsp:include page="./hands/playerhand.jsp" />
-			</div>
+
 		</div>
 	</section>
 

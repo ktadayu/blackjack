@@ -1,5 +1,31 @@
 @charset "UTF-8";
 
-body{
+.dealer{
+    position:relative;
+    display:flex;
+    justify-content:center;
+}
 
+.dealer  h3 {
+	text-align:center;
+}
+
+.dealerhand{
+    margin:0;
+}
+
+.dealer-sum{
+    position:absolute;
+    bottom:0;
+    left:0;
+	right:0;
+}
+
+.playerhand1{
+	text-align:center;
+}
+
+.playerhands-2{
+	display:flex;
+	justify-content:space-around;
 }
