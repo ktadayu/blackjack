@@ -38,34 +38,34 @@
 			<table class="form-table">
 				<tr>
 					<th class="form-table-headline"><label for="id">ユーザー名</label></th>
-					<td class="form-table-data">              <input type="text"
-						class="input" name="user_name" id="id" />          
+					<td class="form-table-data">
+					<input type="text" class="input" name="user_name" id="id" required />
 					</td>
 				</tr>
 				<tr>
-					<th class="form-table-headline"><label for="pass">
+					<th class="form-table-headline"><label for="pass1">
 							パスワード </label></th>
-					<td class="form-table-data">              <input type="text"
-						class="input" name="user_password1" id="pass1" />            
+					<td class="form-table-data">
+					<input type="text" class="input" name="user_password1" id="pass1" required />
 					</td>
 				</tr>
 				<tr>
-					<th class="form-table-headline"><label for="pass">
+					<th class="form-table-headline"><label for="pass2">
 							パスワード(確認用) </label></th>
-					<td class="form-table-data">              <input type="text"
-						class="input" name="user_password2" id="pass2" />            
+					<td class="form-table-data">
+					<input type="text" class="input" name="user_password2" id="pass2" required />
 					</td>
 				</tr>
 				<tr>
 					<th class="form-table-headline"><label for="nickname">
 							ニックネーム(表示名)</label></th>
-					<td class="form-table-data">              <input type="text"
-						class="input" name="user_nickname" id="nickname" />            
+					<td class="form-table-data">
+					<input type="text" class="input" name="user_nickname" id="nickname" required />
 					</td>
 				</tr>
 			</table>
-			<div class="form-button">
-				<button class="button button-submission" type="submit">登録</button>
+			<div class="">
+				<button class="form-button" type="submit">登録</button>
 			</div>
 		</form>
 	</section>

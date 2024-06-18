@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>戦績</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/view/users/style/style2.css">
+	href="<%=request.getContextPath()%>/view/users/style/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -26,7 +26,11 @@
 </head>
 <body>
 <jsp:include page="../components/nav-mypage.jsp" />
-	<div>
+
+<div class="history-container">
+	<div class="history">
+
+	<h3>戦績</h3>
 		<table>
 			<tr>
 				<th class="table-header">No</th>
@@ -53,5 +57,10 @@
 		</table>
 	</div>
 
+	<div class="stats">
+	<h3>スタッツ</h3>
+	</div>
+
+</div>
 </body>
 </html>

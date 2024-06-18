@@ -13,11 +13,11 @@
 <body>
 <%if(!FlagOwner.checkSplitting()){ %>
 	<form action="<%=request.getContextPath()%>/BJServlet" method="get">
-		<button type="submit" value="hit" name="opt"
+		<button class="form-button" type="submit" value="hit" name="opt"
 			<%if (FlagOwner.checkUsualGameEnd()) {%> style="display:none" <%}%>>hit</button>
-		<button type="submit" value="stand" name="opt"
+		<button class="form-button" type="submit" value="stand" name="opt"
 			<%if (FlagOwner.checkUsualGameEnd()) {%> style="display:none" <%}%>>stand</button>
-		<button type="submit" value="split" name="opt" onClick="splitHand()"
+		<button class="form-button" type="submit" value="split" name="opt" onClick="splitHand()"
 			id="split-button" <%if (!FlagOwner.checkSplittable()) {%> style="display: none" <%}%>>split</button>
 	</form>
 	<%} %>

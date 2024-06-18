@@ -18,45 +18,37 @@
 
 <jsp:include page="../components/nav-top.jsp" />
 
-
+<section class="global-section">
 	<section class="section">
-		     
 		<h1 class="section-headline">ログイン</h1>
-		     
 		<form action="<%=request.getContextPath()%>/LoginServlet"
 			method="post" class="form">
 			       
 			<table class="form-table">
 				<tr>
-					<td class="form-table-data">              <input type="text"
-						class="input" name="user_name" id="id" placeholder="ユーザー名" />    
-						     
+					<td class="form-table-data">
+					<input type="text" class="input" name="user_name" id="id" placeholder="ユーザー名" />
 					</td>
 				</tr>
 				<tr>
-					<td class="form-table-data">              <input
-						type="password" class="input" name="user_password" id="pass"
-						placeholder="パスワード" />            
+					<td class="form-table-data">
+					<input type="password" class="input" name="user_password" id="pass" placeholder="パスワード" />
 					</td>
 				</tr>
 			</table>
-			       
-			<div class="form-button">
-				         
-				<button class="button button-submission" type="submit">   
-					        ログインする          </button>
-				       
+			<div>
+				<button class="form-button" type="submit">ログインする</button>
 			</div>
-			     
 		</form>
 		<!-- 登録を促す画面 -->
-		<div class="form-button">
+		<div>
 			<h4>-----または-----</h4>
 			<!-- 線をcssで作る -->
-			<button type="submit" class="button button-signin"
+			<button type="submit" class="form-button"
 				onclick="location.href='<%=request.getContextPath()%>/view/users/sign_up.jsp'">登録
 			</button>
 		</div>
 	</section>
+</section>
 </body>
 </html>

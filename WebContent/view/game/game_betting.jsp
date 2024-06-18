@@ -43,9 +43,9 @@
 				action="<%=request.getContextPath()%>/BJServlet" method="post">
 				<input class="input" type="text" value="0" id="betting-form"
 					name="betPoint">
-				<button type="submit">bet</button>
+				<button class="form-button" type="submit">bet</button>
 			</form>
-			<button class="reset-button" id="reset-button">Reset</button>
+			<button class="form-button" id="reset-button">Reset</button>
 		</div>
 		</div>
 	</div>

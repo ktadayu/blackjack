@@ -97,3 +97,62 @@ a:hover {
 a:active {
 	color: #ff8000;
 }
+
+
+/*　携帯用のメニューとか　*/
+
+.btn-for-mobile{
+    position:absolute;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+}
+
+.btn-for-mobile > span{
+    display: inline-block;
+    background-color: black;
+    width: 25px;
+    height: 4px;
+    border-radius: 9999;
+    transition: all 3s;
+}
+
+.btn-for-mobile.open{
+
+}
+
+.btn-for-mobile > span:nth-child(1){
+    margin-bottom:5px;
+}
+
+.btn-for-mobile.open span:nth-child(1){
+    transform: translateY(8px) rotate(45deg);
+    background-color: black;
+}
+
+.btn-for-mobile > span:nth-child(2){
+    margin-bottom:5px;
+}
+
+.btn-for-mobile.open span:nth-child(2){
+    transform: translateX(-10px) rotateY(360deg);
+    opacity: 0;
+}
+
+
+
+.btn-for-mobile > span:nth-child(3){
+
+}
+
+.btn-for-mobile.open span:nth-child(3){
+    transform: translateY(-8px) rotate(135deg);
+    background-color: black;
+}
+
+button{
+    margin: 10px;
+}
+

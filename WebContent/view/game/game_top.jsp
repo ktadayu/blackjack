@@ -57,12 +57,12 @@
 				ようこそ
 				<%=USER.getUserNickname()%>さん
 			</h2>
-			<form class="game_start_form"
+			<form class=""
 				action="<%=request.getContextPath()%>/view/game/game_betting.jsp">
 				<!-- formかaにするかで迷う -->
 				<div class="div_game_start_button">
-					<button class="game_start_button" type="submit">
-						ゲームをはじめる(ディール？)</button>
+					<button class="form-button" type="submit">
+						ゲームをはじめる</button>
 				</div>
 			</form>
 		</div>

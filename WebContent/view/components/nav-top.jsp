@@ -17,4 +17,9 @@
 		<a href="<%=request.getContextPath()%>/">ブラックジャックのルール</a>
 	</div>
 	<% } %>
+	<button class="btn-for-mobile">
+		<span></span>
+		<span></span>
+		<span></span>
+	</button>
 </div>
