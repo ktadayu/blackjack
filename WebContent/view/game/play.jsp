@@ -42,5 +42,9 @@
 	<jsp:include page="../components/blackjack/replay.jsp" />
 	</div>
 	</section>
+		<script
+		src="<%=request.getContextPath()%>/view/components/blackjack/hands/app.js">
+	</script>
+
 </body>
 </html>

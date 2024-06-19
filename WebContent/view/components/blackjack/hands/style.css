@@ -37,3 +37,31 @@
 	margin-bottom:5pxl
 }
 
+
+.dealerhand > img{
+	transition: all 0.3s;
+}
+
+.dealerhand > img:nth-child(4){
+	transform: translate(400px,-400px);
+}
+
+.dealerhand > img:nth-child(5){
+	transform: translate(400px,-400px);
+}
+
+.dealerhand > img:nth-child(6){
+	transform: translate(400px,-400px);
+}
+
+.dealerhand > img:nth-child(7){
+	transform: translate(400px,-400px);
+}
+
+.dealerhand > img:nth-child(8){
+	transform: translate(400px,-400px);
+}
+
+.dealerhand > img:nth-child(9){
+	transform: translate(400px,-400px);
+}

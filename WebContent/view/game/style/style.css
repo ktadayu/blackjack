@@ -263,12 +263,12 @@ grid area
 .animation-characters.viewing .character{
     display: inline-block;
     animation-name: top-animation;
+    animation-iteration-count: 1;
     animation-duration: 2s;
+    animation-delay: 0s;
     animation-timing-function: cubic-bezier(.73,.29,.58,.93);
     animation-fill-mode: both;
     animation-direction: normal;
-    animation-iteration-count: 1;
-    animation-delay: 0s;
 }
 
 .animation-characters.viewing .character:nth-child(1){

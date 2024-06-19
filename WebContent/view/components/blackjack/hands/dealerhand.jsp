@@ -52,9 +52,7 @@
 		</div>
 		</div>
 	</div>
-	<script
-		src="<%=request.getContextPath()%>/view/components/blackjack/hands/app.js">
-	</script>
+
 
 </body>
 </html>

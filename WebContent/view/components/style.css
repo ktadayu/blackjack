@@ -24,9 +24,9 @@
 	left:0;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 450px) {
   .header{
-    display: none;
+	
   }
 }
 
@@ -118,7 +118,7 @@ a:active {
 	background-color:transparent;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 450px) {
   .btn-for-mobile {
     display: none;
   }

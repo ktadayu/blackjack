@@ -21,7 +21,9 @@
 <%
 	User USER = (User) session.getAttribute("USER");
 	HistoryDao historyDao = new HistoryDao();
-	List<History> historyList = historyDao.selectAllHistory(USER);
+	HistoryDao historyDao_2 = new HistoryDao();
+	List<History> historyList = historyDao.selectHistory(USER);
+	List<User> historyList_2 = historyDao_2.selectTopRateUsers();
 %>
 </head>
 <body>
@@ -30,7 +32,7 @@
 <div class="history-container">
 	<div class="history">
 
-	<h3>戦績</h3>
+	<h3>最近の戦績(100戦)</h3>
 		<table>
 			<tr>
 				<th class="table-header">No</th>
@@ -59,6 +61,14 @@
 
 	<div class="stats">
 	<h3>スタッツ</h3>
+		<dl>
+			<dt>ニックネーム</dt>
+			<dd><%=USER.getUserNickname()  %></dd>
+			<dt>勝利数</dt>
+			<dd>5</dd>
+			<dt>勝率</dt>
+			<dd>57%</dd>
+		</dl>
 	</div>
 
 </div>

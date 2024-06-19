@@ -36,6 +36,33 @@ public class HistoryDao extends BaseDao {
 	}
 
 	/*
+	 * 戦績最新100件
+	 */
+	public List<History> selectHistory(User user) throws MyException {
+
+		List<History> historyList = new ArrayList<>();
+
+		try {
+			String sql = "select * from score_history where `user_id` = ? order by datetime desc limit 100";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, user.getUserId());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				int historyId = rs.getInt("history_id");
+				int amountOfChanges = rs.getInt("amount_of_changes");
+				String time = rs.getString("timestamp");
+				History history = new History(historyId, amountOfChanges, time);
+				historyList.add(history);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MyException("リスト取得について予期せぬ失敗");
+		}
+
+		return historyList;
+	}
+
+	/*
 	 * 全戦績の取得
 	 */
 	public List<History> selectAllHistory(User user) throws MyException {
@@ -62,7 +89,7 @@ public class HistoryDao extends BaseDao {
 		return historyList;
 	}
 
-	//勝率を計算し勝率の降順で5つ取得する
+	//勝率を計算し勝率の降順で取得
 	public List<User> selectTopRateUsers() throws MyException {
 
 		List<User> userList = new ArrayList<>();
@@ -77,7 +104,7 @@ public class HistoryDao extends BaseDao {
 					"inner join users\r\n" +
 					"on users.user_id = score_history.user_id\r\n" +
 					"group by score_history.user_id\r\n" +
-					"order by rate desc limit 5;";
+					"order by rate desc;";
 
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
