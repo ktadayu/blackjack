@@ -13,9 +13,9 @@
 
 	<form action="<%=request.getContextPath()%>/BJSplitServlet"
 		method="post">
-		<button class="form-button" type="submit" value="hit" name="opt2"
+		<button class="form-button" type="submit" value="hit" name="opt1"
 			<%if (FlagOwner.checkPlayer1End()) {%> style="display:none" <%}%>>hit</button>
-		<button class="form-button" type="submit" value="stand" name="opt2"
+		<button class="form-button" type="submit" value="stand" name="opt1"
 			<%if (FlagOwner.checkPlayer1End()) {%> style="display:none" <%}%>>stand</button>
 	</form>
 

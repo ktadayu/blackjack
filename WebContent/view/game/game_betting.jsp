@@ -32,20 +32,21 @@
 			<div class="pos-a" id="tip-1">
 				<img src="<%=imgFileRootName%>1.png" alt="1チップ">
 			</div>
-			<div class="pos-d" id="tip-10">
-				<img src="<%=imgFileRootName%>10.png" alt="10チップ">
-			</div>
 			<div class="pos-e" id="tip-5">
 				<img src="<%=imgFileRootName%>5.png" alt="5チップ">
+			</div>
+			<div class="pos-d" id="tip-10">
+				<img src="<%=imgFileRootName%>10.png" alt="10チップ">
 			</div>
 			<div class="pos-f"></div>
 		</div>
 
 		<div class="betting-form-container">
-			<form class="betting-form"
-				action="<%=request.getContextPath()%>/BJServlet" method="post">
+			<form action="<%=request.getContextPath()%>/BJServlet" method="post">
+			 <div class="betting-form">
 				<input class="input" type="text" value="0" id="betting-form"
 					name="betPoint">
+			 </div>
 				<button class="form-button" type="submit">bet</button>
 			</form>
 			<button class="form-button" id="reset-button">Reset</button>

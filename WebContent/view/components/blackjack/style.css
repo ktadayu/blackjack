@@ -3,6 +3,11 @@
 * ゲーム画面
 */
 
+img {
+	width: 80px;
+	height: 120px
+}
+
 .div-opt-game {
 	display: flex;
 	justify-content: center;

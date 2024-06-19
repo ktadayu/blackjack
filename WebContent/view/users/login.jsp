@@ -23,7 +23,6 @@
 		<h1 class="section-headline">ログイン</h1>
 		<form action="<%=request.getContextPath()%>/LoginServlet"
 			method="post" class="form">
-			       
 			<table class="form-table">
 				<tr>
 					<td class="form-table-data">

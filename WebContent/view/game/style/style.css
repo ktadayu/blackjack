@@ -5,6 +5,15 @@ body {
 	margin:0;
 	background-color: #ffff;
 	color:#ffff;
+	overflow:hidden;
+}
+
+@media screen and (max-width: 450px) {
+body {
+	overflow:visible;
+/*	background-color:#176c42; */
+	background-color:#176c;
+  }
 }
 
 .header {
@@ -140,8 +149,16 @@ grid area
 }
 
 /*
-    betボタン
-    */
+    beページ
+ */
+
+ @media screen and (max-width: 700px) {
+ img {
+	width: 120px;
+	height: 120px
+}
+}
+
 .betting {
 	position:relative;
 	text-align: center;
@@ -163,6 +180,14 @@ grid area
 	top:50px;
 }
 
+@media screen and (max-width: 700px) {
+
+.betting-container > h1{
+	font-size: 1em;
+	padding:10px;
+}
+}
+
 .betting-form-container {
 	position: relative;
 	text-align: center;
@@ -173,6 +198,15 @@ grid area
 	align-items: center;
 	text-align: center;
 	padding: 40px 0px;
+}
+
+@media screen and (max-width: 700px) {
+	.betting-form {
+	margin: 0 auto;
+	align-items: center;
+	text-align: center;
+	padding: 10px 0px;
+}
 }
 
 .betting-form > button {

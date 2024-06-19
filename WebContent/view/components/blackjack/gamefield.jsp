@@ -11,10 +11,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-img {
-	width: 80px;
-	height: 120px
-}
+
 </style>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/view/components/blackjack/style.css">

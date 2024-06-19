@@ -18,18 +18,7 @@
 %>
 <body>
 	<div class="dealer">
-		<div class="dealer-sum">
-			<%
-				if (FlagOwner.checkEndGame()) {
-			%>
-			<h4>
-				合計
-				<%=dealerHand.totalValue()%>
-			</h4>
-			<%
-				}
-			%>
-		</div>
+
 		<div class="dealerhand">
 			<h3>ディーラー手札:</h3>
 
@@ -49,6 +38,18 @@
 				}
 				}
 			%>
+			<div class="dealer-sum">
+			<%
+				if (FlagOwner.checkEndGame()) {
+			%>
+			<h4>
+				合計
+				<%=dealerHand.totalValue()%>
+			</h4>
+			<%
+				}
+			%>
+		</div>
 		</div>
 	</div>
 	<script
