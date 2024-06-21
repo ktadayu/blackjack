@@ -56,9 +56,19 @@ String msg = (String) request.getAttribute("message");
 		<div>
 			<h4>-----または-----</h4>
 			<!-- 線をcssで作る -->
+
+			<form action="<%=request.getContextPath()%>/view/users/sign_up.jsp"
+			method="post">
+			<input 	type="hidden" name="signUp" >
+			<button type="submit" class="form-button"  value="signUp">登録
+			</button>
+			</form>
+
+<!--
 			<button type="submit" class="form-button" value="signUp"
 				onclick="location.href='<%=request.getContextPath()%>/view/users/sign_up.jsp'">登録
 			</button>
+ -->
 		</div>
 	</section>
 </section>

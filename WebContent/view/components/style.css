@@ -51,14 +51,17 @@
 	justify-content:flex-end;
 }
 .header.loginpage > a:nth-child(1){
-	paddig-right:120px;
+	paddig-right:20px;
 }
 
 .header.loginpage > a:nth-child(2){
-	padding-right:50px;
-	padding-left:50px;
+	padding-right:20px;
+	padding-left:20px;
 }
 
+.header.loginpage > a:nth-child(3){
+	padding-right:20px;
+}
 
 .header > div,a{
 	font-weight:700;
@@ -82,7 +85,6 @@
 	padding-right:5%;
 	padding-left:5%;
 }
-
 
 a {
 	 text-decoration: none;
