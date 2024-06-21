@@ -23,7 +23,7 @@
 	HistoryDao historyDao = new HistoryDao();
 	HistoryDao historyDao_2 = new HistoryDao();
 	List<History> historyList = historyDao.selectHistory(USER);
-	List<User> historyList_2 = historyDao_2.selectTopRateUsers();
+	User userStats = historyDao_2.selectRate(USER);
 %>
 </head>
 <body>
@@ -63,11 +63,13 @@
 	<h3>スタッツ</h3>
 		<dl>
 			<dt>ニックネーム</dt>
-			<dd><%=USER.getUserNickname()  %></dd>
+			<dd><%=userStats.getUserNickname()  %></dd>
+			<dt>試合数</dt>
+			<dd><%=userStats.getNumOfPlays()  %></dd>
 			<dt>勝利数</dt>
-			<dd>5</dd>
+			<dd><%=userStats.getWins() %></dd>
 			<dt>勝率</dt>
-			<dd>57%</dd>
+			<dd><%=userStats.getRate() %></dd>
 		</dl>
 	</div>
 

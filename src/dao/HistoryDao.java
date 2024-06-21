@@ -89,7 +89,7 @@ public class HistoryDao extends BaseDao {
 		return historyList;
 	}
 
-	//勝率を計算し勝率の降順で取得
+	//全ユーザーの勝率を計算し勝率の降順で取得
 	public List<User> selectTopRateUsers() throws MyException {
 
 		List<User> userList = new ArrayList<>();
@@ -121,6 +121,35 @@ public class HistoryDao extends BaseDao {
 		}
 
 		return userList;
+	}
+
+	//特定のユーザーの勝率を取得
+
+	public User selectRate(User user) throws MyException {
+
+		User userStats = null;
+
+		try {
+			String sql = "select users.user_nickname, score_history.user_id, users.number_of_tips, sum(case when amount_of_changes > 0 then 1 else 0 end) as wins, count(*), sum(case when amount_of_changes > 0 then 1 else 0 end)/count(*) as rate from score_history inner join users on users.user_id = score_history.user_id where score_history.user_id = ?;";
+
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, user.getUserId());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				String user_nickname = rs.getString("user_nickname");
+				int tips = rs.getInt("number_of_tips");
+				int wins = rs.getInt("wins");
+				int numOfPlays = rs.getInt("count(*)");
+				float rate = rs.getFloat("rate");
+
+				userStats = new User(user_nickname, tips, wins ,numOfPlays , rate);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MyException("リスト取得について予期せぬ失敗");
+		}
+
+		return userStats;
 	}
 
 }

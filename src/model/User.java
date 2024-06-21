@@ -10,6 +10,11 @@ public class User implements Serializable{
 	private int number_of_tips;
 	private float rate;
 
+	//Stats管理用フィールド
+	//Userクラスに定義するのではなく、Statsという新しいクラスを定義するのも考える
+	private int wins;
+	private int numOfPlays;
+
 	//コンストラクタ
 	//new User(id, name, password, user_nickname, number_of_tips);
 	public User(int user_id, String user_name, String user_password, String user_nickname, int number_of_tips) {
@@ -35,6 +40,15 @@ public class User implements Serializable{
 	public User(String user_nickname, int number_of_tips, float rate) {
 		this.user_nickname = user_nickname;
 		this.number_of_tips = number_of_tips;
+		this.rate = rate;
+	}
+
+	//stats用
+	public  User(String user_nickname, int tips, int wins ,int numOfPlays ,float rate) {
+		this.user_nickname = user_nickname;
+		this.number_of_tips = tips;
+		this.wins = wins;
+		this.numOfPlays = numOfPlays;
 		this.rate = rate;
 	}
 
@@ -85,6 +99,20 @@ public class User implements Serializable{
 	 */
 	public int getUserId() {
 		return this.user_id;
+	}
+
+	/*
+	 * wins
+	 */
+	public int getWins() {
+		return this.wins;
+	}
+
+	/*
+	 * id
+	 */
+	public int getNumOfPlays() {
+		return this.numOfPlays;
 	}
 
 }
