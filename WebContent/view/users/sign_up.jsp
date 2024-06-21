@@ -46,14 +46,14 @@
 					<th class="form-table-headline"><label for="pass1">
 							パスワード </label></th>
 					<td class="form-table-data">
-					<input type="text" class="input" name="user_password1" id="pass1" required />
+					<input type="password" class="input" name="user_password1" id="pass1" required />
 					</td>
 				</tr>
 				<tr>
 					<th class="form-table-headline"><label for="pass2">
 							パスワード(確認用) </label></th>
 					<td class="form-table-data">
-					<input type="text" class="input" name="user_password2" id="pass2" required />
+					<input type="password" class="input" name="user_password2" id="pass2" required />
 					</td>
 				</tr>
 				<tr>

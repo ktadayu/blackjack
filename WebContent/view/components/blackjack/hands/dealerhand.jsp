@@ -22,13 +22,13 @@
 		<div class="dealerhand">
 			<h3>ディーラー手札:</h3>
 
-			<%
+			<% //
 				//ディーラー2枚目のカードを裏向きに表示させておくための場合分け
 				for (int i = 0; i < dealerHand.size(); i++) {
-					if (i == 1 && !FlagOwner.checkEndGame()) {
+					if (i == 1 && !FlagOwner.checkEndGame() ) {
 			%>
 			<img src="<%=request.getContextPath()%>/img/card_back.png"
-				alt="back of Card">
+				alt="back of Card" class="back-card <%if(FlagOwner.checkEndGame()){%> flip <% } %>">
 			<%
 				} else {
 			%>

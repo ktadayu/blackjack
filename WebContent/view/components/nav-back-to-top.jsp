@@ -9,6 +9,8 @@
 <%
 	Deck deck = (Deck) session.getAttribute("DECK");
 	User user = (User) session.getAttribute("USER");
+	String message = (String) request.getAttribute("message"); //エラー文
+	//勝敗に関するメッセージ
 	String msg = (String) request.getAttribute("msg");
 	String msg1 = (String) request.getAttribute("msg1");
 	String msg2 = (String) request.getAttribute("msg2");
@@ -17,26 +19,33 @@
 	<div class="header-container">
 	<nav class="header">
 	<div class="numOfTips">現在のチップ枚数: <%=user.getNumberOfTips()%></div>
-	<div>
+	<div class="messages">
 	<% //勝敗の表示  %>
+				<%
+			if (message != null) {
+			%>
+		<h4> <%=message %>	</h4>
+			<%
+			}
+			%>
 			<%
 			if (msg != null) {
 			%>
-		<span class="grid1"><%=msg %></span>
+		<span ><%=msg %></span>
 			<%
 			}
 			%>
 			<%
 				if (msg1 != null) {
 			%>
-		<span class="grid1"><%=msg1 %></span>
+		<span ><%=msg1 %></span>
 			<%
 			}
 			%>
 			<%
 				if (msg2 != null) {
 			%>
-		<span class="grid1"><%=msg2 %></span>
+		<span ><%=msg2 %></span>
 			<%
 			}
 			%>

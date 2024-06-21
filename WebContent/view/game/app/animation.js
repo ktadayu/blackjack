@@ -2,7 +2,9 @@ const container = document.querySelector(".animation-container");
 const globalSection = document.querySelector(".global-section");
 const animationCahracters = document.querySelector(".animation-characters");
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded",  () => {
+
+	if(container != null) {
 	animationCahracters.classList.add("viewing");
 	globalSection.style.opacity = 0;
 //  setTimeout(() => {
@@ -11,4 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	animationCahracters.addEventListener('animationend', () => {
 	  globalSection.style.opacity = 1;
 	})
+	}else{
+	globalSection.style.opacity = 1;
+	}
 });
+

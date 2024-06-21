@@ -120,7 +120,7 @@ public class BJServlet extends HttpServlet {
 			betPoint = Integer.parseInt(request.getParameter("betPoint"));
 			//bet額が不正な場合、ゲームトップへ戻るものとする。
 			if (betPoint > 10 || betPoint <= 0) {
-				sendMessage("bet額が不正です", "/ToGameTopServlet", request, response);
+				sendMessage("bet額が不正です", "/view/game/game_betting.jsp", request, response);
 				return;
 			}
 			session.setAttribute("BETPOINT", betPoint);

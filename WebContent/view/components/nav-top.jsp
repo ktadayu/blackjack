@@ -13,8 +13,8 @@
 	</div>
 	<% }else{ %>
 	<div class="header loginpage">
-		<a href="<%=request.getContextPath()%>/">このサイトについて</a>
-		<a href="<%=request.getContextPath()%>/">ブラックジャックのルール</a>
+		<a href="#">このサイトについて</a>
+		<a href="#">ブラックジャックのルール</a>
 	</div>
 	<% } %>
 	<button class="btn-for-mobile">

@@ -1,6 +1,4 @@
-
 'use strict'
-
 /*
  * bet画面
  */
@@ -49,16 +47,14 @@ tip_10.addEventListener('click', function (e) {
 
 
 
-let btn_2 = document.getElementById('reset-button');
-btn_2.addEventListener('click', function (e) {
-    i = 0;
-   // let counter = document.getElementById('betting-counter');
-    let form = document.getElementById('betting-form');
-   // counter.textContent = i;
-    form.value= i;
-}, false);
-
-
+//let btn_2 = document.getElementById('reset-button');
+//btn_2.addEventListener('click', function (e) {
+//    i = 0;
+//   // let counter = document.getElementById('betting-counter');
+//    let form = document.getElementById('betting-form');
+//   // counter.textContent = i;
+//    form.value= i;
+//}, false);
 
 /*
  *playing画面

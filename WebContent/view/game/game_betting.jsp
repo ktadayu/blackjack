@@ -48,8 +48,8 @@
 					name="betPoint">
 			 </div>
 				<button class="form-button" type="submit">bet</button>
+			<button type="reset" class="form-button" id="reset-button">Reset</button>
 			</form>
-			<button class="form-button" id="reset-button">Reset</button>
 		</div>
 		</div>
 	</div>

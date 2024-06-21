@@ -83,8 +83,18 @@ body {
 	font-size: 20px;
 }
 
-img{
+.section-greeting h3{
+	color:orangered
+}
+
+.betting-container img{
 	cursor:pointer;
+}
+
+betting-container img:hover{
+	position : relative;
+	top : 3px;
+	left : 3px;
 }
 
 .form-button {
@@ -346,6 +356,8 @@ transitional-animation.transition-start{
    	 opacity:0;
     }
 }
+
+
 
 
 

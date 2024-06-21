@@ -17,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="../components/nav-top.jsp" />
+<jsp:include page="../components/nav-mypage.jsp" />
 	<section class="section">
 
 		<h1 class="section-headline">ユーザーの削除</h1>

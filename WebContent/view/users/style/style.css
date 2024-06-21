@@ -58,3 +58,23 @@ text-align:center;
 	text-align:center;
 	font-size:1.5em;
 }
+
+
+table{
+	display:flex;
+	justify-content:center;
+}
+
+.table-header{
+	padding:10px;
+	font-weight:100;
+}
+
+th{
+	padding:5px;
+}
+
+.stats{
+	margin-right:100px;
+	margin-left:100px;
+}

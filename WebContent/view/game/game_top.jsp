@@ -29,6 +29,9 @@
 
 <jsp:include page="../components/nav-top.jsp" />
 
+<%
+	if (msg == null) {
+%>
   <div class="animation-container">
       <div class="animation-characters">
         <span class="character">B</span>
@@ -42,6 +45,7 @@
         <span class="character">K</span>
       </div>
     </div>
+ <% } %>
 
 <section class="global-section">
 	<section>

@@ -12,6 +12,9 @@
 
 .dealerhand{
     margin:0;
+	backface-visibility: hidden;
+	transform-style: preserve-3d;
+	perspective: 1000px;
 }
 
 .dealer-sum{
@@ -20,6 +23,7 @@
 
 .dealer-sum > h4{
 	margin:0;
+	opacity:0;
 }
 
 .playerhand1{
@@ -65,3 +69,31 @@
 .dealerhand > img:nth-child(9){
 	transform: translate(400px,-400px);
 }
+
+
+/* カードを裏返しにする　*/
+
+.back-card.flip{
+transform: rotateY(180deg);
+}
+
+.back-card::after {
+  content: '';
+  width: 19px;
+  height: 32px;
+  background-image: url("<%=imgFileRootName + dealerHand.get(1) %>.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.dealer-card-img-1::after {
+    content: "";
+    backface-visibility: hidden;
+    background-image: url('<%=imgFileRootName + dealerHand.get(i)%>.png');
+    transform: rotateY(180deg);
+}
+
+.flip {
+    transform: rotateY(180deg);
+}
+

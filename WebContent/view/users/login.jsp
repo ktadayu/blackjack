@@ -14,13 +14,26 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
 	rel="stylesheet">
 </head>
+
+<%
+String msg = (String) request.getAttribute("message");
+%>
+
 <body>
 
 <jsp:include page="../components/nav-top.jsp" />
 
 <section class="global-section">
+
 	<section class="section">
 		<h1 class="section-headline">ログイン</h1>
+			<%
+				if (msg != null) {
+			%>
+			<h3 class="alert"><%=msg%></h3>
+			<%
+				}
+			%>
 		<form action="<%=request.getContextPath()%>/LoginServlet"
 			method="post" class="form">
 			<table class="form-table">
@@ -43,7 +56,7 @@
 		<div>
 			<h4>-----または-----</h4>
 			<!-- 線をcssで作る -->
-			<button type="submit" class="form-button"
+			<button type="submit" class="form-button" value="signUp"
 				onclick="location.href='<%=request.getContextPath()%>/view/users/sign_up.jsp'">登録
 			</button>
 		</div>

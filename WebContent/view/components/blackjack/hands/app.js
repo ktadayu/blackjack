@@ -2,24 +2,29 @@
 //これをimportするjspにはこのボタンがない⇒play.jspにimportする
 const standBtn = document.querySelector(".form-button.stand");
 
-const dealerhand = document.querySelectorAll(".dealerhand img");
+const dealerHand = document.querySelectorAll(".dealerhand img");
+const dealerSum = document.querySelector(".dealer-sum h4")
 
 let count = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    setTimeout(() => {
-
-    	const setIntervalId = setInterval(() => {
-    		  console.log("Hello!");
-    		  count++;
-    		  console.log(count > 5);
-
-    		  if(count > 5){
-    		    	clearInterval(setIntervalId);
-    		    }
-    	},1000)
-
+  //１枚１秒で出す
+  dealerHand.forEach((img, index) => {
+	  count++
+    if (index > 1) {
+      //1秒遅らせる
+      setTimeout(() => {
+    	  console.log(index);
+        img.style.transform = "translate(0px,0px)";
+      }, index * 200);
+    }
+  });
+  //ゲームの途中でも呼び出されてエラーとなるので何とかする。
+  	setTimeout(()=> {
+  		dealerSum.style.opacity = 1;
+  	},dealerHand.length * 300);
+});
 
 //    	dealerhand.forEach((img,index) => {
 //    	    	  if(index > 1){
@@ -27,20 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
 //    	    	  }
 //    	      });
 //
-
-    }, 1000);
-  });
-
-
-
-
-
-
-
-
-
-
-
 
 //遷移で毎回呼び出される。
 //setTimeout(()=>{
