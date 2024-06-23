@@ -12,9 +12,6 @@
 
 .dealerhand{
     margin:0;
-	backface-visibility: hidden;
-	transform-style: preserve-3d;
-	perspective: 1000px;
 }
 
 .dealer-sum{
@@ -42,58 +39,63 @@
 }
 
 
-.dealerhand > img{
-	transition: all 0.3s;
+.dealerhand  img{
+	transition: transform 0.3s;
 }
 
-.dealerhand > img:nth-child(4){
-	transform: translate(400px,-400px);
-}
-
-.dealerhand > img:nth-child(5){
-	transform: translate(400px,-400px);
-}
-
-.dealerhand > img:nth-child(6){
-	transform: translate(400px,-400px);
-}
-
-.dealerhand > img:nth-child(7){
-	transform: translate(400px,-400px);
-}
-
-.dealerhand > img:nth-child(8){
-	transform: translate(400px,-400px);
-}
-
-.dealerhand > img:nth-child(9){
+.inline-block > img:nth-of-type(1){
 	transform: translate(400px,-400px);
 }
 
 
 /* カードを裏返しにする　*/
 
-.back-card.flip{
-transform: rotateY(180deg);
+.first-dealer-card{
+	display:inline-block;
 }
 
-.back-card::after {
-  content: '';
-  width: 19px;
-  height: 32px;
-  background-image: url("<%=imgFileRootName + dealerHand.get(1) %>.png");
-  background-size: cover;
-  background-repeat: no-repeat;
+.inline-block{
+	display:inline-block;
+	  vertical-align: top;
 }
 
-.dealer-card-img-1::after {
-    content: "";
+.card-container{
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.front-back-container{
+    display: inline-block;
+    position: relative;
+    transform-style: preserve-3d;
+    text-align: center;
+}
+
+.front-back-container img{
+	height:120px;
+	width: 90px;
+}
+
+.front-card, .back-card{
+    transition: all 1s;
+    position: absolute;
+    transform-origin: top center;
     backface-visibility: hidden;
-    background-image: url('<%=imgFileRootName + dealerHand.get(i)%>.png');
-    transform: rotateY(180deg);
+    transform-style: preserve-3d;
 }
 
-.flip {
-    transform: rotateY(180deg);
+.front-card{
+  transform: rotateY(-180deg);
 }
 
+.back-card.flipped{
+  transform: rotateY(180deg);
+  /* backface-visilityが効かない？何かおかしい*/
+  opacity:0;
+}
+
+.front-card.flipped{
+	transform: rotateY(0deg);
+}

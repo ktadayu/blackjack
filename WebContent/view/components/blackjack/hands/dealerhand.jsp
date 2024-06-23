@@ -21,38 +21,59 @@
 
 		<div class="dealerhand">
 			<h3>ディーラー手札:</h3>
+			<div class="card-container">
 
-			<% //
-				//ディーラー2枚目のカードを裏向きに表示させておくための場合分け
-				for (int i = 0; i < dealerHand.size(); i++) {
-					if (i == 1 && !FlagOwner.checkEndGame() ) {
-			%>
-			<img src="<%=request.getContextPath()%>/img/card_back.png"
-				alt="back of Card" class="back-card <%if(FlagOwner.checkEndGame()){%> flip <% } %>">
-			<%
-				} else {
-			%>
-			<img src="<%=imgFileRootName + dealerHand.get(i)%>.png"
-				alt="<%=dealerHand.get(i)%>" class="dealer-card-img-<%=i%>">
+				<%
+					//&& !FlagOwner.checkEndGame()
+					//ディーラー2枚目のカードを裏向きに表示させておくための場合分け
+					for (int i = 0; i < dealerHand.size(); i++) {
+				if(i == 0){
+				%>
+				<div class="first-dealer-card">
+					<img src="<%=imgFileRootName + dealerHand.get(i)%>.png"
+						alt="<%=dealerHand.get(i)%>" class="dealer-card-img-<%=i%>">
+				</div>
+				<%
+				}
+				if (i == 1) {
+				%>
+				<div class="front-back-container inline-block <%if(FlagOwner.checkEndGame()){ %> flip <% } %>">
+					<span class="front-card">
+					<img src="<%=imgFileRootName + dealerHand.get(i)%>.png"
+						alt="front of Card" class="card">
+					</span>
+					<span class="back-card"> <img
+						src="<%=request.getContextPath()%>/img/card_back.png"
+						alt="back of Card" class="card">
+					</span>
+				</div>
+				<img style="opacity: 0" />
+				<%
+					} else if (i > 1) {
+				%>
+				<div class="inline-block">
+					<img src="<%=imgFileRootName + dealerHand.get(i)%>.png"
+						alt="<%=dealerHand.get(i)%>" class="dealer-card-img-<%=i%>">
+				</div>
 			<%
 				}
 				}
 			%>
+
+			</div>
 			<div class="dealer-sum">
-			<%
-				if (FlagOwner.checkEndGame()) {
-			%>
-			<h4>
-				合計
-				<%=dealerHand.totalValue()%>
-			</h4>
-			<%
-				}
-			%>
-		</div>
+				<%
+					if (FlagOwner.checkEndGame()) {
+				%>
+				<h4>
+					合計
+					<%=dealerHand.totalValue()%>
+				</h4>
+				<%
+					}
+				%>
+			</div>
 		</div>
 	</div>
-
-
 </body>
 </html>
