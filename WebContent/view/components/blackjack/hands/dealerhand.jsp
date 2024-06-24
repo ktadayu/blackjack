@@ -37,7 +37,7 @@
 				}
 				if (i == 1) {
 				%>
-				<div class="front-back-container inline-block <%if(FlagOwner.checkEndGame()){ %> flip <% } %>">
+				<div class="front-back-container inline-block <%if(FlagOwner.checkEndGame() && !FlagOwner.checkBlackJack()){ %> flip <% } %>">
 					<span class="front-card">
 					<img src="<%=imgFileRootName + dealerHand.get(i)%>.png"
 						alt="front of Card" class="card">

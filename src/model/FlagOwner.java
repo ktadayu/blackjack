@@ -9,7 +9,7 @@ public class FlagOwner {
 	static Boolean endPlayer2 = false; //プレイヤー2の終了
 	static Boolean splittable = false; //split可能ならtrue
 	static Boolean splittingFlag = false; //split中のフラグ
-
+	static Boolean blackjack = false ;
 //チェックメソッド
 	public static Boolean checkEndGame() {
 		endGame = (endUsualGame && !splittingFlag) || (endPlayer1 && endPlayer2);
@@ -29,6 +29,9 @@ public class FlagOwner {
 	}
 	public static Boolean checkSplittable() {
 		return splittable;
+	}
+	public static Boolean checkBlackJack() {
+		return blackjack;
 	}
 
 
@@ -51,6 +54,9 @@ public class FlagOwner {
 	public static void validateSplit() {
 		splittingFlag = true;
 	}
+	public static void validateBlackJack() {
+		blackjack = true;
+	}
 
 
 	//false化
@@ -65,6 +71,7 @@ public class FlagOwner {
 		 endUsualGame = false;
 		 splittable = false;
 		 splittingFlag = false;
+		 blackjack = false;
 	}
 
 }

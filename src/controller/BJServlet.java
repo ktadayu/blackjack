@@ -144,6 +144,7 @@ public class BJServlet extends HttpServlet {
 			request.setAttribute("msg", "ブラックジャック！");
 			//ゲーム終了を宣言
 			FlagOwner.validateUsualGameEnd();
+			FlagOwner.validateBlackJack();
 		}
 
 		//split可能判定
