@@ -13,7 +13,7 @@
 /*	background-color:rgba(24,109,67); */
 	background-color:#176c42;
 	width:100vw;
-	height:80px;
+	height:11vh;
 	margin:0;
 	align-items:center;
 	justify-content:space-between;
@@ -30,23 +30,24 @@
   }
 }
 
-.header.toppage{
-	justify-content:flex-end;
+.tips{
+	position:absolute;
+	left:0;
+}
+
+.header > .toppage{
+	position:absolute;
+	right:0;
 }
 
 
 .header.mypage{
 	justify-content:flex-end;
 }
-.header.mypage > a:nth-child(1){
+.header.mypage > a{
 	padding-right:20px;
 }
-.header.mypage > a:nth-child(2){
-	padding-right:20px;
-}
-.header.mypage > a:nth-child(3){
-	padding-right:20px;
-}
+
 .header.loginpage{
 	justify-content:flex-end;
 }
@@ -172,6 +173,12 @@ button{
     margin: 10px;
 }
 
-.messages{
-	color:orangered
+.messages  span{
+	font-weight:bold;
+	color:orangered;
+}
+
+.messages > h4{
+	margin:0;
+	padding:0;
 }

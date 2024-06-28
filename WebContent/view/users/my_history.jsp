@@ -63,7 +63,7 @@
 	<h3>スタッツ</h3>
 		<dl>
 			<dt>ニックネーム</dt>
-			<dd><%=userStats.getUserNickname()  %></dd>
+			<dd><%=userStats.getUserNickname() == null? USER.getUserNickname() : userStats.getUserNickname()  %></dd>
 			<dt>試合数</dt>
 			<dd><%=userStats.getNumOfPlays()  %></dd>
 			<dt>勝利数</dt>

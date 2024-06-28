@@ -23,6 +23,7 @@
 	User USER = (User) session.getAttribute("USER");
 	List<User> ranking = (List<User>) request.getAttribute("ranking");
 	String msg = (String) request.getAttribute("message");
+	int intervalTime = session.getMaxInactiveInterval();
 %>
 </head>
 <body>
@@ -61,6 +62,7 @@
 				ようこそ
 				<%=USER.getUserNickname()%>さん
 			</h2>
+			<p>セッション有効期限は<%=intervalTime %>秒です。</p>
 			<form class=""
 				action="<%=request.getContextPath()%>/view/game/game_betting.jsp">
 				<!-- formかaにするかで迷う -->

@@ -57,7 +57,7 @@ public class UserDao extends BaseDao {
 	 */
 	public void doCreate(String user_name, String user_password, String user_nickname) throws MyException {
 		try {
-			String sql = "INSERT INTO `users` (`user_id`, `user_name`, `user_password`, `user_nickname`, `number_of_tips`) VALUES (NULL, ?, ?, ?, '100');";
+			String sql = "INSERT INTO `users` (`user_id`, `user_name`, `user_password`, `user_nickname`, `number_of_tips`) VALUES (NULL, ?, ?, ?, '100')";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, user_name);
 			ps.setString(2, user_password);
@@ -65,7 +65,7 @@ public class UserDao extends BaseDao {
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new MyException("作成できませんでした");
+			throw new MyException("既に使用されているユーザー名またはニックネームです。");
 		} finally {
 			close();
 		}

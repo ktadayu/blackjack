@@ -50,8 +50,8 @@
 					<th><%=user.getNumberOfTips()%></th>
 					<th>勝率</th>
 					<th><a
-						href="<%=request.getContextPath()%>/LeaveServlet?user_nickname=<%=user.getUserNickname()%>"><button
-								type="button">削除</button></a></th>
+						href="<%=request.getContextPath()%>/LeaveServlet?user_nickname=<%=user.getUserNickname()%>">
+						<button type="button" class="admin-delete">削除</button></a></th>
 				</tr>
 				<%
 					}

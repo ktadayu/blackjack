@@ -9,9 +9,14 @@ User USER = (User) session.getAttribute("USER");
 %>
 <div class="header-container">
 	<% if(USER != null){ %>
-	<div class="header toppage">
+	<div class="header">
+	<div class="tips">
+	<p>現在のチップ枚数:<%=USER.getNumberOfTips() %></p>
+	</div>
+	<div class="toppage">
 		<a href="<%=request.getContextPath()%>/view/users/my_history.jsp">マイページ</a>
 		<a href="<%=request.getContextPath()%>/LoginServlet">ログアウト</a>
+	</div>
 	</div>
 	<% }else{ %>
 	<div class="header loginpage">

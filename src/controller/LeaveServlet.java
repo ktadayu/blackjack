@@ -66,6 +66,8 @@ public class LeaveServlet extends HttpServlet {
 				UserDao userDao = new UserDao();
 				userDao.doDelete(USER.getUserName());
 
+				session.invalidate();
+
 				String message = "ユーザーを削除しました";
 				request.setAttribute("message", message);
 				nextPage = "/view/users/login.jsp";

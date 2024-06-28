@@ -38,14 +38,14 @@
 			<%
 				if (msg1 != null) {
 			%>
-		<span ><%=msg1 %></span>
+		<h4>手札1は<span ><%=msg1 %></span></h4>
 			<%
 			}
 			%>
 			<%
 				if (msg2 != null) {
 			%>
-		<span ><%=msg2 %></span>
+		<h4>手札2は<span ><%=msg2 %></span></h4>
 			<%
 			}
 			%>
